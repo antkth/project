@@ -56,7 +56,7 @@
 									id="navbarDropdown_3" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"> Toys </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-										<a class="dropdown-item" href="${contextPath}/login.mem">
+										<a class="dropdown-item" href="${contextPath}/member/login.mem">
 											login </a> <a class="dropdown-item" href="#">product checkout</a>
 										<a class="dropdown-item" href="${contextPath}/cart.tem">shopping
 											cart</a> <a class="dropdown-item"
@@ -80,17 +80,17 @@
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 									<c:choose>
 									<c:when test="${id==null}">
-										<a class="dropdown-item" href="${contextPath}/login.mem">Login</a>
-										<a class="dropdown-item" href="${contextPath}/join.mem">Join</a>
-										<a class="dropdown-item" href="${contextPath}/findId.mem">아이디 찾기</a>
+										<a class="dropdown-item" href="${contextPath}/member/login.mem">Login</a>
+										<a class="dropdown-item" href="${contextPath}/member/join.mem">Join</a>
+										<a class="dropdown-item" href="${contextPath}/member/findId.mem">아이디 찾기</a>
 									</c:when>
 									<c:otherwise>
-										<a class="dropdown-item" href="${contextPath}/memMod.mem">회원정보 수정</a>
-										<a class="dropdown-item" href="${contextPath}/logout.mem">로그아웃</a>
+										<a class="dropdown-item" href="${contextPath}/member/memMod.mem">회원정보 수정</a>
+										<a class="dropdown-item" href="${contextPath}/member/logout.mem">로그아웃</a>
 									</c:otherwise>
 									</c:choose>
 									<c:if test="${id=='admin'}">
-										<a class="dropdown-item" href="${contextPath}/insertPro.pro">관리자페이지</a>
+										<a class="dropdown-item" href="${contextPath}/admin/insertPro.pro">관리자페이지</a>
 									</c:if>
 									</div></li>
 							</ul>

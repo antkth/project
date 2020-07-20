@@ -15,11 +15,11 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	private ModelAndView mav = new ModelAndView();
-	@RequestMapping(value = "/join.mem", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/join.mem", method = RequestMethod.GET)
 	public ModelAndView join() {
 		return mav;
 	}
-	@RequestMapping(value = "/idCheck.mem", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/idCheck.mem", method = RequestMethod.GET)
 	public void idCheck(String id,
 								HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
@@ -42,7 +42,7 @@ public class MemberController {
 		response.getWriter().print(out);
 
 	}
-	@RequestMapping(value = "/addMember.mem", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/addMember.mem", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute MemberVO memberVO,
 									HttpServletRequest request,
 									HttpServletResponse response) {
@@ -51,12 +51,12 @@ public class MemberController {
 		request.getSession().setAttribute("id",memberVO.getId());
 		return mav;
 	}
-	@RequestMapping(value = "/login.mem" , method = RequestMethod.GET)
+	@RequestMapping(value = "/member/login.mem" , method = RequestMethod.GET)
 	public ModelAndView login() {
 		mav.clear();
 		return mav;
 	}
-	@RequestMapping(value = "/loginCheck.mem" , method = RequestMethod.POST)
+	@RequestMapping(value = "/member/loginCheck.mem" , method = RequestMethod.POST)
 	public ModelAndView loginMember(@ModelAttribute MemberVO memberVO,
 									HttpServletRequest request,
 									HttpServletResponse response){
@@ -64,14 +64,14 @@ public class MemberController {
 
 		if(msg.equals("login")) {
 			request.getSession().setAttribute("id",memberVO.getId());
-			mav.setViewName("redirect:/index.tem");
+			mav.setViewName("redirect:/index.pro");
 		}else {
 			mav.addObject("msg",msg);
-			mav.setViewName("login");
+			mav.setViewName("member/login");
 		}
 		return mav;
 	}
-	@RequestMapping(value = "/logout.mem", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/logout.mem", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request,
 							   HttpServletResponse response) {
 		String inforpage = request.getHeader("referer").substring(29);
@@ -80,26 +80,25 @@ public class MemberController {
 		mav.setViewName(nextPage);
 		return mav;
 	}
-	@RequestMapping(value = "/memMod.mem", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/memMod.mem", method = RequestMethod.GET)
 	public ModelAndView memMod(HttpServletRequest request) {
 		String id = (String)request.getSession().getAttribute("id");
 		mav.addObject("meminfo", memberService.memMod(id));
-		mav.setViewName("memMod");
 		return mav;
 	}
-	@RequestMapping(value = "/updateMem.mem", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/updateMem.mem", method = RequestMethod.POST)
 	public ModelAndView updateMem(@ModelAttribute MemberVO memberVO,
 								  HttpServletRequest request) {
 		memberService.updateMem(memberVO);
-		mav.setViewName("redirect:/index.tem");
+		mav.setViewName("redirect:/index.pro");
 		return mav;
 	}
-	@RequestMapping(value = "/findId.mem" , method = RequestMethod.GET)
+	@RequestMapping(value = "/member/findId.mem" , method = RequestMethod.GET)
 	public ModelAndView findId() {
 		mav.clear();
 		return mav;
 	}
-	@RequestMapping(value = "/findIdCheck.mem" , method = RequestMethod.POST)
+	@RequestMapping(value = "/member/findIdCheck.mem" , method = RequestMethod.POST)
 	public ModelAndView findIdCheck(@ModelAttribute MemberVO memberVO) {
 		memberVO = memberService.findId(memberVO);
 		String msg="";
@@ -112,11 +111,11 @@ public class MemberController {
 			String id = idMaking.substring(0,idMaking.length()-2)+"**";
 			memberVO.setId(id);
 			mav.addObject("meminfo",memberVO);
-			mav.setViewName("findpwd");
+			mav.setViewName("member/findpwd");
 		}
 		return mav;
 	}
-	@RequestMapping(value = "/findpwdCheck.mem" , method = RequestMethod.POST)
+	@RequestMapping(value = "/member/findpwdCheck.mem" , method = RequestMethod.POST)
 	public ModelAndView finpwdCheck(@ModelAttribute MemberVO memberVO)throws Exception{
 		if(memberService.idCheck(memberVO.getId())==0) {
 			mav.addObject("msg2","잘못된 아이디 입니다 . ");
@@ -126,7 +125,7 @@ public class MemberController {
 			memberVO=memberService.memMod(memberVO.getId());
 			memberService.SendEmail(memberVO);
 			mav.addObject("msg","메일 전송이 완료 되었습니다 .");
-			mav.setViewName("login");
+			mav.setViewName("member/login");
 		}
 		return mav;
 	}

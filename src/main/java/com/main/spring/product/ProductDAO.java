@@ -8,4 +8,11 @@ import org.springframework.stereotype.Repository;
 public class ProductDAO {
 	@Autowired
 	private SqlSession sqlSession;
+	public int numcheck() {
+		return sqlSession.selectList("mapper.product.numcheck").size();
+	}
+	public void proinsert(ProductVO productVO) {
+		System.out.println(productVO.getImage());
+		sqlSession.insert("mapper.product.proinsert", productVO);
+	}
 }

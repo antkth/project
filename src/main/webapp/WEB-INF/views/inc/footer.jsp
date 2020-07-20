@@ -50,12 +50,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
-    <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
     <script src="${contextPath}/resources/js/popper.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/resources/js/jquery.magnific-popup.js"></script>
+    <script src="${contextPath}/resources/js/jquery.magnific-popup.js"></script> 
     <script src="${contextPath}/resources/js/swiper.min.js"></script>
-    <script src="${contextPath}/resources/js/mixitup.min.js"></script>
+    <script src="${contextPath}/resources/js/mixitup.min.js"></script>	
     <script src="${contextPath}/resources/js/owl.carousel.min.js"></script>
     <script src="${contextPath}/resources/js/jquery.nice-select.min.js"></script>
     <script src="${contextPath}/resources/js/slick.min.js"></script>
@@ -66,4 +65,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="${contextPath}/resources/js/jquery.form.js"></script>
     <script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
     <script src="${contextPath}/resources/js/mail-script.js"></script>
-    <script src="${contextPath}/resources/js/custom.js"></script>
+    <script src="${contextPath}/resources/js/custom.js"></script> 

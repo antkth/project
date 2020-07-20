@@ -1,11 +1,36 @@
 package com.main.spring.product;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductVO {
 	private String name,origin,manufacturer,category1,category2,category3,image;
 	private int num,price,inventory;
+	private Timestamp exp_date;
+
+	public ProductVO() {}
+	
+	
+	public ProductVO(String name, String origin, String manufacturer, String category1, String category3, String image,
+			int price,Timestamp exp_date) {
+		this.name = name;
+		this.origin = origin;
+		this.manufacturer = manufacturer;
+		this.category1 = category1;
+		this.category3 = category3;
+		this.image = image;
+		this.price = price;
+		this.exp_date = exp_date;
+	}
+
+	public Timestamp getexp_date() {
+		return exp_date;
+	}
+	public void setexp_date(Timestamp exp_date) {
+		this.exp_date = exp_date;
+	}
 	public String getName() {
 		return name;
 	}
