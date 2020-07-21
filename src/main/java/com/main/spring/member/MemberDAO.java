@@ -1,5 +1,6 @@
 package com.main.spring.member;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -34,5 +35,8 @@ public class MemberDAO {
 	}
 	public MemberVO findIdinfo(MemberVO memberVO) {
 		return sqlsession.selectOne("mapper.member.findIdinfo", memberVO);
+	}
+	public void addpoint(HashMap map) {
+		sqlsession.update("mapper.member.addpoint",map);
 	}
 	}
