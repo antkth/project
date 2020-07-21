@@ -38,7 +38,11 @@
 		 ]]>	
 	</select>
    	
-   	
+   	<select id="getProductInfo" resultMap="proResult" parameterType="productVO">
+   		<![CDATA[
+	   	select * from product where num = #{num}
+	   	]]>
+   	</select>
    	
    	
    	</mapper>

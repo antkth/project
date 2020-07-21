@@ -14,12 +14,23 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/join.js"></script>
-<style type="text/css">
-</style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>   -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+  <script>
+  $(function() {
+	    $( "#testDatepicker" ).datepicker({
+	    	minDate : 0,
+	    	dateFormat: "yy-mm-dd"
+	    });
+	});
+  </script>
+ 
 </head>
 <body>
-	<jsp:include page="../inc/header.jsp" />
+<jsp:include page="../inc/header.jsp" />
+
+<script src="${contextPath}/resources/js/join.js"></script>
 	<!-- breadcrumb part start-->
 	<section class="breadcrumb_part">
 		<div class="container">
@@ -40,7 +51,7 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-8">
 					<h3 class="mb-30">Form Element</h3>
-					<form action="${contextPath}/insertItem.pro" method="post" enctype="multipart/form-data">
+					<form action="${contextPath}/admin/insertItem.pro" method="post" enctype="multipart/form-data">
 						<div class="mt-10">
 							<input type="text" name="name" placeholder="name"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'name'" required
@@ -86,6 +97,11 @@
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'image'" required
 								class="single-input-accent">
 						</div>
+						<div class="mt-10">
+							<input type="text" name="exp_date" placeholder="exp_date" id="testDatepicker"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'exp_date'" required
+								class="single-input-accent">
+						</div>						
 						<div class="input-group-icon mt-10" align="center">
 				<input type="submit" class="genric-btn success circle" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="reset" class="genric-btn success circle" value="다시작성">
