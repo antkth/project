@@ -1,5 +1,7 @@
 package com.main.spring.member;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -84,6 +87,7 @@ public class MemberController {
 	public ModelAndView memMod(HttpServletRequest request) {
 		String id = (String)request.getSession().getAttribute("id");
 		mav.addObject("meminfo", memberService.memMod(id));
+		mav.setViewName("member/memMod");
 		return mav;
 	}
 	@RequestMapping(value = "/member/updateMem.mem", method = RequestMethod.POST)
@@ -127,6 +131,23 @@ public class MemberController {
 			mav.addObject("msg","메일 전송이 완료 되었습니다 .");
 			mav.setViewName("member/login");
 		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/member/mypage.mem" , method = RequestMethod.GET)
+	public ModelAndView mypage(HttpServletRequest request) {
+		String id = (String)request.getSession().getAttribute("id");
+		
+		if(request.getParameter("addpoint")!=null) {
+			HashMap map = new HashMap();
+			map.put("id",id);
+			map.put("addpoint",request.getParameter("addpoint"));
+			memberService.addpoint(map);
+		}
+		
+		MemberVO memberVO = memberService.memMod(id);
+		mav.addObject("meminfo",memberVO);
+		mav.setViewName("member/mypage");
 		return mav;
 	}
 }

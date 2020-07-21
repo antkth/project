@@ -52,9 +52,16 @@
 		select * from member where name = #{name} and email = #{email}
 		]]>
    	</select>
+   	
    	<select id="findIdinfo" parameterType="memberVO" resultType="memberVO">
-   			<![CDATA[
+   		<![CDATA[
 		select * from member where name = #{name} and email = #{email}
 		]]>
    	</select>
+   	
+   	<update id="addpoint" parameterType="java.util.HashMap">
+   		<![CDATA[
+   		update member set point=point+#{addpoint} where id=#{id}
+   		]]>
+   	</update>
    </mapper>

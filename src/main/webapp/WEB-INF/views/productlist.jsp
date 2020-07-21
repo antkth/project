@@ -26,7 +26,6 @@
 						   + "<p>" + item.price + "</p>"
 						   + "</div>"
 						   + "</div>";
-						 
 				$("#pp_product").append(pp_pro);
 			}); 
 		});   

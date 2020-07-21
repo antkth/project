@@ -1,5 +1,6 @@
 package com.main.spring.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -92,4 +93,8 @@ public class MemberService {
 			e.printStackTrace();
 		}
 }
+	public void addpoint(HashMap map) {
+		memberDAO.addpoint(map);
+	}
+	
 }

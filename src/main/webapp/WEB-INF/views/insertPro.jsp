@@ -95,11 +95,11 @@
 				<div class="col-lg-3 col-md-4 mt-sm-30">
 					<div class="single-element-widget mt-30">
 						<h3 class="mb-30">목록</h3>
-						<div class="switch-wrap d-flex justify-content-between">
+						<div class="switch-wrap d-flex justify-content-between" onclick="href='${contextPath}/admin/insertPro'">
 							<p>상품등록</p>
 							<div></div>
 						</div>
-						<div class="switch-wrap d-flex justify-content-between">
+						<div class="switch-wrap d-flex justify-content-between" onclick="href='${contextPath}/qaboard/ad_qalist.qab'">
 							<p>02. Primary Color Checkbox</p>
 							<div></div>
 						</div>

@@ -68,11 +68,25 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/cart-context.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+	<load-on-startup>1</load-on-startup>
+	</servlet>	
 	<servlet-mapping>
 		<servlet-name>cartServlet</servlet-name>
 		<url-pattern>*.car</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>	
 	
+	
+	<servlet>
+		<servlet-name>qaboardServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/qaboard-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>qaboardServlet</servlet-name>
+		<url-pattern>*.qab</url-pattern>
+	</servlet-mapping>
 </web-app>
