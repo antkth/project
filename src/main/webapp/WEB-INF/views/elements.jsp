@@ -533,13 +533,6 @@
 							<textarea class="single-textarea" placeholder="Message" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Message'" required></textarea>
 						</div>
-						<!-- For Gradient Border Use -->
-						<!-- <div class="mt-10">
-										<div class="primary-input">
-											<input id="primary-input" type="text" name="first_name" placeholder="Primary color" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Primary color'">
-											<label for="primary-input"></label>
-										</div>
-									</div> -->
 						<div class="mt-10">
 							<input type="text" name="first_name" placeholder="Primary color"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Primary color'" required
