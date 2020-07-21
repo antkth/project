@@ -27,4 +27,9 @@ public class ProductService {
 		return productDAO.getProductList6(number, category1, category3);
 	}
 	
+	public ProductVO getProductInfo(int num) {
+		
+		return productDAO.getProductInfo(num);
+	}
+	
 }

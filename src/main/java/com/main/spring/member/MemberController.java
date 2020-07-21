@@ -133,6 +133,7 @@ public class MemberController {
 		}
 		return mav;
 	}
+	
 	@RequestMapping(value = "/member/mypage.mem" , method = RequestMethod.GET)
 	public ModelAndView mypage(HttpServletRequest request) {
 		String id = (String)request.getSession().getAttribute("id");
