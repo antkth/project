@@ -4,18 +4,34 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="zxx">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>pillloMart</title>
-        <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
+    <title>Product List</title>
+    	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
-
 <body>
 <jsp:include page="inc/header.jsp"/>
-
+<script type="text/javascript">
+	function btn_LoadMore() {
+ 		var number = $('#pp_product>div').length;
+ 		var category1 = "${category1}";
+ 		var category3 = "${category3}";
+	  		$.getJSON("${contextPath}/productlist6.pro",{number:number,category1:category1,category3:category3},function(data){
+  			$.each(data, function(index,item){
+ 				var pp_pro = "<div class='col-lg-6 col-sm-6'  >"
+ 						   + "<div class='single_product_item'>"
+						   + "<img src='" + "/spring/resources/img_catfood/" + item.image + "' class='img-fluid'>"
+						   + "<h3><a href='single-product.html'>" + item.name + "</a></h3>"
+						   + "<p>" + item.price + "</p>"
+						   + "</div>"
+						   + "</div>";
+						
+				$("#pp_product").append(pp_pro);
+			}); 
+		});   
+	}
+</script> 
     <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
         <div class="container">
@@ -46,103 +62,30 @@
                             <div class="select_option">
                                 <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
                                 <div class="select_option_dropdown">
-                                    <p><a href="#">Category 1</a></p>
-                                    <p><a href="#">Category 2</a></p>
-                                    <p><a href="#">Category 3</a></p>
-                                    <p><a href="#">Category 4</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list">Type <i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">Type 1</a></p>
-                                    <p><a href="#">Type 2</a></p>
-                                    <p><a href="#">Type 3</a></p>
-                                    <p><a href="#">Type 4</a></p>
+                                    <p><a href="#">건식 사료</a></p>
+                                    <p><a href="#">습식 사료</a></p>
+                                    <p><a href="#">건식 간식</a></p>
+                                    <p><a href="#">습식 간식</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>             
                 <div class="col-md-8">
                     <div class="product_list">
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_1.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Cervical pillow for airplane
-                                    car office nap pillow</a> </h3>
-                                    <p>From $5</p>
+                        <div class="row" id="pp_product" >
+                        <c:forEach var="product" items="${productList}">
+                            <div class="col-lg-6 col-sm-6"  >                            
+                                <div class="single_product_item" >
+                                    <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
+                                    <h3><a href="single-product.html">${product.name}</a></h3>
+                                    <p>${product.price}</p>                                    
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_2.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_3.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Foam filling cotton slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_4.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_5.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_6.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_7.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_8.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_9.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src="${contextPath}/resources/img/product/product_list_10.png" alt="#" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
+                        </c:forEach>   
                         </div>
                         <div class="load_more_btn text-center">
-                            <a href="#" class="btn_3">Load More</a>
+                        		<input type="button"  onclick="btn_LoadMore()" class="btn_3" value="더보기(More)">
                         </div>
                     </div>
                 </div>

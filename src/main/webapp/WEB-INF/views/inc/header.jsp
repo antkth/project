@@ -42,42 +42,51 @@
 									href="${contextPath}/index.tem">Home</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="${contextPath}/about.tem">For Cats</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="${contextPath}/blog.tem"
-									id="navbarDropdown_1" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Food </a>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="${contextPath}/productlist.jsp" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Food </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-										<a class="dropdown-item" href="${contextPath}/productlist.tem">
-											product list</a> <a class="dropdown-item"
-											href="${contextPath}/singleproduct.tem">product details</a>
-									</div></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="${contextPath}/blog.tem"
-									id="navbarDropdown_3" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Toys </a>
+										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식사료">
+											건식 사료
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식사료">
+											습식 사료
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식간식">
+											건식 간식
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식간식">
+											습식 간식
+										</a> 										
+									</div>
+								</li>
+								<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Toys </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 										<a class="dropdown-item" href="${contextPath}/member/login.mem">
-											login </a> <a class="dropdown-item" href="#">product checkout</a>
-										<a class="dropdown-item" href="${contextPath}/cart.tem">shopping
-											cart</a> <a class="dropdown-item"
-											href="${contextPath}/confirmation.tem">confirmation</a> <a
-											class="dropdown-item" href="${contextPath}/elements.tem">elements</a>
-									</div></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="${contextPath}/blog.tem"
-									id="navbarDropdown_2" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Daily Products
+											login 
+										</a> 
+										<a class="dropdown-item" href="#">product checkout</a>
+										<a class="dropdown-item" href="${contextPath}/cart.tem">shopping cart</a> 
+										<a class="dropdown-item" href="${contextPath}/confirmation.tem">confirmation</a> 
+										<a class="dropdown-item" href="${contextPath}/elements.tem">elements</a>
+									</div>
+								</li>
+								<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+									Daily Products
 								</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 										<a class="dropdown-item" href="${contextPath}/blog.tem">
-											blog</a> <a class="dropdown-item"
-											href="${contextPath}/singleblog.tem">Single blog</a>
-									</div></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="${contextPath}/blog.tem"
-									id="navbarDropdown_2" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">My Page</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+											blog
+										</a>
+										<a class="dropdown-item" href="${contextPath}/singleblog.tem">Single blog</a>
+									</div>
+								</li>
+								<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									My Page
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
 									<c:choose>
 									<c:when test="${id==null}">
 										<a class="dropdown-item" href="${contextPath}/member/login.mem">Login</a>
@@ -92,7 +101,8 @@
 									<c:if test="${id=='admin'}">
 										<a class="dropdown-item" href="${contextPath}/admin/insertPro.pro">관리자페이지</a>
 									</c:if>
-									</div></li>
+								</div>
+								</li>
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex align-items-center">

@@ -1,6 +1,9 @@
 package com.main.spring.product;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,4 +23,8 @@ public class ProductService {
 		productVO.setInventory(0);
 		productDAO.proinsert(productVO);
 	}
+	public List getProductList6(int number, String category1, String category3) throws DataAccessException {
+		return productDAO.getProductList6(number, category1, category3);
+	}
+	
 }
