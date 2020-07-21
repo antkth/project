@@ -92,8 +92,9 @@ public class MemberService {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+}
 	public void addpoint(HashMap map) {
 		memberDAO.addpoint(map);
 	}
+	
 }

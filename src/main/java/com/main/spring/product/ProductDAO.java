@@ -25,4 +25,7 @@ public class ProductDAO {
 		maplist.put("category3", category3);
 		return sqlSession.selectList("mapper.product.getProductList6", maplist);
 	}
+	public ProductVO getProductInfo(int num) {
+		return sqlSession.selectOne("mapper.product.getProductInfo", num);
+	}
 }
