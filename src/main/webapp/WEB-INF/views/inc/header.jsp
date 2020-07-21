@@ -66,7 +66,7 @@
 											login 
 										</a> 
 										<a class="dropdown-item" href="#">product checkout</a>
-										<a class="dropdown-item" href="${contextPath}/cart.tem">shopping cart</a> 
+										<a class="dropdown-item" href="${contextPath}/cartList.car?id=${sessionScope.id}">shopping cart</a> 
 										<a class="dropdown-item" href="${contextPath}/confirmation.tem">confirmation</a> 
 										<a class="dropdown-item" href="${contextPath}/elements.tem">elements</a>
 									</div>
@@ -107,7 +107,7 @@
 						</div>
 						<div class="hearer_icon d-flex align-items-center">
 							<a id="search_1" href="javascript:void(0)"><i
-								class="ti-search"></i></a> <a href="${contextPath}/cart.tem"> <i
+								class="ti-search"></i></a> <a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i
 								class="flaticon-shopping-cart-black-shape"></i>
 							</a>
 						</div>

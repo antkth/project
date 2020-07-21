@@ -22,11 +22,11 @@
  				var pp_pro = "<div class='col-lg-6 col-sm-6'  >"
  						   + "<div class='single_product_item'>"
 						   + "<img src='" + "/spring/resources/img_catfood/" + item.image + "' class='img-fluid'>"
-						   + "<h3><a href='single-product.html'>" + item.name + "</a></h3>"
+						   + "<h3><a href='${contextPath}/productInfo.pro?num="+item.num+"'>" + item.name + "</a></h3>"
 						   + "<p>" + item.price + "</p>"
 						   + "</div>"
 						   + "</div>";
-						
+						 
 				$("#pp_product").append(pp_pro);
 			}); 
 		});   
@@ -78,7 +78,7 @@
                             <div class="col-lg-6 col-sm-6"  >                            
                                 <div class="single_product_item" >
                                     <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
-                                    <h3><a href="single-product.html">${product.name}</a></h3>
+                                    <h3><a href="${contextPath}/productInfo.pro?num=${product.num}">${product.name}</a></h3>
                                     <p>${product.price}</p>                                    
                                 </div>
                             </div>

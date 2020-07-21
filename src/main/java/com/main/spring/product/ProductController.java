@@ -77,6 +77,7 @@ public class ProductController {
 			productInfo.put("image", productVO.getImage());
 			productInfo.put("name", productVO.getName());
 			productInfo.put("price", productVO.getPrice());
+			productInfo.put("num", productVO.getNum());
 			productArray.add(productInfo);	
 		}
 		response.getWriter().print(productArray);
@@ -92,7 +93,15 @@ public class ProductController {
 		return mav;
 	}
 	
-	
+	@RequestMapping(value = "/productInfo.pro", method = RequestMethod.GET)
+	public ModelAndView getProductInfo(@RequestParam int num,
+									   HttpServletRequest request,
+									   HttpServletResponse response)throws Exception{
+
+		productVO = productService.getProductInfo(num);
+		mav.addObject("productVO", productVO);
+		return mav; 
+}
 	
 	
 	

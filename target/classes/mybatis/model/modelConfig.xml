@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="com.main.spring.member.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.main.spring.product.ProductVO" alias="productVO"/>
+		<typeAlias type="com.main.spring.cart.CartVO" alias="cartVO"/>
 	</typeAliases>
 </configuration>
