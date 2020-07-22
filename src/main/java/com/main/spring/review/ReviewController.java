@@ -1,13 +1,18 @@
 package com.main.spring.review;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,26 +30,44 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	@Autowired
-	private ReviewDAO reviewDAO;
+	private ReviewVO reviewVO;
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/reviewList.rev", method = RequestMethod.GET) public
+	 * ModelAndView getRivewList(@RequestParam int num, HttpServletRequest request,
+	 * HttpServletResponse response) throws Exception{
+	 * 
+	 * List<ReviewVO> rvList = reviewService.getReviewList(num);
+	 * mav.addObject("rvList", rvList); mav.setViewName("productInfo.pro");
+	 * System.out.println(rvList.size()); return mav; }
+	 */
 	
 	@ResponseBody
 	@RequestMapping(value = "/reviewList.rev", method = RequestMethod.GET)
-	public ModelAndView getRivewList(@RequestParam int num, 
-									HttpServletRequest request,
-									HttpServletResponse response) throws Exception{
+	public void rivewList(@RequestParam int num,
+							HttpServletRequest request,
+							HttpServletResponse response){
+		List<ReviewVO> rvList = reviewService.getReviewList(num);
 		
-		List<ReviewVO> rvList = reviewService.getReviewList(num);
-		mav.addObject("rvList", rvList);
-		mav.setViewName("productInfo.pro");
-		System.out.println(rvList.size());
-		return mav;
-	}
-	
-	@RequestMapping("/listJson.rev")
-	@ResponseBody
-	public List<ReviewVO> listJson(@RequestParam int num){
-		List<ReviewVO> rvList = reviewService.getReviewList(num);
-		return rvList;
+		JSONArray rvArray = new JSONArray();
+		for(int i=0; i<rvList.size(); i++) {
+			JSONObject review = new JSONObject();
+			reviewVO =(ReviewVO)rvList.get(i);
+			review.put("num", reviewVO.getNum());
+			review.put("r_num", reviewVO.getR_num());
+			review.put("content", reviewVO.getContent());
+			review.put("id", reviewVO.getId());
+			review.put("date", reviewVO.getDate());
+			rvArray.add(review);
+		}
+		try {
+			response.getWriter().print(rvArray);
+		} catch (IOException e) {
+			System.out.println("Err : " + e.getMessage());
+		}
+		
 	}
 	
 	@ResponseBody

@@ -13,8 +13,7 @@
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
 		<!-- bar-rating -->
 <script>
-	$(document).ready(function(){
-		listReply();
+
 		
 		$("#btnReply").click(function(){
 			var content = $("#content").val();
@@ -44,30 +43,29 @@
 			});
 		});
 
-	});
+
 	
 	function listReply(){
+		console.log(1);
 		var num = "${productVO.num}";
-		var param = "num="+num;
-		
-		$.ajax({
-			type: "get",
-			url : "${contextPath}/reviewList.rev",
-			data : param,
-			async: false,
-			success : function(data){
-				var output = '';
-				$.each(data, function(key, value){
-					output += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-					output += '<div class="commentInfo'+value.c_num+'">'+'댓글번호 : '+value.c_num+' / 작성자 : '+value.id;
-					output += '<div class="commentContent'+value.c_num+'"> <p> 내용 : '+value.content +'</p>';
-					output += '</div></div>';
-				});
-				$("#listReply").html(output);
-			}
+		console.log(2);
+		$.getJSON("${contextPath}/reviewList.rev",{num : num},function(data){
+			console.log(3);
+			var output = '';
+			$.each(data, function(index,item){
+				     output += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+				   	 output += '<div class="commentInfo'+item.r_num+'">'+'별점 : '+item.score+' / 작성자 : '+item.id;
+				   	 output += '<a onclick="commentDelete('+item.r_num+');"> 삭제 </a> </div>';
+				     output += '<div class="commentContent'+item.r_num+'"> <p> 내용 : '+item.content +'</p>';
+				     output += '</div></div>';
+			});
+			$("#listReply").html(output);
 		});
 	}
-
+	
+	$(document).ready(function(){
+		listReply();
+	});
 </script>
 		
 
