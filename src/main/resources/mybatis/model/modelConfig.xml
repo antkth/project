@@ -8,5 +8,6 @@
 		<typeAlias type="com.main.spring.product.ProductVO" alias="productVO"/>
 		<typeAlias type="com.main.spring.cart.CartVO" alias="cartVO"/>
 		<typeAlias type="com.main.spring.qaboard.QaboardVO" alias="qaboardVO"/>
+		<typeAlias type="com.main.spring.review.ReviewVO" alias="reviewVO"/>
 	</typeAliases>
 </configuration>

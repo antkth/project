@@ -11,9 +11,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-    
-</head>
+		<!-- bar-rating -->
+<script>
+	$(document).ready(function(){
+		listReply();
+		
+		$("#btnReply").click(function(){
+			var content = $("#content").val();
+			var num = "${productVO.num}";
+			var score=0;
+			var radio_btn = document.getElementsByName("star");
+			for(var i=0;i<radio_btn.length;i++){
+				if(radio_btn[i].checked==true){
+					score=radio_btn[i].value;
+				}
+			}
+			if(content == null || content==""){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			var param = "content="+content+"&num="+num+"&id=${sessionScope.id}"+"&score="+score;
+			$.ajax({
+				type: "post",
+				async: false,
+				url : "${contextPath}/reviewAdd.rev",
+				data : param,
+				success:function(data){
+					alert("댓글작성이 완료되었습니다.");
+					$("#content").val("");
+					listReply();
+				}
+			});
+		});
 
+	});
+	
+	function listReply(){
+		var num = "${productVO.num}";
+		var param = "num="+num;
+		
+		$.ajax({
+			type: "get",
+			url : "${contextPath}/reviewList.rev",
+			data : param,
+			async: false,
+			success : function(data){
+				var output = '';
+				$.each(data, function(key, value){
+					output += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+					output += '<div class="commentInfo'+value.c_num+'">'+'댓글번호 : '+value.c_num+' / 작성자 : '+value.id;
+					output += '<div class="commentContent'+value.c_num+'"> <p> 내용 : '+value.content +'</p>';
+					output += '</div></div>';
+				});
+				$("#listReply").html(output);
+			}
+		});
+	}
+
+</script>
+		
+
+</head>
 <body>
  <jsp:include page="inc/header.jsp"/>
     <section class="breadcrumb_part single_product_breadcrumb">
@@ -92,6 +150,62 @@
       </form>
     </div>
   </div>
+  
+  <!-- 댓글 -->
+  <div class="container" style=" width:650px; text-align: center;">
+  <table id="review" cellspacing="0" cellpadding="0" border="0">
+  	<tr id="star_tr">
+				<td></td>
+					<td ><input type="radio" value="5" id="star" name="star" checked="checked">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star"> 
+					</td>
+					<td><input type="radio" value="4" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+				    </td>
+					<td>
+						<input type="radio" value="3" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star" > </td>
+					<td><input type="radio" value="2" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star"> </td>
+					<td><input type="radio" value="1" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star"> </td>
+					    <td></td>
+			</tr>
+  	</table>
+  	</div>
+  <div style="width: 650px; text-align: center;" class="container">
+  
+  
+  
+  	<br>
+  	<c:if test="${sessionScope.id != null}">
+  		<textarea rows="5" cols="80" id="content" name="content" placeholder="댓글을 입력하세요." ></textarea>
+  	<br>
+  	<button type="button" id="btnReply" class="btn btn-primary">댓글 작성</button>
+  	</c:if>
+  </div>
+  <div id="listReply"></div>
+  
   <!--================End Single Product Area =================-->
    <!-- subscribe part here -->
    <section class="subscribe_part section_padding">

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="mapper.review">
+   	<resultMap type="reviewVO" id="revResult">
+   		<result property="r_num" column="r_num" />
+   		<result property="num" column="num" />
+   		<result property="id" column="id" />
+   		<result property="content" column="content" />
+   		<result property="score" column="score" />
+  		<result property="date" column="date" />
+   	</resultMap>
+   	 
+   	 <select id="numcheck" resultMap="revResult" >
+   	 	<![CDATA[
+   	 		select * from review
+   	 	]]>
+   	 </select>
+   	 
+   	<insert id="insertReview" parameterType="reviewVO" >
+   		<![CDATA[
+   			insert into review(r_num, num, id, content, date, score) values
+   			(#{r_num},#{num},#{id},#{content},#{date},#{score})
+   		]]>
+   	</insert>
+   	
+   	<select id="reviewList" parameterType="java.lang.Integer" resultMap="revResult" >
+   		<![CDATA[
+   			SELECT * FROM review WHERE num = #{num}
+   		]]>
+   	</select>
+   	
+   </mapper>
