@@ -64,4 +64,19 @@
    		update member set point=point+#{addpoint} where id=#{id}
    		]]>
    	</update>
+   	<update id="updateaddr" parameterType="memberVO">
+   		<![CDATA[
+   		update member set d_addr1=#{d_addr1},d_addr2=#{d_addr2},d_addr3=#{d_addr3},d_addr4=#{d_addr4} where id=#{id}
+   		]]>
+   	</update>
+   	<select id="userPoint" parameterType="String" resultType="java.lang.Integer">
+   		<![CDATA[
+   		select point from member where id = #{id}
+   		]]>
+   	</select>
+   	   	<update id="decrpoint" parameterType="java.util.HashMap">
+   		<![CDATA[
+   		update member set point=point-#{total} where id=#{id}
+   		]]>
+   	</update>
    </mapper>

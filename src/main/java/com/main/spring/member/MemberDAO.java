@@ -39,4 +39,7 @@ public class MemberDAO {
 	public void addpoint(HashMap map) {
 		sqlsession.update("mapper.member.addpoint",map);
 	}
+	public void updateaddr(MemberVO memberVO) {
+		sqlsession.update("mapper.member.updateaddr",memberVO);
+	}
 	}

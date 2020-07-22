@@ -38,5 +38,19 @@
 	   		SELECT SUM(price*qty) FROM cart WHERE id = #{id}
 	   	]]>
    	</select>
-   	
+   	   	<select id="soloTotalPrice" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+   		<![CDATA[
+			select qty*price from cart where id=#{id} and cart_num = #{cart_num};
+	   	]]>
+   	</select>
+   	   	<select id="cartinfo" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+   		<![CDATA[
+	   		select * from cart where id=#{id} and cart_num=#{cart_num}
+	   	]]>
+   	</select>
+	<delete id="deletecart" parameterType="java.util.HashMap">
+		<![CDATA[
+			delete from cart where id=#{id} and cart_num=#{cart_num}
+		]]>
+	</delete>
    </mapper>

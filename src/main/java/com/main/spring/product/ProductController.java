@@ -39,10 +39,12 @@ public class ProductController {
 	
 	@RequestMapping(value = "/index.pro", method = RequestMethod.GET)
 	public ModelAndView index() {
+		mav.setViewName("index");
 		return mav;
 	}
 	@RequestMapping(value = "/admin/insertPro.pro", method = RequestMethod.GET)
 	public ModelAndView insertPro() {
+		mav.setViewName("admin/insertPro");
 		return mav;
 	}
 	@RequestMapping(value = "/admin/insertItem.pro", method = RequestMethod.POST)
@@ -90,6 +92,7 @@ public class ProductController {
 		mav.addObject("productList", productList);
 		mav.addObject("category1",category1);
 		mav.addObject("category3",category3);
+		mav.setViewName("productlist");
 		return mav;
 	}
 	
@@ -100,6 +103,7 @@ public class ProductController {
 
 		productVO = productService.getProductInfo(num);
 		mav.addObject("productVO", productVO);
+		mav.setViewName("productInfo");
 		return mav; 
 }
 	

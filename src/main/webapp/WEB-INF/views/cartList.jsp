@@ -11,7 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-        
+       <c:if test="${msg != null}">
+               <script type="text/javascript">
+               window.alert('${msg}');
+               </script>
+       </c:if>
 </head>
 
 <body>
@@ -48,7 +52,6 @@
             </thead>
             <tbody>
             <c:forEach var="cart" items="${cartList}" varStatus="cnt">
-            	<c:set var="cart_qty" value="${cartList[cnt.count-1].qty}" />
               <tr>
                 <td>
                   <div class="media">
@@ -66,16 +69,6 @@
                   </h5>
                 </td>
                 <td>
-                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                      class="input-text qty input-number" />
-                    <button
-                      class="increase input-number-increment items-count" type="button">
-                      <i class="ti-angle-up"></i>
-                    </button>
-                    <button
-                      class="reduced input-number-decrement items-count" type="button">
-                      <i class="ti-angle-down"></i>
-                    </button> -->
                     <p>${cart.qty} 개</p>
                 </td>
                 <td id="total">
@@ -84,7 +77,7 @@
                   </h5>
                 </td>
                 <td>
-                 <a href="#">결제하기</a>
+				<a href="#" class="genric-btn primary-border small">payment</a>
                 </td>
               </tr>
               </c:forEach>
@@ -107,8 +100,16 @@
                 <td></td>
                 <td></td>
                 <td>
+                <div class="clear"></div>
                   <div class="cupon_text float-right">
-                    <a class="btn_1" href="#">Button</a>
+                   <form action="${contextPath}/purchase.pur" method="post">
+                  <c:forEach items="${cartList}" varStatus="cnt" var="cart">
+                	<input type="hidden" value="${cart.cart_num}" name="cart_num${cnt.count}">
+                  </c:forEach>
+                  	<input type="hidden" value="${total}" name="total">
+					<input type="hidden" value="${id}" name="id">     
+				<input type="submit" class="genric-btn primary-border circle" value="total payment">
+                  </form> 
                   </div>
                 </td>
               </tr>

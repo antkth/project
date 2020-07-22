@@ -74,8 +74,6 @@
 		<servlet-name>cartServlet</servlet-name>
 		<url-pattern>*.car</url-pattern>
 	</servlet-mapping>	
-	
-	
 	<servlet>
 		<servlet-name>qaboardServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -88,5 +86,18 @@
 	<servlet-mapping>
 		<servlet-name>qaboardServlet</servlet-name>
 		<url-pattern>*.qab</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>purchaseServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/purchase-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>purchaseServlet</servlet-name>
+		<url-pattern>*.pur</url-pattern>
 	</servlet-mapping>
 </web-app>
