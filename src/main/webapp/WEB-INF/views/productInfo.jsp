@@ -12,9 +12,14 @@
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
 		<!-- bar-rating -->
-<script>
+ <script>
 
-		
+ 
+ $(document).ready(function(){	
+	 listReply();
+	 
+
+	 
 		$("#btnReply").click(function(){
 			var content = $("#content").val();
 			var num = "${productVO.num}";
@@ -43,30 +48,43 @@
 			});
 		});
 
-
-	
-	function listReply(){
-		console.log(1);
+	 function listReply(){
 		var num = "${productVO.num}";
-		console.log(2);
-		$.getJSON("${contextPath}/reviewList.rev",{num : num},function(data){
-			console.log(3);
+		$.getJSON("${contextPath}/reviewList.rev?num=${productVO.num}",function(data){
 			var output = '';
 			$.each(data, function(index,item){
-				     output += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
-				   	 output += '<div class="commentInfo'+item.r_num+'">'+'별점 : '+item.score+' / 작성자 : '+item.id;
-				   	 output += '<a onclick="commentDelete('+item.r_num+');"> 삭제 </a> </div>';
-				     output += '<div class="commentContent'+item.r_num+'"> <p> 내용 : '+item.content +'</p>';
-				     output += '</div></div>';
+				     output += '<div class="comment-list">';
+				     output += '<div class="single-comment justify-content-between d-flex">';
+				     output += '<div class="user justify-content-between d-flex">';
+				   	 output += '<div class="desc"><h5>작성자 : '+item.id+'&nbsp;&nbsp;&nbsp;&nbsp';
+				   	 output += '작성일 : '+item.date+'&nbsp;&nbsp;&nbsp;&nbsp; 평점 : '+item.score+'';
+				   	 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+				   	 output += '<div class="d-flex justify-content-between">';
+				   	 output += '<div class="d-flex align-items-center">';
+				     output += '<p class="comment">내용 : '+item.content+'</p>';
+					 output += '</div></div></div></div></div><br>';
 			});
-			$("#listReply").html(output);
+			 $("#listReply").html(output);
 		});
-	}
-	
-	$(document).ready(function(){
-		listReply();
-	});
-</script>
+	} 			
+}); 
+ 
+ 
+	function commentDelete(r_num){
+		 console.log(1);
+		 $.ajax({
+			 url : "${contextPath}/reviewDel.rev",
+			 type : "post",
+			 data : {r_num : r_num},
+			 async : false,
+			 success : function(data){
+					alert("삭제가 완료되었습니다.");
+					window.location.reload();
+			 }
+		 });
+	 }	
+ 
+</script> 
 		
 
 </head>
@@ -191,18 +209,18 @@
 			</tr>
   	</table>
   	</div>
-  <div style="width: 650px; text-align: center;" class="container">
+  <div style="width: 650px; text-align: left;" class="container">
   
   
   
   	<br>
   	<c:if test="${sessionScope.id != null}">
-  		<textarea rows="5" cols="80" id="content" name="content" placeholder="댓글을 입력하세요." ></textarea>
+  		<textarea rows="5" cols="50" id="content" name="content" placeholder="댓글을 입력하세요."  ></textarea>
   	<br>
   	<button type="button" id="btnReply" class="btn btn-primary">댓글 작성</button>
   	</c:if>
   </div>
-  <div id="listReply"></div>
+  <div class="container" style="width: 650px; text-align: center;"><div id="listReply" class="comment-area"></div></div>
   
   <!--================End Single Product Area =================-->
    <!-- subscribe part here -->

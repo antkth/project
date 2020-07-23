@@ -21,10 +21,14 @@ public class ReviewDAO {
 	}
 
 	
-	public List getReviewList(int num) {
+	public List rivewList(int num) {
 		
 		return sqlSession.selectList("mapper.review.reviewList", num);
 		
+	}
+
+	public void deleteReview(int r_num) {
+		 sqlSession.delete("mapper.review.deleteReview", r_num);
 	}
 
 

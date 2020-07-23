@@ -1,17 +1,11 @@
 package com.main.spring.product;
 
 import java.io.File;
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,17 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.main.spring.review.ReviewService;
-import com.main.spring.review.ReviewVO;
 
 @Controller
 public class ProductController {
@@ -73,6 +62,7 @@ public class ProductController {
 	}
 	@RequestMapping(value = "/productlist6.pro", method = RequestMethod.GET)
 	public void productlist6(@RequestParam String category1,@RequestParam String category3,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		response.setContentType("text/html;charset=utf-8");
 		if(request.getParameter("number")!=null) number=Integer.parseInt(request.getParameter("number"));
 		List productlist6 = productService.getProductList6(number, category1, category3 );
@@ -86,6 +76,7 @@ public class ProductController {
 			productInfo.put("num", productVO.getNum());
 			productArray.add(productInfo);	
 		}
+		
 		response.getWriter().print(productArray);
 	}	
 	@RequestMapping(value = "/productlist.pro", method = RequestMethod.GET)

@@ -14,14 +14,14 @@
    	 
    	 <select id="numcheck" resultMap="revResult" >
    	 	<![CDATA[
-   	 		select * from review
+   	 		SELECT * FROM review
    	 	]]>
    	 </select>
    	 
    	<insert id="insertReview" parameterType="reviewVO" >
    		<![CDATA[
-   			insert into review(r_num, num, id, content, date, score) values
-   			(#{r_num},#{num},#{id},#{content},#{date},#{score})
+   			INSERT INTO review(num, id, content, date, score) 
+   			VALUES (#{num},#{id},#{content},#{date},#{score})
    		]]>
    	</insert>
    	
@@ -30,5 +30,11 @@
    			SELECT * FROM review WHERE num = #{num}
    		]]>
    	</select>
+   	
+   	<delete id="deleteReview" parameterType="int" >
+   		<![CDATA[
+   			DELETE FROM review WHERE r_num = #{r_num}
+   		]]>
+   	</delete>
    	
    </mapper>
