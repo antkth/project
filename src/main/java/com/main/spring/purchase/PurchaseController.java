@@ -35,16 +35,13 @@ public class PurchaseController {
 	@RequestMapping(value = "/cartList.pur", method=RequestMethod.GET)
 	public ModelAndView cartList(HttpServletRequest request, 
 								HttpServletResponse response) throws Exception {
+		int total = 0;
 		String id = (String)request.getSession().getAttribute("id");
-		System.out.println(1);
 		List cartList = purchaseService.getCartList(id);
-		System.out.println(3);
-		int total = purchaseService.getTotalPrice(id);
-		System.out.println(2);
+		if(purchaseService.totalCheck(id)!=0) total = purchaseService.getTotalPrice(id);
 		mav.addObject("msg",(String)request.getSession().getAttribute("msg"));
 		mav.addObject("cartList", cartList);
 		mav.addObject("total",total);
-		request.getSession().removeAttribute("msg");
 		mav.setViewName("cartList");
 		return mav;
 	}

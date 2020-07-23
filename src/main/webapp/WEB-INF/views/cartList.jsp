@@ -16,6 +16,7 @@
                window.alert('${msg}');
                </script>
        </c:if>
+       <c:remove var="msg"/>
 </head>
 
 <body>
@@ -77,7 +78,12 @@
                   </h5>
                 </td>
                 <td>
-				<a href="#" class="genric-btn primary-border small">payment</a>
+				<form action="${contextPath}/purchase.pur" method="post">
+				<input type="hidden" name="total" value="${cart.price * cart.qty}">
+				<input type="hidden" name="cart_num1" value="${cart.cart_num}">
+				<input type="hidden" value="${id}" name="id">     
+				<input class="genric-btn primary-border small" value="payment" type="submit">
+				</form>
                 </td>
               </tr>
               </c:forEach>

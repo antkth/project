@@ -53,4 +53,9 @@
 			delete from cart where id=#{id} and cart_num=#{cart_num}
 		]]>
 	</delete>
+	<select id="totalCheck" parameterType="String" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(num) from cart where id=#{id}
+		]]>
+	</select>
    </mapper>

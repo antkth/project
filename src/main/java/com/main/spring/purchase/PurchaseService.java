@@ -19,6 +19,7 @@ import com.main.spring.cart.CartVO;
 public class PurchaseService {
 	@Autowired
 	private PurchaseDAO purchaseDAO;
+	public int totalCheck;
 
 	public int pointCheck(HttpServletRequest request) {
 		int check = 0;
@@ -92,4 +93,7 @@ public class PurchaseService {
 	}
 	public int getTotalPrice(String id) {
 		return purchaseDAO.getTotalPrice(id);	}
+	public int totalCheck(String id) {
+		return purchaseDAO.totalCheck(id);
+	}
 }

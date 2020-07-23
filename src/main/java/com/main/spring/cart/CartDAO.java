@@ -32,4 +32,8 @@ public class CartDAO {
 	public int getTotalPrice(String id) {
 		return sqlSession.selectOne("mapper.cart.getTotalPrice",id);
 	}
+
+	public int totalCheck(String id) {
+		return sqlSession.selectOne("mapper.cart.totalCheck",id);
+	}
 }

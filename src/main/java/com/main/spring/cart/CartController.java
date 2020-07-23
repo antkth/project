@@ -33,11 +33,11 @@ public class CartController {
 	public ModelAndView cartList(@RequestParam String id,
 								HttpServletRequest request, 
 								HttpServletResponse response) throws Exception {
+		int total =0;
 		List cartList = cartService.getCartList(id);
-		int total = cartService.getTotalPrice(id);
+		if(cartService.totalCheck(id)!=0) total = cartService.getTotalPrice(id);
 		mav.addObject("cartList", cartList);
 		mav.addObject("total",total);
-		request.getSession().setAttribute("cartList",cartList);
 		mav.setViewName("cartList");
 		return mav;
 	}

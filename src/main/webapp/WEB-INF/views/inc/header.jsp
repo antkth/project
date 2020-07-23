@@ -109,9 +109,10 @@
 						</div>
 						<div class="hearer_icon d-flex align-items-center">
 							<a id="search_1" href="javascript:void(0)"><i
-								class="ti-search"></i></a> <a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i
-								class="flaticon-shopping-cart-black-shape"></i>
-							</a>
+								class="ti-search"></i></a> 
+								<c:if test="${sessionScope.id !=null}">
+								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape"></i></a>
+								</c:if>
 						</div>
 					</nav>
 				</div>
