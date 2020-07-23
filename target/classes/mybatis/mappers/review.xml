@@ -18,6 +18,12 @@
    	 	]]>
    	 </select>
    	 
+   	 <select id="avg" resultMap="revResult" >
+   	 	<![CDATA[
+   	 		SELECT AVG(score) FROM review
+   	 	]]>
+   	 </select>
+   	 
    	<insert id="insertReview" parameterType="reviewVO" >
    		<![CDATA[
    			INSERT INTO review(num, id, content, date, score) 

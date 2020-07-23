@@ -122,6 +122,7 @@
 		            	<th>가격</th>
 		            	<th>종류</th>
 		            	<th>유통기한</th>
+		            	<th>평점</th>
 	            	</tr>
 	            	<tr>
 	            		<td>${productVO.origin}</td>
@@ -131,6 +132,7 @@
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
 	            		</td>
+	            		<td></td>
 	            	</tr>
 	            </table>
 				</div>
