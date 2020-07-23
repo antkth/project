@@ -45,16 +45,16 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="${contextPath}/productlist.jsp" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Food </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식사료">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=건식사료">
 											건식 사료
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식사료">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=습식사료">
 											습식 사료
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식간식">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=건식간식">
 											건식 간식
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식간식">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=습식간식">
 											습식 간식
 										</a> 										
 									</div>
@@ -120,9 +120,11 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container ">
-				<form class="d-flex justify-content-between search-inner">
-					<input type="text" class="form-control" id="search_input"
-						placeholder="Search Here">
+				<form class="d-flex justify-content-between search-inner" action="${contextPath}/productSearch.pro" method="get">
+					<input type="text" class="form-control" id="search_input" name="search_key"
+						placeholder="제품명을 입력해주세요.">
+                    <input type="hidden" name="category1" value="total">
+                    <input type="hidden" name="category3" value="total"> 
 					<button type="submit" class="btn"></button>
 					<span class="ti-close" id="close_search" title="Close Search"></span>
 				</form>

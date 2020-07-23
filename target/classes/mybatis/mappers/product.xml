@@ -44,5 +44,34 @@
 	   	]]>
    	</select>
    	
+   	<select id="getAllProduct" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+   		<![CDATA[
+		select count(num) from product where name like #{search_key} 
+		]]>
+	<if test="category1 != 'total'">
+		<![CDATA[
+		and category1 like #{category1} and category3 like #{category3};
+		]]>
+	</if>	
+ 	</select>
+   	<select id="getKeyList" resultMap="proResult" parameterType="java.util.HashMap">
+   		<![CDATA[
+		select * from product where name like '%${search_key}%' 
+		]]>
+		<choose>
+		<when test="category1 != 'total'">
+		<![CDATA[
+		and category1 like #{category1} and category3 like #{category3} order by num desc limit #{pageFirst}, #{pageSize};	   	
+		]]>
+		</when>
+		<otherwise>
+		<![CDATA[
+		order by num desc limit #{pageFirst}, #{pageSize};	   	
+		]]>
+		</otherwise>
+		</choose>
+   	</select>
+   	
+   	
    	
    	</mapper>

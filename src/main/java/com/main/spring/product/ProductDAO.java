@@ -28,4 +28,13 @@ public class ProductDAO {
 	public ProductVO getProductInfo(int num) {
 		return sqlSession.selectOne("mapper.product.getProductInfo", num);
 	}
+	public List getKeyList(HashMap map) {
+		return sqlSession.selectList("mapper.product.getKeyList", map);
+	}
+	public int getAllProduct(HashMap map) {
+		
+		return sqlSession.selectOne("mapper.product.getAllProduct", map);
+		
+		
+	}
 }

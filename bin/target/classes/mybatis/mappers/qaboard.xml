@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="mapper.qaboard">
+   	<resultMap type="qaboardVO" id="qabResult">
+   		<result property="qa_num" column="qa_num" />
+   		<result property="id" column="id" />
+   		<result property="title" column="title" />
+   		<result property="content" column="content" />
+   		<result property="cur_status" column="cur_status" />
+  		<result property="qa_date" column="qa_date" />
+  		<result property="answer" column="answer"/>
+   	</resultMap>
+   	<select id="getqa_num" parameterType="String" resultMap="qabResult">
+   		<![CDATA[
+   		select * from qaboard where id = #{id}
+   		]]>
+   	</select>
+   	
+	<insert id="insertQaboard" parameterType="qaboardVO">
+		<![CDATA[
+		insert qaboard (qa_num,id,title,content,cur_status,qa_date,answer) values 
+		(#{qa_num},#{id},#{title},#{content},0,#{qa_date},#{answer})
+		]]>
+	</insert>
+	<select id="qalist" parameterType="String" resultMap="qabResult">
+		<![CDATA[
+		select * from qaboard where id = #{id} order by qa_date desc
+		]]>
+	</select>
+		<select id="ad_qalist" resultMap="qabResult">
+		<![CDATA[
+		select * from qaboard where cur_status = 0 order by qa_date desc
+		]]>
+	</select>
+	<select id="qaread" parameterType="java.util.HashMap" resultType="qaboardVO">
+		<![CDATA[
+		select * from qaboard where id=#{id} and qa_num = #{qa_num}
+		]]>
+	</select>
+	<update id="updatead_update" parameterType="qaboardVO">
+		<![CDATA[
+		update qaboard set answer=#{answer} , cur_status = #{cur_status} where id=#{id} and qa_num = #{qa_num}
+		]]>
+	</update>
+   	</mapper>
