@@ -9,36 +9,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script src="${contextPath}/resources/js/mypage.js"></script>
 </head>
-<script type="text/javascript">
-var IMP = window.IMP; 
-IMP.init('imp91194056');
-function insertpoint() {
-	var C_point = document.getElementById('C_point').value;
-IMP.request_pay({
-    pg : 'kakao', 
-    pay_method : 'card',
-    merchant_uid : '${meminfo.id}' + new Date().getTime(),
-    name : '주문명:결제테스트',
-    amount : C_point,
-    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-}, function(rsp) {
-    if ( rsp.success ) {
-        var msg = '결제가 완료되었습니다.';
-        msg += 'ID : ${meminfo.id}';
-        msg += '결제 금액 : ' + rsp.paid_amount; 
-    } else {
-        var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-    }
-    alert(msg);
-	window.location.href='${contextPath}/member/mypage.mem?addpoint='+C_point
-});
-}
-</script>
 <body>
 <jsp:include page="../inc/header.jsp"/>
  <section class="confirmation_part section_padding">
@@ -98,6 +74,21 @@ IMP.request_pay({
                 <p>사용한 포인트</p><span>: ${meminfo.u_point}</span>
               </li>
             </ul>
+          </div>
+        </div>
+         <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+          	<form action="${contextPath}/member/updateaddr.mem" method="post">
+          	<input type="hidden" name="id" value="${meminfo.id}">
+            <h4>배송지 변경</h4>
+                <p><input type="text" name="d_addr1" id="sample6_postcode" placeholder="우편번호" value="${meminfo.d_addr1}"
+					class="single-input" style="width: 35%; float: left;" readonly="readonly"></p><span><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="genric-btn success circle">
+					<input type="submit" value="변경하기" class="genric-btn success circle">
+					</span>
+                <p><input type="text" name="d_addr2" 	id="sample6_address" placeholder="주소" class="single-input" readonly="readonly" value="${meminfo.d_addr2}"></p>
+                <p><input type="text" name="d_addr3"	id="sample6_detailAddress" placeholder="상세주소" class="single-input" value="${meminfo.d_addr3}"> </p>
+                <p><input type="text" name="d_addr4"	id="sample6_extraAddress" placeholder="참고항목" class="single-input" readonly="readonly" value="${meminfo.d_addr4}"></p>
+            </form>
           </div>
         </div>
       </div>

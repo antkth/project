@@ -96,5 +96,8 @@ public class MemberService {
 	public void addpoint(HashMap map) {
 		memberDAO.addpoint(map);
 	}
+	public void updateaddr(MemberVO memberVO) {
+		memberDAO.updateaddr(memberVO);
+	}
 	
 }
