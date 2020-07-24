@@ -100,4 +100,17 @@
 		<servlet-name>purchaseServlet</servlet-name>
 		<url-pattern>*.pur</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>reviewServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/review-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reviewServlet</servlet-name>
+		<url-pattern>*.rev</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -1,5 +1,6 @@
 package com.main.spring.product;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,23 @@ public class ProductService {
 	public ProductVO getProductInfo(int num) {
 		
 		return productDAO.getProductInfo(num);
+	}
+	public List getKeyList(String search_key, String category1, String category3, int pageFirst, int pageSize) {
+		HashMap map = new HashMap();
+		
+		map.put("search_key", search_key);
+		map.put("category1", category1);
+		map.put("category3", category3);
+		map.put("pageFirst", pageFirst);
+		map.put("pageSize", pageSize);
+		return productDAO.getKeyList(map);		
+	}
+	public int getAllProduct(String search_key, String category1, String category3) {
+		HashMap map = new HashMap();
+		map.put("search_key", '%'+search_key+'%');			
+		map.put("category1", category1);		
+		map.put("category3", category3);		
+		return productDAO.getAllProduct(map);
 	}
 	
 }
