@@ -2,6 +2,7 @@ package com.main.spring.product;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProductController {
 	private ModelAndView mav = new ModelAndView();
-	int number = 0;	
-	
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired
-	private ProductVO productVO;	
 	
 	@RequestMapping(value = "/index.pro", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -63,14 +58,14 @@ public class ProductController {
 	}
 	@RequestMapping(value = "/productlist6.pro", method = RequestMethod.GET)
 	public void productlist6(@RequestParam String category1,@RequestParam String category3,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		response.setContentType("text/html;charset=utf-8");
+		int number = 0;
 		if(request.getParameter("number")!=null) number=Integer.parseInt(request.getParameter("number"));
 		List productlist6 = productService.getProductList6(number, category1, category3 );
 		JSONArray productArray = new JSONArray();
 		for(int i=0; i<productlist6.size(); i++) {
 			JSONObject productInfo = new JSONObject();
-			productVO = (ProductVO) productlist6.get(i);
+			ProductVO productVO = (ProductVO) productlist6.get(i);
 			productInfo.put("image", productVO.getImage());
 			productInfo.put("name", productVO.getName());
 			productInfo.put("price", productVO.getPrice());
@@ -84,6 +79,7 @@ public class ProductController {
 	public ModelAndView productList(@RequestParam String category1,
 									@RequestParam String category3,
 									HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int number = 0;
 		List productList = productService.getProductList6(number, category1, category3);
 		mav.addObject("productList", productList);
 		mav.addObject("category1",category1);
@@ -96,10 +92,45 @@ public class ProductController {
 	public ModelAndView getProductInfo(@RequestParam int num,
 									   HttpServletRequest request,
 									   HttpServletResponse response)throws Exception{
-		
-		productVO = productService.getProductInfo(num);
+		ProductVO productVO = productService.getProductInfo(num);
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 
+}
+	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
+	public ModelAndView productSearch(	@RequestParam(defaultValue = "") String search_key,
+										@RequestParam String category1,
+										@RequestParam String category3,
+										@RequestParam(defaultValue = "1") int nowPage,
+										HttpServletRequest request) {
+
+		int total= productService.getAllProduct(search_key, category1, category3);
+		int pageSize = 9;
+		int pageFirst = (nowPage -1) * pageSize;
+		int totalPage = total/pageSize + (total%pageSize==0?0:1);
+		int blockSize = 5;
+		int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
+		int blockLast = blockFirst + blockSize -1;
+		
+		if(blockLast>totalPage) blockLast=totalPage;
+		
+		List productList = productService.getKeyList(search_key, category1, category3, pageFirst, pageSize);
+		HashMap p_map = new HashMap();
+		p_map.put("pageSize", pageSize);
+		p_map.put("pageFirst", pageFirst);
+		p_map.put("totalPage", totalPage);
+		p_map.put("blockSize", blockSize);
+		p_map.put("blockFirst", blockFirst);
+		p_map.put("blockLast", blockLast);
+		p_map.put("nowPage", nowPage);
+	
+		mav.addObject("productList", productList);
+		mav.addObject("search_key", search_key);
+		mav.addObject("category1", category1);
+		mav.addObject("category3", category3);
+		mav.addObject("p_map", p_map);
+		mav.setViewName("productlist");
+		return mav;
 	}
+
 }
