@@ -12,26 +12,6 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<script type="text/javascript">
-	function btn_LoadMore() {
- 		var number = $('#pp_product>div').length;
- 		var category1 = "${category1}";
- 		var category3 = "${category3}";
-	  		$.getJSON("${contextPath}/productlist6.pro",{number:number,category1:category1,category3:category3},function(data){
-  			$.each(data, function(index,item){
- 				var pp_pro = "<div class='col-lg-6 col-sm-6'  >"
- 						   + "<div class='single_product_item'>"
-						   + "<img src='" + "/spring/resources/img_catfood/" + item.image + "' class='img-fluid'>"
-						   + "<h3><a href='${contextPath}/productInfo.pro?num="+item.num+"'>" + item.name + "</a></h3>"
-						   + "<p>" + item.price + "</p>"
-						   + "</div>"
-						   + "</div>";
-				$("#pp_product").append(pp_pro);
-			}); 
-		});   
-	}
-</script> 
-    <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
         <div class="container">
             <div class="row">
@@ -43,9 +23,6 @@
             </div>
         </div>
     </section>
-    <!-- breadcrumb part end-->
-    
-    <!-- product list part start-->
     <section class="product_list section_padding">
         <div class="container">
             <div class="row">
@@ -80,14 +57,20 @@
                                 <div class="single_product_item" >
                                     <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
                                     <h3><a href="${contextPath}/productInfo.pro?num=${product.num}">${product.name}</a></h3>
-                                    <p>${product.price}</p>                                    
+                                   <c:choose>
+                                   <c:when test="${product.price == product.real_price}">
+                                   <p>${product.price}</p>
+                                   </c:when>
+                                   <c:otherwise>
+                                   <p><font style="text-decoration: line-through;" color="gray">${product.price}</font></p>
+                                   <p>${product.real_price}</p>    
+                                   </c:otherwise>
+                                   </c:choose>
                                 </div>
                             </div>
                         </c:forEach>   
                         </div>
-                        
                        <nav class="blog-pagination justify-content-center d-flex">
-                       		
                             <ul class="pagination">                               
                                 <li class="page-item">                                                                                          
                                 <c:if test="${p_map.blockFirst!=1}">                                
@@ -109,31 +92,12 @@
 		                        </c:if>			                        	                        		                        
                                 </li>                                                              
                             </ul>
-                           
                         </nav>
-                        
-                                            
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- product list part end-->
-    
-    
-    <!--                                 <li class="page-item active"> -->
-<!--                                     <a href="#" class="page-link">2</a> -->
-<!--                                 </li> -->
-	
-
-    
-       
-    
-    
-    
-    
-    
-    <!-- client review part here -->
     <section class="client_review">
         <div class="container">
             <div class="row justify-content-center">
@@ -165,9 +129,6 @@
             </div>
         </div>
     </section>
-    <!-- client review part end -->
-
-    <!-- feature part here -->
     <section class="feature_part section_padding">
         <div class="container">
             <div class="row justify-content-between">
@@ -212,9 +173,6 @@
             </div>
         </div>
     </section>
-    <!-- feature part end -->
-
-    <!-- subscribe part here -->
     <section class="subscribe_part section_padding">
         <div class="container">
             <div class="row justify-content-center">
@@ -233,5 +191,4 @@
     </section>
 <jsp:include page="inc/footer.jsp"/>
 </body>
-
 </html>

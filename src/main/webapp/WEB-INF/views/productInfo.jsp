@@ -11,15 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-		<!-- bar-rating -->
  <script>
-
- 
  $(document).ready(function(){	
 	 listReply();
-	 
-
-	 
 		$("#btnReply").click(function(){
 			var content = $("#content").val();
 			var num = "${productVO.num}";
@@ -47,7 +41,6 @@
 				}
 			});
 		});
-
 	 function listReply(){
 		var num = "${productVO.num}";
 		$.getJSON("${contextPath}/reviewList.rev?num=${productVO.num}",function(data){
@@ -68,8 +61,6 @@
 		});
 	} 			
 }); 
- 
- 
 	function commentDelete(r_num){
 		 console.log(1);
 		 $.ajax({
@@ -83,10 +74,7 @@
 			 }
 		 });
 	 }	
- 
 </script> 
-		
-
 </head>
 <body>
  <jsp:include page="inc/header.jsp"/>
@@ -127,7 +115,14 @@
 	            	<tr>
 	            		<td>${productVO.origin}</td>
 	            		<td>${productVO.manufacturer}</td>
+                        <c:choose>
+                        <c:when test="${productVO.price == productVO.real_price}">
 	            		<td>${productVO.price}</td>
+                        </c:when>
+                        <c:otherwise>
+	            		<td><font style="text-decoration: line-through;" color="gray">${productVO.price}</font><br>${productVO.real_price}</td>
+                        </c:otherwise>
+                        </c:choose>
 	            		<td>${productVO.category3}</td>
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
@@ -157,7 +152,7 @@
               		<input type="hidden" name="name" value="${productVO.name}">
               		<input type="hidden" name="origin" value="${productVO.origin}">
 	            	<input type="hidden" name="manufacturer" value="${productVO.manufacturer}">
-	            	<input type="hidden" name="price" value="${productVO.price}">
+	            	<input type="hidden" name="price" value="${productVO.real_price}">
 	            	<input type="hidden" name="category3" value="${productVO.category3}"> 
                   <input type="submit" class="btn_3" value="장바구니 추가하기">
               </div>

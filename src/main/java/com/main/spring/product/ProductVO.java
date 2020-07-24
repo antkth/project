@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductVO {
 	private String name,origin,manufacturer,category1,category2,category3,image;
-	private int num,price,inventory;
+	private int num,price,inventory,real_price;
 	private Timestamp exp_date;
 
 	public ProductVO() {}
@@ -22,13 +22,6 @@ public class ProductVO {
 		this.category3 = category3;
 		this.image = image;
 		this.price = price;
-		this.exp_date = exp_date;
-	}
-
-	public Timestamp getexp_date() {
-		return exp_date;
-	}
-	public void setexp_date(Timestamp exp_date) {
 		this.exp_date = exp_date;
 	}
 	public String getName() {
@@ -91,6 +84,16 @@ public class ProductVO {
 	public void setInventory(int inventory) {
 		this.inventory = inventory;
 	}
-	
-	
+	public int getReal_price() {
+		return real_price;
+	}
+	public void setReal_price(int real_price) {
+		this.real_price = real_price;
+	}
+	public Timestamp getExp_date() {
+		return exp_date;
+	}
+	public void setExp_date(Timestamp exp_date) {
+		this.exp_date = exp_date;
+	}
 }
