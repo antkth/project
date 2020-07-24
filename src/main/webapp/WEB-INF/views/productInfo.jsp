@@ -11,9 +11,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-    
-</head>
+		<!-- bar-rating -->
+ <script>
 
+ 
+ $(document).ready(function(){	
+	 listReply();
+	 
+
+	 
+		$("#btnReply").click(function(){
+			var content = $("#content").val();
+			var num = "${productVO.num}";
+			var score=0;
+			var radio_btn = document.getElementsByName("star");
+			for(var i=0;i<radio_btn.length;i++){
+				if(radio_btn[i].checked==true){
+					score=radio_btn[i].value;
+				}
+			}
+			if(content == null || content==""){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			var param = "content="+content+"&num="+num+"&id=${sessionScope.id}"+"&score="+score;
+			$.ajax({
+				type: "post",
+				async: false,
+				url : "${contextPath}/reviewAdd.rev",
+				data : param,
+				success:function(data){
+					alert("댓글작성이 완료되었습니다.");
+					$("#content").val("");
+					listReply();
+				}
+			});
+		});
+
+	 function listReply(){
+		var num = "${productVO.num}";
+		$.getJSON("${contextPath}/reviewList.rev?num=${productVO.num}",function(data){
+			var output = '';
+			$.each(data, function(index,item){
+				     output += '<div class="comment-list">';
+				     output += '<div class="single-comment justify-content-between d-flex">';
+				     output += '<div class="user justify-content-between d-flex">';
+				   	 output += '<div class="desc"><h5>작성자 : '+item.id+'&nbsp;&nbsp;&nbsp;&nbsp';
+				   	 output += '작성일 : '+item.date+'&nbsp;&nbsp;&nbsp;&nbsp; 평점 : '+item.score+'';
+				   	 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+				   	 output += '<div class="d-flex justify-content-between">';
+				   	 output += '<div class="d-flex align-items-center">';
+				     output += '<p class="comment">내용 : '+item.content+'</p>';
+					 output += '</div></div></div></div></div><br>';
+			});
+			 $("#listReply").html(output);
+		});
+	} 			
+}); 
+ 
+ 
+	function commentDelete(r_num){
+		 console.log(1);
+		 $.ajax({
+			 url : "${contextPath}/reviewDel.rev",
+			 type : "post",
+			 data : {r_num : r_num},
+			 async : false,
+			 success : function(data){
+					alert("삭제가 완료되었습니다.");
+					window.location.reload();
+			 }
+		 });
+	 }	
+ 
+</script> 
+		
+
+</head>
 <body>
  <jsp:include page="inc/header.jsp"/>
     <section class="breadcrumb_part single_product_breadcrumb">
@@ -48,6 +122,7 @@
 		            	<th>가격</th>
 		            	<th>종류</th>
 		            	<th>유통기한</th>
+		            	<th>평점</th>
 	            	</tr>
 	            	<tr>
 	            		<td>${productVO.origin}</td>
@@ -57,6 +132,7 @@
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
 	            		</td>
+	            		<td></td>
 	            	</tr>
 	            </table>
 				</div>
@@ -92,6 +168,62 @@
       </form>
     </div>
   </div>
+  
+  <!-- 댓글 -->
+  <div class="container" style=" width:650px; text-align: center;">
+  <table id="review" cellspacing="0" cellpadding="0" border="0">
+  	<tr id="star_tr">
+				<td></td>
+					<td ><input type="radio" value="5" id="star" name="star" checked="checked">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star"> 
+					</td>
+					<td><input type="radio" value="4" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+				    </td>
+					<td>
+						<input type="radio" value="3" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star" > </td>
+					<td><input type="radio" value="2" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star01.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star"> </td>
+					<td><input type="radio" value="1" id="star" name="star">
+					    <img src="resources/img/star/star01.gif" id="star" >
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star">
+					    <img src="resources/img/star/star00.gif" id="star"> </td>
+					    <td></td>
+			</tr>
+  	</table>
+  	</div>
+  <div style="width: 650px; text-align: left;" class="container">
+  
+  
+  
+  	<br>
+  	<c:if test="${sessionScope.id != null}">
+  		<textarea rows="5" cols="50" id="content" name="content" placeholder="댓글을 입력하세요."  ></textarea>
+  	<br>
+  	<button type="button" id="btnReply" class="btn btn-primary">댓글 작성</button>
+  	</c:if>
+  </div>
+  <div class="container" style="width: 650px; text-align: center;"><div id="listReply" class="comment-area"></div></div>
+  
   <!--================End Single Product Area =================-->
    <!-- subscribe part here -->
    <section class="subscribe_part section_padding">

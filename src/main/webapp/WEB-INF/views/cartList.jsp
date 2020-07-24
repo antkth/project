@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="zxx">
@@ -18,25 +18,21 @@
        </c:if>
        <c:remove var="msg"/>
 </head>
-
 <body>
-  <jsp:include page="inc/header.jsp"/>
+	<jsp:include page="inc/header.jsp" />
 
-    <!-- breadcrumb part start-->
-    <section class="breadcrumb_part">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner">
-                        <h2>장바구니</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb part end-->
-
-  <!--================Cart Area =================-->
+	<!-- breadcrumb part start-->
+	<section class="breadcrumb_part">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner">
+						<h2>장바구니</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
   <section class="cart_area section_padding">
     <div class="container">
       <div class="cart_inner">
@@ -123,8 +119,8 @@
           </table>
         </div>
       </div>
+    </div> 
   </section>
 <jsp:include page="inc/footer.jsp"/>
 </body>
-
 </html>

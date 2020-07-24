@@ -1,13 +1,9 @@
 package com.main.spring.product;
 
 import java.io.File;
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,16 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProductController {
-	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	private ModelAndView mav = new ModelAndView();
 	int number = 0;	
-		
+	
 	@Autowired
 	private ProductService productService;
 	
 	@Autowired
 	private ProductVO productVO;	
-	
 	
 	@RequestMapping(value = "/index.pro", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -69,6 +63,7 @@ public class ProductController {
 	}
 	@RequestMapping(value = "/productlist6.pro", method = RequestMethod.GET)
 	public void productlist6(@RequestParam String category1,@RequestParam String category3,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		response.setContentType("text/html;charset=utf-8");
 		if(request.getParameter("number")!=null) number=Integer.parseInt(request.getParameter("number"));
 		List productlist6 = productService.getProductList6(number, category1, category3 );
@@ -82,6 +77,7 @@ public class ProductController {
 			productInfo.put("num", productVO.getNum());
 			productArray.add(productInfo);	
 		}
+		
 		response.getWriter().print(productArray);
 	}	
 	@RequestMapping(value = "/productlist.pro", method = RequestMethod.GET)
@@ -100,61 +96,10 @@ public class ProductController {
 	public ModelAndView getProductInfo(@RequestParam int num,
 									   HttpServletRequest request,
 									   HttpServletResponse response)throws Exception{
-
+		
 		productVO = productService.getProductInfo(num);
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//---------------------------------------------------------------------------------------------------	
-	
-		private String getViewName(HttpServletRequest request) throws Exception {
-			String contextPath = request.getContextPath();
-			String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-			if (uri == null || uri.trim().equals("")) {
-				uri = request.getRequestURI();
-			}
-
-			int begin = 0;
-			if (!((contextPath == null) || ("".equals(contextPath)))) {
-				begin = contextPath.length();
-			}
-
-			int end;
-			if (uri.indexOf(";") != -1) {
-				end = uri.indexOf(";");
-			} else if (uri.indexOf("?") != -1) {
-				end = uri.indexOf("?");
-			} else {
-				end = uri.length();
-			}
-
-			String fileName = uri.substring(begin, end);
-			if (fileName.indexOf(".") != -1) {
-				fileName = fileName.substring(0, fileName.lastIndexOf("."));
-			}
-			if (fileName.lastIndexOf("/") != -1) {
-											//  /member/listMembers.do로 요청할 경우
-											//	/member/listMembers를 View이름으로 가져오게 하기! ↓ ( .do를 제외한 나머지를 가져오게하기 )
-				fileName = fileName.substring(fileName.lastIndexOf("/", 1), fileName.length());
-			}
-			return fileName;
-		}	
-
 	}
+}
