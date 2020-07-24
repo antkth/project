@@ -143,5 +143,15 @@ public class ProductController {
 		mav.setViewName("productlist");
 		return mav;
 	}
+	@RequestMapping(value = "/chegecategory.pro", method = RequestMethod.GET)
+	public ModelAndView chegecategory(HttpServletRequest request) {
+		if(request.getSession().getAttribute("chegecategory")==null||request.getSession().getAttribute("chegecategory").equals("1")) {
+			request.getSession().setAttribute("chegecategory","0");
+		}else {
+			request.getSession().setAttribute("chegecategory","1");
+		}
+		mav.setViewName("index");
+		return mav;
+	}
 
 }
