@@ -150,4 +150,10 @@ public class MemberController {
 		mav.setViewName("member/mypage");
 		return mav;
 	}
+	@RequestMapping(value = "/member/updateaddr.mem", method = RequestMethod.POST)
+	public ModelAndView updateaddr(@ModelAttribute MemberVO memberVO) {
+		memberService.updateaddr(memberVO);
+		mav.setViewName("redirect:/member/mypage.mem");
+		return mav;
+	}
 }

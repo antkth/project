@@ -52,8 +52,10 @@
                 <div class="col-md-4">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="Search keyword">
+                            <form action="${contextPath}/productSearch.pro" method="get">
+                                <input type="text" name="search_key" placeholder="제품명을 검색하세요">
+                                <input type="hidden" name="category1" value="${category1}">
+                                <input type="hidden" name="category3" value="${category3}">                                                            
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -74,7 +76,7 @@
                     <div class="product_list">
                         <div class="row" id="pp_product" >
                         <c:forEach var="product" items="${productList}">
-                            <div class="col-lg-6 col-sm-6"  >                            
+                            <div class="col-lg-4 col-sm-8"  >                            
                                 <div class="single_product_item" >
                                     <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
                                     <h3><a href="${contextPath}/productInfo.pro?num=${product.num}">${product.name}</a></h3>
@@ -83,15 +85,53 @@
                             </div>
                         </c:forEach>   
                         </div>
-                        <div class="load_more_btn text-center">
-                        		<input type="button"  onclick="btn_LoadMore()" class="btn_3" value="더보기(More)">
-                        </div>
+                        
+                       <nav class="blog-pagination justify-content-center d-flex">
+                       		
+                            <ul class="pagination">                               
+                                <li class="page-item">                                                                                          
+                                <c:if test="${p_map.blockFirst!=1}">                                
+                                    <a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${p_map.blockFirst-p_map.blockSize}&category1=${category1}&category3=${category3}" class="page-link" aria-label="Previous">
+                           	    	<i class="ti-angle-left"></i>
+                           	    	</a>                           	    
+                           	    </c:if>                           	                               	                              	     
+                           	    </li>
+                           	    <c:forEach var="i" begin="${p_map.blockFirst}" end="${p_map.blockLast}">   
+                                <li class="page-item">          
+                                    <a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${i}&category1=${category1}&category3=${category3}" class="page-link">${i}</a>   
+                                </li> 
+                                </c:forEach>       
+								<li class="page-item">									
+								<c:if test="${p_map.blockLast!=p_map.totalPage}">                                		                        
+		                        	<a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${p_map.blockLast+1}&category1=${category1}&category3=${category3}" class="page-link" aria-label="Next">
+		                        	<i class="ti-angle-right"></i>
+		                         	</a>
+		                        </c:if>			                        	                        		                        
+                                </li>                                                              
+                            </ul>
+                           
+                        </nav>
+                        
+                                            
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- product list part end-->
+    
+    
+    <!--                                 <li class="page-item active"> -->
+<!--                                     <a href="#" class="page-link">2</a> -->
+<!--                                 </li> -->
+	
+
+    
+       
+    
+    
+    
+    
     
     <!-- client review part here -->
     <section class="client_review">

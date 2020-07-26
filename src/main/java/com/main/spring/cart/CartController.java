@@ -20,23 +20,12 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	@Autowired
-	private CartVO cartVO;
-	
-	@RequestMapping(value = "/index.car", method = RequestMethod.GET)
-	public ModelAndView index() {
-		return mav;
-	}
-	
 	@RequestMapping(value = "/addCart.car", method = RequestMethod.POST)
 	public ModelAndView addCart(@ModelAttribute CartVO cartVO,
 								HttpServletRequest request,
-		
 								HttpServletResponse response) {
 		cartService.addCart(cartVO);
-		
-		mav.setViewName("redirect:/index.car");
-		
+		mav.setViewName("redirect:/index.pro");
 		return mav;
 	}
 	
@@ -44,11 +33,12 @@ public class CartController {
 	public ModelAndView cartList(@RequestParam String id,
 								HttpServletRequest request, 
 								HttpServletResponse response) throws Exception {
+		int total =0;
 		List cartList = cartService.getCartList(id);
-		int total = cartService.getTotalPrice(id);
+		if(cartService.totalCheck(id)!=0) total = cartService.getTotalPrice(id);
 		mav.addObject("cartList", cartList);
 		mav.addObject("total",total);
-		request.getSession().setAttribute("cartList",cartList);
+		mav.setViewName("cartList");
 		return mav;
 	}
 	

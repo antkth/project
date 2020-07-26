@@ -27,4 +27,8 @@ public class CartService {
 		
 		return cartDAO.getTotalPrice(id);
 	}
+
+	public int totalCheck(String id) {
+		return cartDAO.totalCheck(id);
+	}
 }

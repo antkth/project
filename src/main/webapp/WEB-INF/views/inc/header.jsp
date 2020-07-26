@@ -43,43 +43,45 @@
 								<li class="nav-item"><a class="nav-link"
 									href="${contextPath}/about.tem">For Cats</a></li>
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="${contextPath}/productlist.jsp" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Food </a>
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Food </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식사료">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=건식사료">
 											건식 사료
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식사료">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=습식사료">
 											습식 사료
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=건식간식">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=건식간식">
 											건식 간식
 										</a> 
-										<a class="dropdown-item" href="${contextPath}/productlist.pro?category1=고양이&category3=습식간식">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=습식간식">
 											습식 간식
 										</a> 										
 									</div>
 								</li>
 								<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Toys </a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-										<a class="dropdown-item" href="${contextPath}/member/login.mem">
-											login 
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Toys </a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=소형 장난감">
+											소형 장난감
 										</a> 
-										<a class="dropdown-item" href="#">product checkout</a>
-										<a class="dropdown-item" href="${contextPath}/cartList.car?id=${sessionScope.id}">shopping cart</a> 
-										<a class="dropdown-item" href="${contextPath}/confirmation.tem">confirmation</a> 
-										<a class="dropdown-item" href="${contextPath}/elements.tem">elements</a>
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=스크레치">
+											스크레치
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=낚시대">
+											낚시대
+										</a> 
 									</div>
 								</li>
 								<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-									Daily Products
-								</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-										<a class="dropdown-item" href="${contextPath}/blog.tem">
-											blog
-										</a>
-										<a class="dropdown-item" href="${contextPath}/singleblog.tem">Single blog</a>
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Daily Necessities </a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=샴푸">
+											샴푸
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=집">
+											집
+										</a> 
 									</div>
 								</li>
 								<li class="nav-item dropdown">
@@ -109,9 +111,10 @@
 						</div>
 						<div class="hearer_icon d-flex align-items-center">
 							<a id="search_1" href="javascript:void(0)"><i
-								class="ti-search"></i></a> <a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i
-								class="flaticon-shopping-cart-black-shape"></i>
-							</a>
+								class="ti-search"></i></a> 
+								<c:if test="${sessionScope.id !=null}">
+								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape"></i></a>
+								</c:if>
 						</div>
 					</nav>
 				</div>
@@ -119,9 +122,11 @@
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container ">
-				<form class="d-flex justify-content-between search-inner">
-					<input type="text" class="form-control" id="search_input"
-						placeholder="Search Here">
+				<form class="d-flex justify-content-between search-inner" action="${contextPath}/productSearch.pro" method="get">
+					<input type="text" class="form-control" id="search_input" name="search_key"
+						placeholder="제품명을 입력해주세요.">
+                    <input type="hidden" name="category1" value="total">
+                    <input type="hidden" name="category3" value="total"> 
 					<button type="submit" class="btn"></button>
 					<span class="ti-close" id="close_search" title="Close Search"></span>
 				</form>
