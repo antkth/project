@@ -156,6 +156,38 @@
 									</c:if>
 								</div>
 								</li>
+								<c:if test="${lastview1_num !=null}">
+								<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									최근본 상품
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview1_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview1_image}" width="50px">
+										${lastview1_name}</a>
+										<c:if test="${lastview2_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview2_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview2_image}" width="50px">
+										${lastview2_name}</a>
+										</c:if>
+										<c:if test="${lastview3_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview3_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview3_image}" width="50px">
+										${lastview3_name}</a>
+										</c:if>
+										<c:if test="${lastview4_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview4_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview4_image}" width="50px">
+										${lastview4_name}</a>
+										</c:if>
+										<c:if test="${lastview5_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview5_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview5_image}" width="50px">
+										${lastview5_name}</a>
+										</c:if>
+								</div>
+								</li>
+								</c:if>
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex align-items-center">

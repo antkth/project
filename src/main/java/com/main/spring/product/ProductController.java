@@ -84,11 +84,9 @@ public class ProductController {
 		Date nowdate = format.parse(format.format(cal.getTime()));
 		Date exp_date = format.parse(format.format(productVO.getExp_date()));
 		if(nowdate.compareTo(exp_date)==1) DC+=10;
-		
-		
-		
 		int real_price = Math.round(productVO.getPrice()/100*(100-DC)/100)*100;
 		productVO.setReal_price(real_price);
+		productService.lastview(request,num,productVO.getName(),productVO.getImage());
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 

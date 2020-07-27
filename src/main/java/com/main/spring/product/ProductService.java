@@ -1,7 +1,11 @@
 package com.main.spring.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -48,6 +52,44 @@ public class ProductService {
 		map.put("category1", category1);		
 		map.put("category3", category3);		
 		return productDAO.getAllProduct(map);
+	}
+	public HttpServletRequest lastview(HttpServletRequest request,int num,String name , String image) {
+		HttpSession session = request.getSession();
+		List list = new ArrayList();
+		boolean check = true;
+		for(int i = 1 ; i <=5 ; i ++) {
+			if(session.getAttribute("lastview"+i+"_num")!=null) {
+				if(num==Integer.parseInt(session.getAttribute("lastview"+i+"_num").toString())) {
+					check = false;
+				}
+			}
+		}
+		if(check) {
+		if(session.getAttribute("lastview4_num")!=null) {
+			session.setAttribute("lastview5_num",session.getAttribute("lastview4_num"));
+			session.setAttribute("lastview5_name",session.getAttribute("lastview4_name"));
+			session.setAttribute("lastview5_image",session.getAttribute("lastview4_image"));
+		}
+		if(session.getAttribute("lastview3_num")!=null) {
+			session.setAttribute("lastview4_num",session.getAttribute("lastview3_num"));
+			session.setAttribute("lastview4_name",session.getAttribute("lastview3_name"));
+			session.setAttribute("lastview4_image",session.getAttribute("lastview3_image"));
+		}
+		if(session.getAttribute("lastview2_num")!=null) {
+			session.setAttribute("lastview3_num",session.getAttribute("lastview2_num"));
+			session.setAttribute("lastview3_name",session.getAttribute("lastview2_name"));
+			session.setAttribute("lastview3_image",session.getAttribute("lastview2_image"));
+		}
+		if(session.getAttribute("lastview1_num")!=null) {
+			session.setAttribute("lastview2_num",session.getAttribute("lastview1_num"));
+			session.setAttribute("lastview2_name",session.getAttribute("lastview1_name"));
+			session.setAttribute("lastview2_image",session.getAttribute("lastview1_image"));
+		}
+		session.setAttribute("lastview1_num",num);
+		session.setAttribute("lastview1_name",name);
+		session.setAttribute("lastview1_image",image);
+		}
+		return request;
 	}
 	
 }
