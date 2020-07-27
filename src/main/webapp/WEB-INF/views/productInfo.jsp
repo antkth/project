@@ -51,7 +51,9 @@
 				     output += '<div class="user justify-content-between d-flex">';
 				   	 output += '<div class="desc"><h5>작성자 : '+item.id+'&nbsp;&nbsp;&nbsp;&nbsp';
 				   	 output += '작성일 : '+item.date+'&nbsp;&nbsp;&nbsp;&nbsp; 평점 : '+item.score+'';
-				   	 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+				   	 if ('${sessionScope.id}' == item.id) {
+				   		 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+					}
 				   	 output += '<div class="d-flex justify-content-between">';
 				   	 output += '<div class="d-flex align-items-center">';
 				     output += '<p class="comment">내용 : '+item.content+'</p>';
@@ -145,7 +147,13 @@
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
 	            		</td>
-	            		<td></td>
+	            		<td>
+	            		<c:forEach begin="1" end="${scoreAVG}">
+	            			<img src="resources/img/star/star01.gif" id="star">
+	            		</c:forEach>
+		            		<br><fmt:formatNumber value="${scoreAVG}" pattern=".00" /> 
+
+	            		</td>
 	            	</tr>
 	            </table>
 				</div>

@@ -33,7 +33,6 @@ public class ProductService {
 	}
 	
 	public ProductVO getProductInfo(int num) {
-		
 		return productDAO.getProductInfo(num);
 	}
 	public List getKeyList(String search_key, String category1, String category3, int pageFirst, int pageSize) {
@@ -90,6 +89,15 @@ public class ProductService {
 		session.setAttribute("lastview1_image",image);
 		}
 		return request;
+	}
+	
+	public double getScoreAVG(int num) {
+		return productDAO.getScoreAVG(num);
+	}
+	
+	public int getReviewTotal(int num) {
+
+		return productDAO.getReviewTotal(num);
 	}
 	
 }
