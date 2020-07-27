@@ -29,7 +29,6 @@ public class ProductService {
 	}
 	
 	public ProductVO getProductInfo(int num) {
-		
 		return productDAO.getProductInfo(num);
 	}
 	public List getKeyList(String search_key, String category1, String category3, int pageFirst, int pageSize) {
@@ -48,6 +47,15 @@ public class ProductService {
 		map.put("category1", category1);		
 		map.put("category3", category3);		
 		return productDAO.getAllProduct(map);
+	}
+	
+	public double getScoreAVG(int num) {
+		return productDAO.getScoreAVG(num);
+	}
+	
+	public int getReviewTotal(int num) {
+
+		return productDAO.getReviewTotal(num);
 	}
 	
 }

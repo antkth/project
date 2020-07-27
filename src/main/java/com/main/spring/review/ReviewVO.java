@@ -9,9 +9,18 @@ public class ReviewVO {
 	private String content,id;
 	private int num, score, r_num;
 	private Timestamp date;
+	private double socreAVG;
 	
 	public ReviewVO() {}
 	
+	public double getSocreAVG() {
+		return socreAVG;
+	}
+
+	public void setSocreAVG(double socreAVG) {
+		this.socreAVG = socreAVG;
+	}
+
 	public int getR_num() {
 		return r_num;
 	}

@@ -31,7 +31,7 @@ public class ReviewController {
 							HttpServletResponse response)throws Exception{
 		  response.setContentType("text/html;charset=utf-8");
 
-		  List rvList = reviewService.rivewList(num);
+		  List rvList = reviewService.reviewList(num);
 		  
 		  JSONArray rvArray = new JSONArray();
 		  for(int i=0; i<rvList.size(); i++) {
@@ -64,6 +64,8 @@ public class ReviewController {
 		
 		 reviewService.deleteReview(r_num);
 	}
+	
+	
 	
 	
 }

@@ -11,16 +11,16 @@
    		<result property="score" column="score" />
   		<result property="date" column="date" />
    	</resultMap>
-   	 
-   	 <select id="numcheck" resultMap="revResult" >
+   	
+   	 <select id="numcheck" resultType="java.lang.Integer" >
    	 	<![CDATA[
-   	 		SELECT * FROM review
+   	 		SELECT count(num) FROM review WHERE num = #{num}
    	 	]]>
    	 </select>
    	 
-   	 <select id="avg" resultMap="revResult" >
+   	 <select id="scoreAVG" resultType="java.lang.Double" parameterType="java.lang.Integer" >
    	 	<![CDATA[
-   	 		SELECT AVG(score) FROM review
+   	 		SELECT AVG(score) as scoreAVG FROM review WHERE num = #{num}
    	 	]]>
    	 </select>
    	 
@@ -37,7 +37,7 @@
    		]]>
    	</select>
    	
-   	<delete id="deleteReview" parameterType="int" >
+   	<delete id="deleteReview" parameterType="java.lang.Integer" >
    		<![CDATA[
    			DELETE FROM review WHERE r_num = #{r_num}
    		]]>

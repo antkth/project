@@ -56,25 +56,7 @@ public class ProductController {
 		mav.setViewName("admin/insertPro");
 		return mav;
 	}
-	@RequestMapping(value = "/productlist6.pro", method = RequestMethod.GET)
-	public void productlist6(@RequestParam String category1,@RequestParam String category3,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		int number = 0;
-		if(request.getParameter("number")!=null) number=Integer.parseInt(request.getParameter("number"));
-		List productlist6 = productService.getProductList6(number, category1, category3 );
-		JSONArray productArray = new JSONArray();
-		for(int i=0; i<productlist6.size(); i++) {
-			JSONObject productInfo = new JSONObject();
-			ProductVO productVO = (ProductVO) productlist6.get(i);
-			productInfo.put("image", productVO.getImage());
-			productInfo.put("name", productVO.getName());
-			productInfo.put("price", productVO.getPrice());
-			productInfo.put("num", productVO.getNum());
-			productArray.add(productInfo);	
-		}
-		
-		response.getWriter().print(productArray);
-	}	
+
 	@RequestMapping(value = "/productlist.pro", method = RequestMethod.GET)
 	public ModelAndView productList(@RequestParam String category1,
 									@RequestParam String category3,
@@ -92,11 +74,21 @@ public class ProductController {
 	public ModelAndView getProductInfo(@RequestParam int num,
 									   HttpServletRequest request,
 									   HttpServletResponse response)throws Exception{
+		
 		ProductVO productVO = productService.getProductInfo(num);
+		int number = productService.getReviewTotal(num);
+		System.out.println(number);
+		if(number != 0) {
+			double scoreAVG = productService.getScoreAVG(num);
+			
+			mav.addObject("scoreAVG", scoreAVG);
+		}
+
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 
 }
+	
 	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
 	public ModelAndView productSearch(	@RequestParam(defaultValue = "") String search_key,
 										@RequestParam String category1,
