@@ -75,8 +75,8 @@ public class ProductController {
 	public ModelAndView getProductInfo(@RequestParam int num,
 									   HttpServletRequest request,
 									   HttpServletResponse response)throws Exception{
-		
 		ProductVO productVO = productService.getProductInfo(num);
+		mav.addObject("scoreAVG", 0);
 		int DC = 0;
 		if(productVO.getInventory()>50) DC +=10;
 		Calendar cal = Calendar.getInstance();
@@ -89,17 +89,14 @@ public class ProductController {
 		productVO.setReal_price(real_price);
 		productService.lastview(request,num,productVO.getName(),productVO.getImage());
 		int number = productService.getReviewTotal(num);
-		System.out.println(number);
 		if(number != 0) {
 			double scoreAVG = productService.getScoreAVG(num);
-			
 			mav.addObject("scoreAVG", scoreAVG);
 		}
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 
 }
-	
 	@RequestMapping(value = "/productSearch", method = RequestMethod.GET)
 	public ModelAndView productSearch(	@RequestParam(defaultValue = "") String search_key,
 										@RequestParam String category1,

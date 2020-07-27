@@ -97,6 +97,8 @@
 </style> 
 </head>
 <body>
+<script type="text/javascript">
+</script>
  <jsp:include page="inc/header.jsp"/>
     <section class="breadcrumb_part single_product_breadcrumb">
         <div class="container">
@@ -130,7 +132,9 @@
 		            	<th>가격</th>
 		            	<th>종류</th>
 		            	<th>유통기한</th>
+		            	<c:if test="${scoreAVG !=0 }">	
 		            	<th>평점</th>
+		            	</c:if>
 	            	</tr>
 	            	<tr>
 	            		<td>${productVO.origin}</td>
@@ -147,13 +151,14 @@
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
 	            		</td>
+	            	<c:if test="${scoreAVG !=0 }">		
 	            		<td>
 	            		<c:forEach begin="1" end="${scoreAVG}">
 	            			<img src="resources/img/star/star01.gif" id="star">
 	            		</c:forEach>
 		            		<br><fmt:formatNumber value="${scoreAVG}" pattern=".00" /> 
-
 	            		</td>
+	            	</c:if>
 	            	</tr>
 	            </table>
 				</div>
@@ -161,15 +166,12 @@
                 <div class="product_count_area">
                     <p>수량</p>
                     <div class="product_count d-inline-block">
-                       <!--   <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span> -->
                         <select id="qty" class="product_count_item input-number" name="qty">
                         	<option value="1">1</option>
                         	<option value="2">2</option>
                         	<option value="3">3</option>
                         	<option value="4">4</option>
                         </select>
-                        <!-- <input class="product_count_item input-number" type="text" value="1" min="0" max="10" id="count"> -->
-                        <!-- <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>  -->
                     </div>
                 </div>
               <div class="add_to_cart">
@@ -189,8 +191,7 @@
       </form>
     </div>
   </div>
-  
-  <!-- 댓글 -->
+  <c:if test="${id!=null}">
   <div class="container" style=" width:650px; text-align: center;">
   <table id="review" cellspacing="0" cellpadding="0" border="0">
   	<tr id="star_tr">
@@ -232,10 +233,8 @@
 			</tr>
   	</table>
   	</div>
+	</c:if>
   <div style="width: 650px; text-align: left;" class="container">
-  
-  
-  
   	<br>
   	<c:if test="${sessionScope.id != null}">
   		<textarea rows="5" cols="50" id="content" name="content" placeholder="댓글을 입력하세요."  ></textarea>
@@ -244,9 +243,6 @@
   	</c:if>
   </div>
   <div class="container" style="width: 650px; text-align: center;"><div id="listReply" class="comment-area"></div></div>
-  
-  <!--================End Single Product Area =================-->
-   <!-- subscribe part here -->
    <section class="subscribe_part section_padding">
       <div class="container">
           <div class="row justify-content-center">
@@ -263,7 +259,6 @@
           </div>
       </div>
   </section>
-  <!-- subscribe part end -->
  <jsp:include page="inc/footer.jsp"/>
 
 </body>
