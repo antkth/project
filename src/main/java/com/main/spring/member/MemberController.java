@@ -79,7 +79,7 @@ public class MemberController {
 							   HttpServletResponse response) {
 		String inforpage = request.getHeader("referer").substring(29);
 		String nextPage = inforpage.substring(0,inforpage.indexOf("."));
-		request.getSession().invalidate();
+		request.getSession().removeAttribute("id");
 		mav.setViewName(nextPage);
 		return mav;
 	}
@@ -133,7 +133,6 @@ public class MemberController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping(value = "/member/mypage.mem" , method = RequestMethod.GET)
 	public ModelAndView mypage(HttpServletRequest request) {
 		String id = (String)request.getSession().getAttribute("id");
@@ -144,7 +143,6 @@ public class MemberController {
 			map.put("addpoint",request.getParameter("addpoint"));
 			memberService.addpoint(map);
 		}
-		
 		MemberVO memberVO = memberService.memMod(id);
 		mav.addObject("meminfo",memberVO);
 		mav.setViewName("member/mypage");

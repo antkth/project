@@ -35,6 +35,13 @@ public class ProductDAO {
 		
 		return sqlSession.selectOne("mapper.product.getAllProduct", map);
 		
-		
 	}
+	
+	public double getScoreAVG(int num) {
+		return sqlSession.selectOne("mapper.review.scoreAVG", num);
+	}
+	public int getReviewTotal(int num) {
+		return sqlSession.selectOne("mapper.review.numcheck", num);
+	}
+	
 }

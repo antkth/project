@@ -2,14 +2,16 @@ package com.main.spring.product;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,25 +58,6 @@ public class ProductController {
 		mav.setViewName("admin/insertPro");
 		return mav;
 	}
-	@RequestMapping(value = "/productlist6.pro", method = RequestMethod.GET)
-	public void productlist6(@RequestParam String category1,@RequestParam String category3,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		int number = 0;
-		if(request.getParameter("number")!=null) number=Integer.parseInt(request.getParameter("number"));
-		List productlist6 = productService.getProductList6(number, category1, category3 );
-		JSONArray productArray = new JSONArray();
-		for(int i=0; i<productlist6.size(); i++) {
-			JSONObject productInfo = new JSONObject();
-			ProductVO productVO = (ProductVO) productlist6.get(i);
-			productInfo.put("image", productVO.getImage());
-			productInfo.put("name", productVO.getName());
-			productInfo.put("price", productVO.getPrice());
-			productInfo.put("num", productVO.getNum());
-			productArray.add(productInfo);	
-		}
-		
-		response.getWriter().print(productArray);
-	}	
 	@RequestMapping(value = "/productlist.pro", method = RequestMethod.GET)
 	public ModelAndView productList(@RequestParam String category1,
 									@RequestParam String category3,
@@ -93,6 +76,23 @@ public class ProductController {
 									   HttpServletRequest request,
 									   HttpServletResponse response)throws Exception{
 		ProductVO productVO = productService.getProductInfo(num);
+		mav.addObject("scoreAVG", 0);
+		int DC = 0;
+		if(productVO.getInventory()>50) DC +=10;
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE,31);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date nowdate = format.parse(format.format(cal.getTime()));
+		Date exp_date = format.parse(format.format(productVO.getExp_date()));
+		if(nowdate.compareTo(exp_date)==1) DC+=10;
+		int real_price = Math.round(productVO.getPrice()/100*(100-DC)/100)*100;
+		productVO.setReal_price(real_price);
+		productService.lastview(request,num,productVO.getName(),productVO.getImage());
+		int number = productService.getReviewTotal(num);
+		if(number != 0) {
+			double scoreAVG = productService.getScoreAVG(num);
+			mav.addObject("scoreAVG", scoreAVG);
+		}
 		mav.addObject("productVO", productVO);
 		mav.setViewName("productInfo");
 		return mav; 
@@ -102,7 +102,7 @@ public class ProductController {
 										@RequestParam String category1,
 										@RequestParam String category3,
 										@RequestParam(defaultValue = "1") int nowPage,
-										HttpServletRequest request) {
+										HttpServletRequest request) throws Exception{
 
 		int total= productService.getAllProduct(search_key, category1, category3);
 		int pageSize = 9;
@@ -123,13 +123,38 @@ public class ProductController {
 		p_map.put("blockFirst", blockFirst);
 		p_map.put("blockLast", blockLast);
 		p_map.put("nowPage", nowPage);
+		List list = new ArrayList();
+		for(int i = 0 ; i < productList.size() ; i ++) {
+			ProductVO productVO = (ProductVO)productList.get(i);
+			int DC = 0;
+			if(productVO.getInventory()>50) DC +=10;
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE,31);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date nowdate = format.parse(format.format(cal.getTime()));
+			Date exp_date = format.parse(format.format(productVO.getExp_date()));
+			if(nowdate.compareTo(exp_date)==1) DC+=10;
+			int real_price = Math.round(productVO.getPrice()/100*(100-DC)/100)*100;
+			productVO.setReal_price(real_price);
+			list.add(productVO);
+		}
 	
-		mav.addObject("productList", productList);
+		mav.addObject("productList", list);
 		mav.addObject("search_key", search_key);
 		mav.addObject("category1", category1);
 		mav.addObject("category3", category3);
 		mav.addObject("p_map", p_map);
 		mav.setViewName("productlist");
+		return mav;
+	}
+	@RequestMapping(value = "/chegecategory.pro", method = RequestMethod.GET)
+	public ModelAndView chegecategory(HttpServletRequest request) {
+		if(request.getSession().getAttribute("chegecategory")==null||request.getSession().getAttribute("chegecategory").equals("1")) {
+			request.getSession().setAttribute("chegecategory","0");
+		}else {
+			request.getSession().setAttribute("chegecategory","1");
+		}
+		mav.setViewName("index");
 		return mav;
 	}
 

@@ -40,11 +40,28 @@
 							<ul class="navbar-nav">
 								<li class="nav-item"><a class="nav-link"
 									href="${contextPath}/index.tem">Home</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="${contextPath}/about.tem">For Cats</a></li>
+									
+								<c:choose>
+								<c:when test="${chegecategory==null || chegecategory == '1'}">
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/chegecategory.pro">For Cats</a></li>
+								</c:when>
+								<c:otherwise>
+								<li class="nav-item"><a class="nav-link" href="${contextPath}/chegecategory.pro">For Dogs</a></li>
+								</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Food </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+									<c:choose>
+									<c:when test="${chegecategory==null || chegecategory == '1'}">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=수제간식">
+											수제 간식
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=사료">
+											사료
+										</a> 
+									</c:when>
+									<c:otherwise>
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=건식사료">
 											건식 사료
 										</a> 
@@ -56,12 +73,27 @@
 										</a> 
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=습식간식">
 											습식 간식
-										</a> 										
+										</a> 
+									</c:otherwise>
+									</c:choose>
 									</div>
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Toys </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+										<c:choose>
+									<c:when test="${chegecategory==null || chegecategory == '1'}">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=노즈워크매트">
+											노즈워크매트
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=봉제장난감">
+											봉제장난감
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=라텍스">
+											라텍스
+										</a> 
+									</c:when>
+									<c:otherwise>
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=소형 장난감">
 											소형 장난감
 										</a> 
@@ -71,17 +103,34 @@
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=낚시대">
 											낚시대
 										</a> 
+									</c:otherwise>
+									</c:choose>
 									</div>
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Daily Necessities </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+																			<c:choose>
+									<c:when test="${chegecategory==null || chegecategory == '1'}">
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=샴푸">
+											샴푸
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=하우스">
+											하우스
+										</a> 
+										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=강아지&category3=하네스">
+											하네스
+										</a> 
+									</c:when>
+									<c:otherwise>
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=샴푸">
 											샴푸
 										</a> 
 										<a class="dropdown-item" href="${contextPath}/productSearch.pro?category1=고양이&category3=집">
 											집
-										</a> 
+										</a>
+									</c:otherwise>
+									</c:choose>
 									</div>
 								</li>
 								<li class="nav-item dropdown">
@@ -107,6 +156,38 @@
 									</c:if>
 								</div>
 								</li>
+								<c:if test="${lastview1_num !=null}">
+								<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="${contextPath}/blog.tem" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									최근본 상품
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview1_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview1_image}" width="50px">
+										${lastview1_name}</a>
+										<c:if test="${lastview2_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview2_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview2_image}" width="50px">
+										${lastview2_name}</a>
+										</c:if>
+										<c:if test="${lastview3_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview3_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview3_image}" width="50px">
+										${lastview3_name}</a>
+										</c:if>
+										<c:if test="${lastview4_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview4_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview4_image}" width="50px">
+										${lastview4_name}</a>
+										</c:if>
+										<c:if test="${lastview5_num !=null}">
+										<a class="dropdown-item" href="${contextPath}/productInfo.pro?num=${lastview5_num}">
+										<img src="${contextPath}/resources/img_catfood/${lastview5_image}" width="50px">
+										${lastview5_name}</a>
+										</c:if>
+								</div>
+								</li>
+								</c:if>
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex align-items-center">

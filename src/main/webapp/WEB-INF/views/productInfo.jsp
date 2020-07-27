@@ -11,15 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-		<!-- bar-rating -->
  <script>
-
- 
  $(document).ready(function(){	
 	 listReply();
-	 
-
-	 
 		$("#btnReply").click(function(){
 			var content = $("#content").val();
 			var num = "${productVO.num}";
@@ -47,7 +41,6 @@
 				}
 			});
 		});
-
 	 function listReply(){
 		var num = "${productVO.num}";
 		$.getJSON("${contextPath}/reviewList.rev?num=${productVO.num}",function(data){
@@ -58,7 +51,9 @@
 				     output += '<div class="user justify-content-between d-flex">';
 				   	 output += '<div class="desc"><h5>작성자 : '+item.id+'&nbsp;&nbsp;&nbsp;&nbsp';
 				   	 output += '작성일 : '+item.date+'&nbsp;&nbsp;&nbsp;&nbsp; 평점 : '+item.score+'';
-				   	 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+				   	 if ('${sessionScope.id}' == item.id) {
+				   		 output += '<a onclick="commentDelete('+item.r_num+');" class="genric-btn default-border circle"><font color="blue">삭제</font></a></h5>';
+					}
 				   	 output += '<div class="d-flex justify-content-between">';
 				   	 output += '<div class="d-flex align-items-center">';
 				     output += '<p class="comment">내용 : '+item.content+'</p>';
@@ -68,8 +63,6 @@
 		});
 	} 			
 }); 
- 
- 
 	function commentDelete(r_num){
 		 console.log(1);
 		 $.ajax({
@@ -83,12 +76,29 @@
 			 }
 		 });
 	 }	
- 
-</script> 
-		
-
+</script>
+<style type="text/css">
+.img-fluid {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+}
+.img-fluid:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+.img {width:325px; height:280px; overflow:hidden }   /* 부모를 벗어나지 않고 내부 이미지만 확대 */
+</style> 
 </head>
 <body>
+<script type="text/javascript">
+</script>
  <jsp:include page="inc/header.jsp"/>
     <section class="breadcrumb_part single_product_breadcrumb">
         <div class="container">
@@ -122,17 +132,33 @@
 		            	<th>가격</th>
 		            	<th>종류</th>
 		            	<th>유통기한</th>
+		            	<c:if test="${scoreAVG !=0 }">	
 		            	<th>평점</th>
+		            	</c:if>
 	            	</tr>
 	            	<tr>
 	            		<td>${productVO.origin}</td>
 	            		<td>${productVO.manufacturer}</td>
+                        <c:choose>
+                        <c:when test="${productVO.price == productVO.real_price}">
 	            		<td>${productVO.price}</td>
+                        </c:when>
+                        <c:otherwise>
+	            		<td><font style="text-decoration: line-through;" color="gray">${productVO.price}</font><br>${productVO.real_price}</td>
+                        </c:otherwise>
+                        </c:choose>
 	            		<td>${productVO.category3}</td>
 	            		<td>
 	            			<fmt:formatDate value="${productVO.exp_date}" pattern="yyyy-MM-dd" />
 	            		</td>
-	            		<td></td>
+	            	<c:if test="${scoreAVG !=0 }">		
+	            		<td>
+	            		<c:forEach begin="1" end="${scoreAVG}">
+	            			<img src="resources/img/star/star01.gif" id="star">
+	            		</c:forEach>
+		            		<br><fmt:formatNumber value="${scoreAVG}" pattern=".00" /> 
+	            		</td>
+	            	</c:if>
 	            	</tr>
 	            </table>
 				</div>
@@ -140,15 +166,12 @@
                 <div class="product_count_area">
                     <p>수량</p>
                     <div class="product_count d-inline-block">
-                       <!--   <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span> -->
                         <select id="qty" class="product_count_item input-number" name="qty">
                         	<option value="1">1</option>
                         	<option value="2">2</option>
                         	<option value="3">3</option>
                         	<option value="4">4</option>
                         </select>
-                        <!-- <input class="product_count_item input-number" type="text" value="1" min="0" max="10" id="count"> -->
-                        <!-- <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>  -->
                     </div>
                 </div>
               <div class="add_to_cart">
@@ -157,7 +180,7 @@
               		<input type="hidden" name="name" value="${productVO.name}">
               		<input type="hidden" name="origin" value="${productVO.origin}">
 	            	<input type="hidden" name="manufacturer" value="${productVO.manufacturer}">
-	            	<input type="hidden" name="price" value="${productVO.price}">
+	            	<input type="hidden" name="price" value="${productVO.real_price}">
 	            	<input type="hidden" name="category3" value="${productVO.category3}"> 
                   <input type="submit" class="btn_3" value="장바구니 추가하기">
               </div>
@@ -168,8 +191,7 @@
       </form>
     </div>
   </div>
-  
-  <!-- 댓글 -->
+  <c:if test="${id!=null}">
   <div class="container" style=" width:650px; text-align: center;">
   <table id="review" cellspacing="0" cellpadding="0" border="0">
   	<tr id="star_tr">
@@ -211,10 +233,8 @@
 			</tr>
   	</table>
   	</div>
+	</c:if>
   <div style="width: 650px; text-align: left;" class="container">
-  
-  
-  
   	<br>
   	<c:if test="${sessionScope.id != null}">
   		<textarea rows="5" cols="50" id="content" name="content" placeholder="댓글을 입력하세요."  ></textarea>
@@ -223,9 +243,6 @@
   	</c:if>
   </div>
   <div class="container" style="width: 650px; text-align: center;"><div id="listReply" class="comment-area"></div></div>
-  
-  <!--================End Single Product Area =================-->
-   <!-- subscribe part here -->
    <section class="subscribe_part section_padding">
       <div class="container">
           <div class="row justify-content-center">
@@ -242,7 +259,6 @@
           </div>
       </div>
   </section>
-  <!-- subscribe part end -->
  <jsp:include page="inc/footer.jsp"/>
 
 </body>

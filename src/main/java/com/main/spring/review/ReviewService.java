@@ -15,7 +15,7 @@ public class ReviewService {
 		reviewDAO.insertReview(reviewVO);
 	}
 
-	public List<ReviewVO> rivewList(int num) {
+	public List<ReviewVO> reviewList(int num) {
 		return reviewDAO.rivewList(num);
 	}
  
