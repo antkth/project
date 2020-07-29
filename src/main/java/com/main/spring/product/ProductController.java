@@ -30,8 +30,27 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/index.pro", method = RequestMethod.GET)
-	public ModelAndView index() {
+	public ModelAndView index(HttpServletRequest request) throws Exception{
 		mav.setViewName("index");
+		List bestProductList = productService.bestProductList();
+		List list = new ArrayList();
+		for(int i = 0 ; i < bestProductList.size() ; i ++) {
+			ProductVO productVO = (ProductVO)bestProductList.get(i);
+			int DC = 0;
+			if(productVO.getInventory()>50) DC +=10;
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE,31);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date nowdate = format.parse(format.format(cal.getTime()));
+			Date exp_date = format.parse(format.format(productVO.getExp_date()));
+			if(nowdate.compareTo(exp_date)==1) DC+=10;
+			int real_price = Math.round(productVO.getPrice()/100*(100-DC)/100)*100;
+			productVO.setReal_price(real_price);
+			productVO.setWishCheck(productService.wishCheck(productVO.getNum(),(String)request.getSession().getAttribute("id")));
+			list.add(productVO);
+		}
+		mav.addObject("bestProductList", list);
+		
 		return mav;
 	}
 	@RequestMapping(value = "/admin/insertPro.pro", method = RequestMethod.GET)

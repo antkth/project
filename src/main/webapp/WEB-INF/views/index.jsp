@@ -14,7 +14,7 @@
 
 <body>
 <jsp:include page="inc/header.jsp"/>
-    <!-- banner part start-->
+<%--     <!-- banner part start-->
     <section class="banner_part">
         <div class="container">
             <div class="row align-items-center">
@@ -36,7 +36,52 @@
             <img src="${contextPath}/resources/img/banner_pattern.png " alt="#" class="pattern_img img-fluid">
         </div>
     </section>
-    <!-- banner part start-->
+    <!-- banner part start--> --%>
+    
+ 
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+		  <ol class="carousel-indicators">
+		    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+		    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+		    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+		  </ol>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="${contextPath}/resources/img/pet03(1).png" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>First slide label</h5>
+		        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <img src="${contextPath}/resources/img/pet03(1).png" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>Second slide label</h5>
+		        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <img src="${contextPath}/resources/img/pet03(1).png" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>Third slide label</h5>
+		        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+		      </div>
+		    </div>
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+    </section>
+    <!-- Hero Section End --> 
+
     <!-- product list start-->
     <section class="single_product_list">
         <div class="container">
@@ -115,17 +160,18 @@
                 </div>
             </div>
             <div class="row">
+            <c:forEach items="${bestProductList}" var="DTO" begin="0" end="6">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <img src="${contextPath}/resources/img/tranding_item/tranding_item_1.png" alt="#" class="img-fluid">
+                            <a href="${contextPath}/productInfo.pro?num=${DTO.num}"><img src="${contextPath}/resources/img_catfood/${DTO.image}" alt="#" class="img-fluid"></a>
                         </div>
-                        <h3> <a href="single-product.html">Cervical pillow for airplane
-                        car office nap pillow</a> </h3>
-                        <p>From $5</p>
+                        <h3> <a href="single-product.html">${DTO.name}</a></h3>
+                        <p>${DTO.real_price}</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
+            </c:forEach>
+<%--                 <div class="col-lg-4 col-sm-6">
                     <div class="single_product_item">
                         <img src="${contextPath}/resources/img/tranding_item/tranding_item_2.png" alt="#" class="img-fluid">
                         <h3> <a href="single-product.html">Foam filling cotton slow rebound pillows</a> </h3>
@@ -160,7 +206,7 @@
                         <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
                         <p>From $5</p>
                     </div>
-                </div>
+                </div> --%>
             </div>
         </div>
     </section>
@@ -174,21 +220,21 @@
                     <div class="client_review_slider owl-carousel">
                         <div class="single_client_review">
                             <div class="client_img">
-                                <img src="${contextPath}/resources/img/client.png" alt="#">
+                                <img src="${contextPath}/resources/img/pet03.png" alt="#">
                             </div>
                             <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
                             <h5>- Micky Mouse</h5>
                         </div>
                         <div class="single_client_review">
                             <div class="client_img">
-                                <img src="${contextPath}/resources/img/client_1.png" alt="#">
+                                <img src="${contextPath}/resources/img/pet02.png" alt="#">
                             </div>
                             <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
                             <h5>- Micky Mouse</h5>
                         </div>
                         <div class="single_client_review">
                             <div class="client_img">
-                                <img src="${contextPath}/resources/img/client_2.png" alt="#">
+                                <img src="${contextPath}/resources/img/pet01.png" alt="#">
                             </div>
                             <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
                             <h5>- Micky Mouse</h5>

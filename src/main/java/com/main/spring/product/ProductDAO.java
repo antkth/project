@@ -52,4 +52,7 @@ public class ProductDAO {
 	public void deletewish(HashMap map) {
 		sqlSession.delete("mapper.product.deletewish",map);
 	}
+	public List bestProductList() {
+		return sqlSession.selectList("mapper.product.bestProductList");		
+	}
 }
