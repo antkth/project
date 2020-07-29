@@ -99,5 +99,26 @@ public class ProductService {
 
 		return productDAO.getReviewTotal(num);
 	}
+	public int wishCheck(int num , String id) {
+		HashMap map = new HashMap();
+		map.put("num",num);
+		map.put("id",id);
+		return productDAO.wishCheck(map);
+	}
+	public void addwishlist(int num , String id) {
+		HashMap map = new HashMap();
+		map.put("num",num);
+		map.put("id",id);
+		productDAO.addwishlist(map);
+	}
+	public List wishlist(String id) {
+		return productDAO.wishlist(id);
+	}
+	public void deletewish(String id , int num) {
+		HashMap map = new HashMap();
+		map.put("id",id);
+		map.put("num",num);
+		productDAO.deletewish(map);
+	}
 	
 }

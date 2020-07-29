@@ -32,16 +32,24 @@ public class ProductDAO {
 		return sqlSession.selectList("mapper.product.getKeyList", map);
 	}
 	public int getAllProduct(HashMap map) {
-		
 		return sqlSession.selectOne("mapper.product.getAllProduct", map);
-		
 	}
-	
 	public double getScoreAVG(int num) {
 		return sqlSession.selectOne("mapper.review.scoreAVG", num);
 	}
 	public int getReviewTotal(int num) {
 		return sqlSession.selectOne("mapper.review.numcheck", num);
 	}
-	
+	public int wishCheck(HashMap map) {
+		return sqlSession.selectOne("mapper.product.wishCheck",map);
+	}
+	public void addwishlist(HashMap map) {
+		sqlSession.insert("mapper.product.addwishlist",map);
+	}
+	public List wishlist(String id) {
+		return sqlSession.selectList("mapper.product.wishlist",id);
+	}
+	public void deletewish(HashMap map) {
+		sqlSession.delete("mapper.product.deletewish",map);
+	}
 }

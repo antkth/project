@@ -1,6 +1,7 @@
 package com.main.spring.cart;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +36,8 @@ public class CartDAO {
 
 	public int totalCheck(String id) {
 		return sqlSession.selectOne("mapper.cart.totalCheck",id);
+	}
+	public void deletecart(HashMap map) {
+		sqlSession.delete("mapper.cart.deletecart",map);
 	}
 }

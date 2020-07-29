@@ -146,6 +146,7 @@
 									</c:when>
 									<c:otherwise>
 										<a class="dropdown-item" href="${contextPath}/member/mypage.mem">마이페이지</a>
+										<a class="dropdown-item" href="${contextPath}/wishList.pro">위시리스트</a>
 										<a class="dropdown-item" href="${contextPath}/qaboard/qalist.qab">1대1 문의</a>
 										<a class="dropdown-item" href="${contextPath}/member/memMod.mem">회원정보 수정</a>
 										<a class="dropdown-item" href="${contextPath}/member/logout.mem">로그아웃</a>

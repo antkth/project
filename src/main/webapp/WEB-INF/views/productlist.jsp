@@ -30,7 +30,7 @@
                     <div class="product_sidebar">
                         <div class="single_sedebar">
                             <form action="${contextPath}/productSearch.pro" method="get">
-                                <input type="text" name="search_key" placeholder="제품명을 검색하세요">
+                                <input type="text" name="search_key" placeholder="제품명을 검색하세요" value="${search_key}">
                                 <input type="hidden" name="category1" value="${category1}">
                                 <input type="hidden" name="category3" value="${category3}">                                                            
                                 <i class="ti-search"></i>
@@ -63,9 +63,26 @@
                                    </c:when>
                                    <c:otherwise>
                                    <p><font style="text-decoration: line-through;" color="gray">${product.price}</font></p>
-                                   <p>${product.real_price}</p>    
+                                   <p>${product.real_price}</p>
                                    </c:otherwise>
                                    </c:choose>
+                                   <c:if test="${id != null}">
+                                   		<c:choose>
+                                   		<c:when test="${product.wishCheck==1}">
+                                   		<a>찜한상품</a>
+                                   		</c:when>
+                                   		<c:otherwise>
+                                   		<form action="${contextPath}/addwishlist.pro" method="post">
+                                   		<input type="hidden" name="num" value="${product.num}">
+                                   		<input type="hidden" name="category1" value="${category1}">
+                                   		<input type="hidden" name="category3" value="${category3}">
+                                   		<input type="hidden" name="search_key" value="${search_key}">
+                                   		<input type="hidden" name="nowPage" value="${p_map.nowPage}">
+                                   		<input type="submit" value="찜하기">
+                                   		</form>
+                                   		</c:otherwise>
+                                   		</c:choose>
+                                   	</c:if>
                                 </div>
                             </div>
                         </c:forEach>   

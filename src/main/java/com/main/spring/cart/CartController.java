@@ -25,20 +25,26 @@ public class CartController {
 								HttpServletRequest request,
 								HttpServletResponse response) {
 		cartService.addCart(cartVO);
-		mav.setViewName("redirect:/index.pro");
+		mav.setViewName("redirect:/cartList.car?id="+cartVO.getId());
 		return mav;
 	}
 	
 	@RequestMapping(value = "/cartList.car", method=RequestMethod.GET)
-	public ModelAndView cartList(@RequestParam String id,
-								HttpServletRequest request, 
-								HttpServletResponse response) throws Exception {
+	public ModelAndView cartList(@RequestParam String id){
 		int total =0;
 		List cartList = cartService.getCartList(id);
 		if(cartService.totalCheck(id)!=0) total = cartService.getTotalPrice(id);
 		mav.addObject("cartList", cartList);
 		mav.addObject("total",total);
 		mav.setViewName("cartList");
+		return mav;
+	}
+	@RequestMapping(value = "/deletecart.car", method = RequestMethod.POST)
+	public ModelAndView deletecart(@RequestParam String id,
+								   @RequestParam int cart_num
+								   ) {
+		cartService.deletecart(id, cart_num);
+		mav.setViewName("redirect:/cartList.car?id="+id);
 		return mav;
 	}
 	

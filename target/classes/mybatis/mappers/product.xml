@@ -71,7 +71,24 @@
 		</otherwise>
 		</choose>
    	</select>
-   	
-   	
-   	
+   	<select id="wishCheck" parameterType="java.util.HashMap" resultType="int">
+   		<![CDATA[
+   		select count(num) from wishlist where id=#{id} and num = #{num}
+   		]]>
+   	</select>
+	<insert id="addwishlist" parameterType="java.util.HashMap">
+		<![CDATA[
+		insert into wishlist (num , id) values (#{num},#{id})
+		]]>
+	</insert>  
+	<select id="wishlist" parameterType="String" resultMap="proResult">
+		<![CDATA[
+		select * from product where num in (select num from wishlist where id = #{id});
+		]]>
+	</select> 
+	<delete id="deletewish" parameterType="java.util.HashMap">
+		<![CDATA[
+		delete from wishlist where id=#{id} and num=#{num}
+		]]>
+	</delete>	
    	</mapper>
