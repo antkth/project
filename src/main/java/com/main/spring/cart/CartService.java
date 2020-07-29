@@ -1,5 +1,6 @@
 package com.main.spring.cart;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,11 @@ public class CartService {
 
 	public int totalCheck(String id) {
 		return cartDAO.totalCheck(id);
+	}
+	public void deletecart(String id , int cart_num) {
+		HashMap map = new HashMap();
+		map.put("id",id);
+		map.put("cart_num",cart_num);
+		cartDAO.deletecart(map);
 	}
 }

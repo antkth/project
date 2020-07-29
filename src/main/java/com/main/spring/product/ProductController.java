@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,9 +137,9 @@ public class ProductController {
 			if(nowdate.compareTo(exp_date)==1) DC+=10;
 			int real_price = Math.round(productVO.getPrice()/100*(100-DC)/100)*100;
 			productVO.setReal_price(real_price);
+			productVO.setWishCheck(productService.wishCheck(productVO.getNum(),(String)request.getSession().getAttribute("id")));
 			list.add(productVO);
 		}
-	
 		mav.addObject("productList", list);
 		mav.addObject("search_key", search_key);
 		mav.addObject("category1", category1);
@@ -155,6 +156,33 @@ public class ProductController {
 			request.getSession().setAttribute("chegecategory","1");
 		}
 		mav.setViewName("index");
+		return mav;
+	}
+	@RequestMapping(value = "/addwishlist.pro", method = RequestMethod.POST)
+	public ModelAndView addwishlist(@RequestParam int num,
+									@RequestParam(defaultValue = "") String search_key,
+									@RequestParam String category1,
+									@RequestParam String category3,
+									@RequestParam(defaultValue = "1") int nowPage,
+									HttpServletRequest request) {
+		String id = (String)request.getSession().getAttribute("id");
+		productService.addwishlist(num, id);
+		mav.setViewName("redirect:/productSearch.pro");
+		return mav;
+	}
+	@RequestMapping(value = "/wishList.pro", method = RequestMethod.GET)
+	public ModelAndView wishList(HttpServletRequest request) {
+		String id = (String)request.getSession().getAttribute("id");
+		List list = productService.wishlist(id);
+		mav.addObject("wishList",list);
+		mav.setViewName("wishList");
+		return mav;
+	}
+	@RequestMapping(value = "/deletewish.pro", method = RequestMethod.POST)
+	public ModelAndView deletewish(@RequestParam String id,
+								   @RequestParam int num) {
+		productService.deletewish(id,num);
+		mav.setViewName("redirect:/wishList.pro?id="+id);
 		return mav;
 	}
 
