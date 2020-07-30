@@ -10,10 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
     <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
+    
+    <!-- Important Owl stylesheet -->
+	<link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+	<!-- Default Theme -->
+	<link rel="stylesheet" href="owl-carousel/owl.theme.css">
+	<!--  jQuery 1.7+  -->
+	<script src="jquery-1.9.1.min.js"></script>
+	<!-- Include js plugin -->
+	<script src="assets/owl-carousel/owl.carousel.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$("#owl-example").owlCarousel();
+		});
+	</script>
+	
 </head>
 
 <body>
 <jsp:include page="inc/header.jsp"/>
+
 <%--     <!-- banner part start-->
     <section class="banner_part">
         <div class="container">
@@ -81,7 +98,20 @@
 		</div>
     </section>
     <!-- Hero Section End --> 
+    
+    <!-- 슬라이드(인기제품 늘어놓기) -->
+    <div id="owl-example" class="owl-carousel" style="margin-top: 50px;">
+	  <div> <img src="${contextPath}/resources/img/b1.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b2.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b3.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b1.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b2.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b3.jpg"> </div>
+	  <div> <img src="${contextPath}/resources/img/b1.jpg"> </div>
+	</div>
+    <!-- 슬라이드 -->
 
+<%-- 
     <!-- product list start-->
     <section class="single_product_list">
         <div class="container">
@@ -149,6 +179,7 @@
         </div>
     </section>
     <!-- product list end-->
+    --%> 
     <!-- trending item start-->
     <section class="trending_items">
         <div class="container">
@@ -160,14 +191,14 @@
                 </div>
             </div>
             <div class="row">
-            <c:forEach items="${bestProductList}" var="DTO" begin="0" end="6">
+            <c:forEach items="${worstProductList}" var="VO" begin="0" end="6">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_product_item">
                         <div class="single_product_item_thumb">
-                            <a href="${contextPath}/productInfo.pro?num=${DTO.num}"><img src="${contextPath}/resources/img_catfood/${DTO.image}" alt="#" class="img-fluid"></a>
+                            <a href="${contextPath}/productInfo.pro?num=${VO.num}"><img src="${contextPath}/resources/img_catfood/${VO.image}" alt="#" class="img-fluid"></a>
                         </div>
-                        <h3> <a href="single-product.html">${DTO.name}</a></h3>
-                        <p>${DTO.real_price}</p>
+                        <h3> <a href="single-product.html">${VO.name}</a></h3>
+                        <p>${VO.real_price}</p>
                     </div>
                 </div>
             </c:forEach>

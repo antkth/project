@@ -91,7 +91,7 @@
 		delete from wishlist where id=#{id} and num=#{num}
 		]]>
 	</delete>	
-	<select id="bestProductList" resultMap="proResult">
+	<select id="worstProductList" resultMap="proResult">
 		<![CDATA[
 		select * from product order by inventory desc limit 0, 6;
 		]]>
