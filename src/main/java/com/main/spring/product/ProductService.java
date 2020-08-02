@@ -121,4 +121,8 @@ public class ProductService {
 		productDAO.deletewish(map);
 	}
 	
+	public List worstProductList() {
+		return productDAO.worstProductList();
+	}
+	
 }
