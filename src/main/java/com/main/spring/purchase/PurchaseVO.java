@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PurchaseVO {
 	private int num,pur_num,qty,price,pur_status;
-	private String id;
+	private String id, image, name;
 	private Timestamp put_date;
 	
 	public PurchaseVO() {}
@@ -22,7 +22,18 @@ public class PurchaseVO {
 	}
 
 
-
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getNum() {
 		return num;
 	}

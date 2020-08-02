@@ -125,4 +125,8 @@ public class ProductService {
 		return productDAO.worstProductList();
 	}
 	
+	public List bestProductList() {
+		return productDAO.bestProductList();
+	}
+	
 }

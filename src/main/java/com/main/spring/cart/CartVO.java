@@ -19,18 +19,12 @@ public class CartVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
 	public int getCart_num() {
 		return cart_num;
 	}
-
-
 	public void setCart_num(int cart_num) {
 		this.cart_num = cart_num;
 	}
-
-
 	public String getName() {
 		return name;
 	}

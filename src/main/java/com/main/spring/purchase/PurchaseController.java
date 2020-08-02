@@ -45,4 +45,13 @@ public class PurchaseController {
 		mav.setViewName("cartList");
 		return mav;
 	}
+	@RequestMapping(value = "/getpurList.pur", method = RequestMethod.GET)
+	public ModelAndView getpurList(HttpServletRequest request) {
+		int total = 0;
+		String id = (String)request.getSession().getAttribute("id");
+		List getpurList = purchaseService.getpur_list(id);
+		mav.addObject("getpurList", getpurList);
+		mav.setViewName("deliveryInfo");
+		return mav;
+	}
 }

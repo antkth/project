@@ -96,4 +96,7 @@ public class PurchaseService {
 	public int totalCheck(String id) {
 		return purchaseDAO.totalCheck(id);
 	}
+	public List getpur_list(String id) {
+		return purchaseDAO.getpur_list(id);
+	}
 }

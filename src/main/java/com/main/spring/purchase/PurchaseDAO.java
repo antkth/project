@@ -45,4 +45,7 @@ public class PurchaseDAO {
 	public int totalCheck(String id) {
 		return sqlSession.selectOne("mapper.cart.totalCheck",id);
 	}
+	public List getpur_list(String id) {
+		return sqlSession.selectList("mapper.purchase.getpur_list", id);
+	}
 }

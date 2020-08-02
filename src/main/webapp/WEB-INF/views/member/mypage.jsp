@@ -129,10 +129,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <div class="single_feature_part">
+                    <a href="${contextPath}/getpurList.pur"><div class="single_feature_part">
                         <img src="${contextPath}/resources/img/icon/feature_icon_2.svg">
-                        <h4>Online Order</h4>
-                    </div>
+                        <h4>배송정보</h4></a>
+                    </div></a>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_feature_part">
