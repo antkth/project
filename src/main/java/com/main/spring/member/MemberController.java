@@ -77,13 +77,10 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value = "/member/logout.mem", method = RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request,
-							   HttpServletResponse response) {
-		String inforpage = request.getHeader("referer").substring(29);
-		String nextPage = inforpage.substring(0,inforpage.indexOf("."));
+	public ModelAndView logout(HttpServletRequest request) {
 		request.getSession().removeAttribute("id");
 		request.getSession().removeAttribute("cartsize");
-		mav.setViewName(nextPage);
+		mav.setViewName("redirect:/index.pro");
 		return mav;
 	}
 	@RequestMapping(value = "/member/memMod.mem", method = RequestMethod.GET)
