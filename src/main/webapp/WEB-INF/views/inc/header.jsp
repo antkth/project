@@ -25,7 +25,7 @@
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-12">
 					<nav class="navbar navbar-expand-lg navbar-light">
-						<a class="navbar-brand" href="${contextPath}/index.tem"> <img
+						<a class="navbar-brand" href="${contextPath}/index.pro"> <img
 							src="${contextPath}/resources/img/logo.png" alt="logo">
 						</a>
 						<button class="navbar-toggler" type="button"

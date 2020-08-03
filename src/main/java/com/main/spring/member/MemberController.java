@@ -20,6 +20,7 @@ public class MemberController {
 	private ModelAndView mav = new ModelAndView();
 	@RequestMapping(value = "/member/join.mem", method = RequestMethod.GET)
 	public ModelAndView join() {
+		mav.setViewName("/member/join");
 		return mav;
 	}
 	@RequestMapping(value = "/member/idCheck.mem", method = RequestMethod.GET)

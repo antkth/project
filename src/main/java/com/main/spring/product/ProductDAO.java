@@ -55,4 +55,7 @@ public class ProductDAO {
 	public List worstProductList() {
 		return sqlSession.selectList("mapper.product.worstProductList");		
 	}
+	public List bestProductList() {
+		return sqlSession.selectList("mapper.product.bestProductList");
+	}
 }
