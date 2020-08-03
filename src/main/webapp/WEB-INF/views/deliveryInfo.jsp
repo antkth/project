@@ -74,21 +74,17 @@
                 
                 <c:choose>
                 <c:when test="${VO.pur_status==1}">
-                 <td><p>입금완료</p></td>
-                </c:when>
-                <c:when test="${VO.pur_status==2}">
                  <td><p>배송대기</p></td>
                 </c:when>
-                <c:when test="${VO.pur_status==3}">
-                 <td><p>배송출발</p></td>
+                <c:when test="${VO.pur_status==2}">
+                 <td><p>배송중</p></td>
                 </c:when>
-                <c:when test="${VO.pur_status==4}">
+                <c:when test="${VO.pur_status==3}">
                  <td>
                  <p>배송완료</p>
                  <p>
-                 	<form action="${contextPath}/deletewish.pro" method="post">
-					<input type="hidden" name="id" value="${id}">
-					<input type="hidden" name="num" value="${VO.num}">
+                 	<form action="${contextPath}/delOrderList.pur" method="post">
+					<input type="hidden" name="pur_num" value="${VO.pur_num}">
 					<input type="button" value="반송신청"> <br>
 					<input type="submit" value="삭제">
 					</form>

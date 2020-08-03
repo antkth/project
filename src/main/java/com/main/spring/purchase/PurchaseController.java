@@ -55,4 +55,10 @@ public class PurchaseController {
 		mav.setViewName("deliveryInfo");
 		return mav;
 	}
+	@RequestMapping(value = "/delOrderList.pur", method = RequestMethod.POST)
+	public ModelAndView delOrderList(@RequestParam int pur_num) {
+		purchaseService.deleteOrderList(pur_num);
+		mav.setViewName("redirect:/getpurList.pur");
+		return mav;
+	}
 }

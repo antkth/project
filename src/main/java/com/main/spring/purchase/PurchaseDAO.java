@@ -48,4 +48,7 @@ public class PurchaseDAO {
 	public List getpur_list(String id) {
 		return sqlSession.selectList("mapper.purchase.getpur_list", id);
 	}
+	public void deleteOrderList(int pur_num) {
+		sqlSession.delete("mapper.purchase.deleteOrderList", pur_num);
+	}
 }
