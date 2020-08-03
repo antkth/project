@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import com.main.spring.cart.CartVO;
 
 @Service
 public class PurchaseService {
@@ -98,5 +95,8 @@ public class PurchaseService {
 	}
 	public List getpur_list(String id) {
 		return purchaseDAO.getpur_list(id);
+	}
+	public void deleteOrderList(int pur_num) {
+		purchaseDAO.deleteOrderList(pur_num);
 	}
 }
