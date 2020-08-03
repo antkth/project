@@ -99,5 +99,8 @@ public class MemberService {
 	public void updateaddr(MemberVO memberVO) {
 		memberDAO.updateaddr(memberVO);
 	}
+	public int totalCheck(String id) {
+		return memberDAO.totalCheck(id);
+	}
 	
 }

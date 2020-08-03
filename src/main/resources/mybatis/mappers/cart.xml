@@ -27,9 +27,9 @@
    		]]>
    	</insert>
    	
-   	<select id="numcheck" resultMap="cartResult">
+   	<select id="numcheck" resultType="int">
    		<![CDATA[
-	   		select * from cart
+	   		select max(cart_num) from cart
 	   	]]>
    	</select>
    	

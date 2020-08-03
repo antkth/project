@@ -77,7 +77,8 @@
     <!-- 슬라이드(인기제품 늘어놓기) -->
     <div id="owl-example" class="owl-carousel" style="margin-top: 50px;">
     <c:forEach items="${bestProductList}" var="VO">
-	  <div><a></a><img src="${contextPath}/resources/img_catfood/${VO.image}" style="width: 250px; margin-left: 50px;"></a><p>${VO.name}</p><p>${VO.real_price}</p></div>
+	  <div style="cursor: pointer;" onclick="location.href='${contextPath}/productInfo.pro?num=${VO.num}'"><img src="${contextPath}/resources/img_catfood/${VO.image}" style="width: 250px; margin-left: 50px;">
+	  <p>${VO.name}</p><p>${VO.real_price}</p></div>
 	</c:forEach>
 	</div>
     <!-- 슬라이드 -->

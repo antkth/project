@@ -39,7 +39,7 @@
 							id="navbarSupportedContent">
 							<ul class="navbar-nav">
 								<li class="nav-item"><a class="nav-link"
-									href="${contextPath}/index.tem">Home</a></li>
+									href="${contextPath}/index.pro">Home</a></li>
 									
 								<c:choose>
 								<c:when test="${chegecategory==null || chegecategory == '1'}">
@@ -195,7 +195,7 @@
 							<a id="search_1" href="javascript:void(0)"><i
 								class="ti-search"></i></a> 
 								<c:if test="${sessionScope.id !=null}">
-								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape"></i></a>
+								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape">${cartsize}</i></a>
 								</c:if>
 						</div>
 					</nav>

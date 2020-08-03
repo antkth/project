@@ -18,17 +18,14 @@ public class CartService {
 		
 		cartDAO.addCart(cartVO);
 	}
-
 	public List getCartList(String id) throws DataAccessException {
 
 		return cartDAO.getCartList(id); 
 	}
-	
 	public int getTotalPrice(String id) throws DataAccessException{
 		
 		return cartDAO.getTotalPrice(id);
 	}
-
 	public int totalCheck(String id) {
 		return cartDAO.totalCheck(id);
 	}

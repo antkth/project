@@ -28,6 +28,7 @@ public class PurchaseController {
 		}
 		purchaseService.intsertPurchase(request);
 		purchaseService.deletecart(request);
+		request.getSession().setAttribute("cartsize",purchaseService.totalCheck(id));
 		request.getSession().setAttribute("msg","구매가 완료되었습니다.");
 		mav.setViewName("redirect:/cartList.pur");
 		return mav;

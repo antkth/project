@@ -68,6 +68,7 @@ public class MemberController {
 
 		if(msg.equals("login")) {
 			request.getSession().setAttribute("id",memberVO.getId());
+			request.getSession().setAttribute("cartsize",memberService.totalCheck(memberVO.getId()));
 			mav.setViewName("redirect:/index.pro");
 		}else {
 			mav.addObject("msg",msg);
@@ -81,6 +82,7 @@ public class MemberController {
 		String inforpage = request.getHeader("referer").substring(29);
 		String nextPage = inforpage.substring(0,inforpage.indexOf("."));
 		request.getSession().removeAttribute("id");
+		request.getSession().removeAttribute("cartsize");
 		mav.setViewName(nextPage);
 		return mav;
 	}

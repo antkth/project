@@ -1,9 +1,7 @@
 package com.main.spring.cart;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ public class CartDAO {
 
 	
 	public int numcheck() {
-		return sqlSession.selectList("mapper.cart.numcheck").size();
+		return sqlSession.selectOne("mapper.cart.numcheck");
 	}
 	
 	public void addCart(CartVO cartVO) {

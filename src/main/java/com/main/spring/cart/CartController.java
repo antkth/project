@@ -25,6 +25,8 @@ public class CartController {
 								HttpServletRequest request,
 								HttpServletResponse response) {
 		cartService.addCart(cartVO);
+		request.getSession().setAttribute("cartsize", cartService.totalCheck(cartVO.getId()));
+		cartService.totalCheck(cartVO.getId());
 		mav.setViewName("redirect:/cartList.car?id="+cartVO.getId());
 		return mav;
 	}
@@ -41,14 +43,12 @@ public class CartController {
 	}
 	@RequestMapping(value = "/deletecart.car", method = RequestMethod.POST)
 	public ModelAndView deletecart(@RequestParam String id,
-								   @RequestParam int cart_num
+								   @RequestParam int cart_num,
+								   HttpServletRequest request
 								   ) {
 		cartService.deletecart(id, cart_num);
+		request.getSession().setAttribute("cartsize", cartService.totalCheck(id));
 		mav.setViewName("redirect:/cartList.car?id="+id);
 		return mav;
 	}
-	
-	
-	
-	
 }

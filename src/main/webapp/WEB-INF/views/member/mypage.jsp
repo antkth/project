@@ -129,10 +129,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <a href="${contextPath}/getpurList.pur"><div class="single_feature_part">
+                    <div class="single_feature_part" style="cursor: pointer;" onclick="location.href='${contextPath}/getpurList.pur'">
                         <img src="${contextPath}/resources/img/icon/feature_icon_2.svg">
-                        <h4>배송정보</h4></a>
-                    </div></a>
+                        <h4>배송정보</h4>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_feature_part">

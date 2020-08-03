@@ -53,42 +53,41 @@ public class ProductService {
 		return productDAO.getAllProduct(map);
 	}
 	public HttpServletRequest lastview(HttpServletRequest request,int num,String name , String image) {
-		HttpSession session = request.getSession();
-		List list = new ArrayList();
-		boolean check = true;
-		for(int i = 1 ; i <=5 ; i ++) {
-			if(session.getAttribute("lastview"+i+"_num")!=null) {
-				if(num==Integer.parseInt(session.getAttribute("lastview"+i+"_num").toString())) {
+		HttpSession session = request.getSession();	//세션 영역 생성
+		boolean check = true;	//중복 체크 도구 
+		for(int i = 1 ; i <=5 ; i ++) {	//세션영역 1 ~ 5 중복 , 현제들어있는지 체크
+			if(session.getAttribute("lastview"+i+"_num")!=null) {	//길이체크
+				if(num==Integer.parseInt(session.getAttribute("lastview"+i+"_num").toString())) { //중복체크
 					check = false;
 				}
 			}
 		}
 		if(check) {
-		if(session.getAttribute("lastview4_num")!=null) {
+		if(session.getAttribute("lastview4_num")!=null) {	//4 > 5
 			session.setAttribute("lastview5_num",session.getAttribute("lastview4_num"));
 			session.setAttribute("lastview5_name",session.getAttribute("lastview4_name"));
 			session.setAttribute("lastview5_image",session.getAttribute("lastview4_image"));
 		}
-		if(session.getAttribute("lastview3_num")!=null) {
+		if(session.getAttribute("lastview3_num")!=null) {	//3 > 4
 			session.setAttribute("lastview4_num",session.getAttribute("lastview3_num"));
 			session.setAttribute("lastview4_name",session.getAttribute("lastview3_name"));
 			session.setAttribute("lastview4_image",session.getAttribute("lastview3_image"));
 		}
-		if(session.getAttribute("lastview2_num")!=null) {
+		if(session.getAttribute("lastview2_num")!=null) {	//2 > 3
 			session.setAttribute("lastview3_num",session.getAttribute("lastview2_num"));
 			session.setAttribute("lastview3_name",session.getAttribute("lastview2_name"));
 			session.setAttribute("lastview3_image",session.getAttribute("lastview2_image"));
 		}
-		if(session.getAttribute("lastview1_num")!=null) {
+		if(session.getAttribute("lastview1_num")!=null) {	//1 > 2
 			session.setAttribute("lastview2_num",session.getAttribute("lastview1_num"));
 			session.setAttribute("lastview2_name",session.getAttribute("lastview1_name"));
 			session.setAttribute("lastview2_image",session.getAttribute("lastview1_image"));
 		}
-		session.setAttribute("lastview1_num",num);
+		session.setAttribute("lastview1_num",num);	//1자리에 등록
 		session.setAttribute("lastview1_name",name);
 		session.setAttribute("lastview1_image",image);
 		}
-		return request;
+		return request;	//리퀘스트 반환
 	}
 	
 	public double getScoreAVG(int num) {

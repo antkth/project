@@ -49,7 +49,7 @@
             <c:forEach var="wish" items="${wishList}" varStatus="cnt">
               <tr>
                 <td>
-                  <div class="media">
+                  <div class="media" style="cursor: pointer;" onclick="location.href='${contextPath}/productInfo.pro?num=${product.num}'">
                     <div class="d-flex">
                       <img src="${contextPath}/resources/img_catfood/${wish.image}"/>
                     </div>

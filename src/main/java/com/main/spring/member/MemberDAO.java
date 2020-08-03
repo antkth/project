@@ -42,4 +42,7 @@ public class MemberDAO {
 	public void updateaddr(MemberVO memberVO) {
 		sqlsession.update("mapper.member.updateaddr",memberVO);
 	}
+	public int totalCheck(String id) {
+		return sqlsession.selectOne("mapper.cart.totalCheck", id);
+	}
 	}
