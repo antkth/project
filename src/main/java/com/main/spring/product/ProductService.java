@@ -1,6 +1,5 @@
 package com.main.spring.product;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,12 +17,22 @@ public class ProductService {
 	public void proinsert(ProductVO productVO) {
 		productVO.setNum(productDAO.numcheck()+1);
 		String check = productVO.getCategory3();
+		if(productVO.getCategory1().equals("고양이")) {
 		if(check.equals("사료")||check.equals("간식")||check.equals("치약")) {
 			productVO.setCategory2("Food");
 		}else if(check.equals("스크래쳐")||check.equals("캣타워")||check.equals("소형장난감")) {
 			productVO.setCategory2("Toys");
 		}else {
 			productVO.setCategory2("DailyProducts");
+		}
+		}else {
+			if(check.equals("수제간식")||check.equals("사료")) {
+				productVO.setCategory2("식품");
+			}else if(check.equals("노즈워크매트")||check.equals("봉제장난감")||check.equals("라텍스")) {
+				productVO.setCategory2("장난감");
+			}else {
+				productVO.setCategory2("생활용품");
+			}
 		}
 		productVO.setInventory(0);
 		productDAO.proinsert(productVO);
