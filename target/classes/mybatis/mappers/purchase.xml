@@ -11,6 +11,8 @@
 		<result property="price" column="price" />
 		<result property="pur_status" column="pur_status" />
 		<result property="put_date" column="put_date" />
+		<result property="image" column="image"/>
+		<result property="name" column="name"/>
 	</resultMap>
 
 	<select id="getpur_num" parameterType="String"
@@ -37,4 +39,24 @@
 		delete from purchaselist where pur_num = #{pur_num}
 	]]>
 	</delete>
+	<select id="ad_orderList" parameterType="int" resultMap="purResult">
+	<![CDATA[
+		select p2.name, p1.id, p1.put_date, p1.qty, p1.price, p1.pur_status
+		from purchaselist p1 join product p2
+		on p1.num = p2.num
+		where pur_status
+	]]>
+	<choose>
+	<when test="sort==1">
+		not like 3
+	</when>
+	<when test="sort==2">
+		like 1
+	</when>
+	<otherwise>
+		like 2
+	</otherwise>
+	</choose>
+	order by pur_status, put_date;
+	</select>
 </mapper>

@@ -99,4 +99,7 @@ public class PurchaseService {
 	public void deleteOrderList(int pur_num) {
 		purchaseDAO.deleteOrderList(pur_num);
 	}
+	public List ad_orderList(int sort) {
+		return purchaseDAO.ad_orderList(sort);
+	}
 }
