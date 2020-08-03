@@ -99,7 +99,15 @@ public class PurchaseService {
 	public void deleteOrderList(int pur_num) {
 		purchaseDAO.deleteOrderList(pur_num);
 	}
-	public List ad_orderList(int sort) {
-		return purchaseDAO.ad_orderList(sort);
+	public List ad_orderList(String sort) {
+		HashMap map = new HashMap();
+		if(sort.equals("1")) sort = "not like 3";
+		if(sort.equals("2")) sort = "like 1";
+		if(sort.equals("3")) sort = "like 2";
+		map.put("sort", sort);
+		return purchaseDAO.ad_orderList(map);
+	}
+	public void ad_orderStatus(int pur_num) {
+		purchaseDAO.ad_orderStatus(pur_num);
 	}
 }

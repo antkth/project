@@ -39,24 +39,19 @@
 		delete from purchaselist where pur_num = #{pur_num}
 	]]>
 	</delete>
-	<select id="ad_orderList" parameterType="int" resultMap="purResult">
+	<select id="ad_orderList" parameterType="java.util.HashMap" resultMap="purResult">
 	<![CDATA[
-		select p2.name, p1.id, p1.put_date, p1.qty, p1.price, p1.pur_status
+		select p2.name, p1.pur_num, p1.id, p1.put_date, p1.qty, p1.price, p1.pur_status
 		from purchaselist p1 join product p2
 		on p1.num = p2.num
-		where pur_status
+		where pur_status ${sort}
+		order by pur_status, put_date;
 	]]>
-	<choose>
-	<when test="sort==1">
-		not like 3
-	</when>
-	<when test="sort==2">
-		like 1
-	</when>
-	<otherwise>
-		like 2
-	</otherwise>
-	</choose>
-	order by pur_status, put_date;
 	</select>
+	<update id="ad_orderStatus" parameterType="int">
+	<![CDATA[
+		update purchaselist set pur_status = pur_status+1
+		where pur_num = #{pur_num};
+	]]>
+	</update>
 </mapper>

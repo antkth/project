@@ -62,10 +62,16 @@ public class PurchaseController {
 		return mav;
 	}
 	@RequestMapping(value = "/admin/getOrderList.pur", method = RequestMethod.GET)
-	public ModelAndView getOrderList(@RequestParam int sort) {
+	public ModelAndView getOrderList(@RequestParam String sort) {
 		List getOrderList = purchaseService.ad_orderList(sort);
 		mav.addObject("getOrderList", purchaseService.ad_orderList(sort));
 		mav.setViewName("admin/ad_orderList");
+		return mav;
+	}
+	@RequestMapping(value = "/admin/orderStatus.pur", method = RequestMethod.GET)
+	public ModelAndView orderStatus(@RequestParam int pur_num, @RequestParam String sort) {
+		purchaseService.ad_orderStatus(pur_num);
+		mav.setViewName("redirect:/admin/getOrderList.pur?sort=1");
 		return mav;
 	}
 }
