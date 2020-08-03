@@ -61,15 +61,15 @@ public class PurchaseService {
 			map.put("id",(String)request.getSession().getAttribute("id"));
 			map.put("cart_num",cart_num.get(i));
 			HashMap mapinfo = purchaseDAO.cartinfo(map);
-			
 			PurchaseVO purchaseVO = new PurchaseVO((Integer)mapinfo.get("num"),
 												   (Integer)mapinfo.get("qty"),
 												   (Integer)mapinfo.get("price"),
 												   (String)mapinfo.get("id"));
-			purchaseVO.setPur_num(purchaseDAO.getpur_num(purchaseVO.getId())+1);
+			purchaseVO.setPur_num(cart_num.get(i));
 			purchaseVO.setPur_status(1);
 			purchaseVO.setPut_date(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(Calendar.getInstance().getTime())));
 			purchaseDAO.intsertPurchase(purchaseVO);	
+
 		}
 	}
 	public void deletecart(HttpServletRequest request) {

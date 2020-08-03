@@ -14,8 +14,6 @@ public class CartService {
 	private CartDAO cartDAO;
  
 	public void addCart(CartVO cartVO) {
-		cartVO.setCart_num(cartDAO.numcheck()+1);
-		
 		cartDAO.addCart(cartVO);
 	}
 	public List getCartList(String id) throws DataAccessException {
