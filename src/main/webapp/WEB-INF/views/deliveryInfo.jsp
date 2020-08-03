@@ -29,7 +29,7 @@
 	</section>
   <section class="cart_area section_padding">
     <div class="container">
-      <div class="cart_inner">
+      <div class="cart_inner" style="text-align: center;">
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -51,10 +51,10 @@
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img src="${contextPath}/resources/img_catfood/${VO.image}"/>
+                      <a href="${contextPath}/productInfo.pro?num=${VO.num}"><img src="${contextPath}/resources/img_catfood/${VO.image}"/></a>
                     </div>
                     <div class="media-body">
-                      <p>${VO.name}</p>
+                      <a href="${contextPath}/productInfo.pro?num=${VO.num}"><p>${VO.name}</p></a>
                     </div>
                   </div>
                 </td>
