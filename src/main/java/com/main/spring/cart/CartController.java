@@ -26,7 +26,6 @@ public class CartController {
 								HttpServletResponse response) {
 		cartService.addCart(cartVO);
 		request.getSession().setAttribute("cartsize", cartService.totalCheck(cartVO.getId()));
-		cartService.totalCheck(cartVO.getId());
 		mav.setViewName("redirect:/cartList.car?id="+cartVO.getId());
 		return mav;
 	}
