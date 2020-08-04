@@ -46,12 +46,12 @@ public class PurchaseDAO {
 		return sqlSession.selectOne("mapper.cart.totalCheck",id);
 	}
 	public List getpur_list(String id) {
-		return sqlSession.selectList("mapper.purchase.getpur_list", id);
+		return sqlSession.selectList("mapper.purchase.getpur_list",id);
 	}
 	public void deleteOrderList(int pur_num) {
-		sqlSession.delete("mapper.purchase.deleteOrderList", pur_num);
+		sqlSession.delete("mapper.purchase.deleteOrderList",pur_num);
 	}
-	public List ad_orderList(int sort) {
-		return sqlSession.selectList("mapper.purchase.ad_orderList", sort);
+	public List ad_orderList(String sort) {
+		return sqlSession.selectList("mapper.purchase.ad_orderList",sort);
 	}
 }

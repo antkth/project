@@ -99,7 +99,12 @@ public class PurchaseService {
 	public void deleteOrderList(int pur_num) {
 		purchaseDAO.deleteOrderList(pur_num);
 	}
-	public List ad_orderList(int sort) {
+	public List ad_orderList(String sort) {
+		
+		  if(sort.equals("1")) sort = "not like 3"; 
+		  if(sort.equals("2")) sort = "like 1"; 
+		  if(sort.equals("3")) sort = "like 2";
+		 
 		return purchaseDAO.ad_orderList(sort);
 	}
 }
