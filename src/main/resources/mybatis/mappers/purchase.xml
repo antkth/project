@@ -43,9 +43,8 @@
 	<![CDATA[
 		select p2.name, p1.pur_num, p1.id, p1.put_date, p1.qty, p1.price, p1.pur_status
 		from purchaselist p1 join product p2
-		on p1.num = p2.num
-		where pur_status ${sort}
-		order by pur_status, put_date;
+		on p1.num = p2.num where pur_status ${sort}
+		order by pur_status, put_date 
 	]]>
 	</select>
 	<update id="ad_orderStatus" parameterType="int">
