@@ -48,7 +48,7 @@
               	<td>${i.id}</td>
               	<td><a href="${contextPath}/admin/ad_qaread.qab?qa_num=${i.qa_num}&id=${i.id}">${i.title}</a></td>
               	<td><f:formatDate value="${i.qa_date}" pattern="yyyy-MM-dd"/></td>
-              	<td>${i.cur_status}</td>
+              	<td><font color="blue" >답변 대기</font></td>
               </tr>
               </c:forEach>
  

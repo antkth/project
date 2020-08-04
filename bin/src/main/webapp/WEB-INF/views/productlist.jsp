@@ -12,48 +12,27 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<script type="text/javascript">
-	function btn_LoadMore() {
- 		var number = $('#pp_product>div').length;
- 		var category1 = "${category1}";
- 		var category3 = "${category3}";
-	  		$.getJSON("${contextPath}/productlist6.pro",{number:number,category1:category1,category3:category3},function(data){
-  			$.each(data, function(index,item){
- 				var pp_pro = "<div class='col-lg-6 col-sm-6'  >"
- 						   + "<div class='single_product_item'>"
-						   + "<img src='" + "/spring/resources/img_catfood/" + item.image + "' class='img-fluid'>"
-						   + "<h3><a href='${contextPath}/productInfo.pro?num="+item.num+"'>" + item.name + "</a></h3>"
-						   + "<p>" + item.price + "</p>"
-						   + "</div>"
-						   + "</div>";
-				$("#pp_product").append(pp_pro);
-			}); 
-		});   
-	}
-</script> 
-    <!-- breadcrumb part start-->
     <section class="breadcrumb_part">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
-                        <h2>product list</h2>
+                        <h2>${category1} product list</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- breadcrumb part end-->
-    
-    <!-- product list part start-->
     <section class="product_list section_padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
-                            <form action="#">
-                                <input type="text" name="#" placeholder="Search keyword">
+                            <form action="${contextPath}/productSearch.pro" method="get">
+                                <input type="text" name="search_key" placeholder="제품명을 검색하세요" value="${search_key}">
+                                <input type="hidden" name="category1" value="${category1}">
+                                <input type="hidden" name="category3" value="${category3}">                                                            
                                 <i class="ti-search"></i>
                             </form>
                         </div>
@@ -74,26 +53,68 @@
                     <div class="product_list">
                         <div class="row" id="pp_product" >
                         <c:forEach var="product" items="${productList}">
-                            <div class="col-lg-6 col-sm-6"  >                            
+                            <div class="col-lg-4 col-sm-8"  >                            
                                 <div class="single_product_item" >
                                     <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
                                     <h3><a href="${contextPath}/productInfo.pro?num=${product.num}">${product.name}</a></h3>
-                                    <p>${product.price}</p>                                    
+                                   <c:choose>
+                                   <c:when test="${product.price == product.real_price}">
+                                   <p>${product.price}</p>
+                                   </c:when>
+                                   <c:otherwise>
+                                   <p><font style="text-decoration: line-through;" color="gray">${product.price}</font></p>
+                                   <p>${product.real_price}</p>
+                                   </c:otherwise>
+                                   </c:choose>
+                                   <c:if test="${id != null}">
+                                   		<c:choose>
+                                   		<c:when test="${product.wishCheck==1}">
+                                   		<a>찜한상품</a>
+                                   		</c:when>
+                                   		<c:otherwise>
+                                   		<form action="${contextPath}/addwishlist.pro" method="post">
+                                   		<input type="hidden" name="num" value="${product.num}">
+                                   		<input type="hidden" name="category1" value="${category1}">
+                                   		<input type="hidden" name="category3" value="${category3}">
+                                   		<input type="hidden" name="search_key" value="${search_key}">
+                                   		<input type="hidden" name="nowPage" value="${p_map.nowPage}">
+                                   		<input type="submit" value="찜하기">
+                                   		</form>
+                                   		</c:otherwise>
+                                   		</c:choose>
+                                   	</c:if>
                                 </div>
                             </div>
                         </c:forEach>   
                         </div>
-                        <div class="load_more_btn text-center">
-                        		<input type="button"  onclick="btn_LoadMore()" class="btn_3" value="더보기(More)">
-                        </div>
+                       <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">                               
+                                <li class="page-item">                                                                                          
+                                <c:if test="${p_map.blockFirst!=1}">                                
+                                    <a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${p_map.blockFirst-p_map.blockSize}&category1=${category1}&category3=${category3}" class="page-link" aria-label="Previous">
+                           	    	<i class="ti-angle-left"></i>
+                           	    	</a>                           	    
+                           	    </c:if>                           	                               	                              	     
+                           	    </li>
+                           	    <c:forEach var="i" begin="${p_map.blockFirst}" end="${p_map.blockLast}">   
+                                <li class="page-item">          
+                                    <a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${i}&category1=${category1}&category3=${category3}" class="page-link">${i}</a>   
+                                </li> 
+                                </c:forEach>       
+								<li class="page-item">									
+								<c:if test="${p_map.blockLast!=p_map.totalPage}">                                		                        
+		                        	<a href="${contextPath}/productSearch.pro?search_key=${search_key}&nowPage=${p_map.blockLast+1}&category1=${category1}&category3=${category3}" class="page-link" aria-label="Next">
+		                        	<i class="ti-angle-right"></i>
+		                         	</a>
+		                        </c:if>			                        	                        		                        
+                                </li>                                                              
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- product list part end-->
-    
-    <!-- client review part here -->
     <section class="client_review">
         <div class="container">
             <div class="row justify-content-center">
@@ -125,9 +146,6 @@
             </div>
         </div>
     </section>
-    <!-- client review part end -->
-
-    <!-- feature part here -->
     <section class="feature_part section_padding">
         <div class="container">
             <div class="row justify-content-between">
@@ -172,9 +190,6 @@
             </div>
         </div>
     </section>
-    <!-- feature part end -->
-
-    <!-- subscribe part here -->
     <section class="subscribe_part section_padding">
         <div class="container">
             <div class="row justify-content-center">
@@ -193,5 +208,4 @@
     </section>
 <jsp:include page="inc/footer.jsp"/>
 </body>
-
 </html>
