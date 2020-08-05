@@ -22,14 +22,14 @@
    	
    	<insert id="addCart" parameterType="cartVO">
    		<![CDATA[
-   			insert into cart(cart_num, num, id, order_date, qty, price) values
-   			(#{cart_num}, #{num}, #{id}, #{order_date}, #{qty}, #{price})
+   			insert into cart(num, id, order_date, qty, price) values
+   			(#{num}, #{id}, #{order_date}, #{qty}, #{price})
    		]]>
    	</insert>
    	
-   	<select id="numcheck" resultMap="cartResult">
+   	<select id="numcheck" resultType="int">
    		<![CDATA[
-	   		select * from cart
+	   		select max(cart_num) from cart
 	   	]]>
    	</select>
    	

@@ -58,4 +58,8 @@ public class ProductDAO {
 	public List bestProductList() {
 		return sqlSession.selectList("mapper.product.bestProductList");
 	}
+	public List searchList(HashMap map) {
+		return sqlSession.selectList("mapper.product.searchList",map);
+	}
+	
 }
