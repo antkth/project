@@ -6,17 +6,13 @@
 <meta charset="utf-8">
 <body>
 	<link rel="icon" href="img/favicon.png">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/animate.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/all.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/flaticon.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/themify-icons.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/magnific-popup.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/themify-icons.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/nice-select.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/slick.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
@@ -192,8 +188,7 @@
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex align-items-center">
-							<a id="search_1" href="javascript:void(0)"><i
-								class="ti-search"></i></a> 
+							<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a> 
 								<c:if test="${sessionScope.id !=null}">
 								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape">${cartsize}</i></a>
 								</c:if>
@@ -205,8 +200,7 @@
 		<div class="search_input" id="search_input_box">
 			<div class="container ">
 				<form class="d-flex justify-content-between search-inner" action="${contextPath}/productSearch.pro" method="get">
-					<input type="text" class="form-control" id="search_input" name="search_key"
-						placeholder="제품명을 입력해주세요.">
+					<input type="text" class="form-control" id="search_input" name="search_key" placeholder="제품명을 입력해주세요.">
                     <input type="hidden" name="category1" value="total">
                     <input type="hidden" name="category3" value="total"> 
 					<button type="submit" class="btn"></button>
