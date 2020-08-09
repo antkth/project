@@ -10,5 +10,6 @@
 		<typeAlias type="com.main.spring.qaboard.QaboardVO" alias="qaboardVO"/>
 		<typeAlias type="com.main.spring.purchase.PurchaseVO" alias="purchaseVO"/>
 		<typeAlias type="com.main.spring.review.ReviewVO" alias="reviewVO"/>
+		<typeAlias type="com.main.spring.inventory.InventoryVO" alias="inventoryVO"/>
 	</typeAliases>
 </configuration>

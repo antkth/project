@@ -119,7 +119,7 @@
 							<div></div>
 						</div>
 						<div class="switch-wrap d-flex justify-content-between">
-							<p>03. Confirm Color Checkbox</p>
+							<a href='${contextPath}/admin/inventorylist.inv'>재고 관리</a>
 							<div></div>
 						</div>
 						<div class="switch-wrap d-flex justify-content-between">
