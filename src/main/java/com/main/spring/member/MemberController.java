@@ -91,8 +91,7 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value = "/member/updateMem.mem", method = RequestMethod.POST)
-	public ModelAndView updateMem(@ModelAttribute MemberVO memberVO,
-								  HttpServletRequest request) {
+	public ModelAndView updateMem(@ModelAttribute MemberVO memberVO) {
 		memberService.updateMem(memberVO);
 		mav.setViewName("redirect:/index.pro");
 		return mav;

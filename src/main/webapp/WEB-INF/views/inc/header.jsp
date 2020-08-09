@@ -5,24 +5,17 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <body>
-
-
 	<link rel="icon" href="img/favicon.png">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/animate.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/all.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/flaticon.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/themify-icons.css">
-	<link rel="stylesheet"
-		href="${contextPath}/resources/css/magnific-popup.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/themify-icons.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/nice-select.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/slick.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -34,16 +27,9 @@
 	}
 </style>
 <script type="text/javascript">
-
-
-
-
 $(function() {
-    
     $("#search_input").autocomplete({
-
         source: function(request, response){
-        	console.log(1);
         	$.ajax({
         		url : "${contextPath}/searchList.pro",
         		type: "post",
@@ -51,8 +37,6 @@ $(function() {
         		data:{key : request.term},
         		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         		success:function(data){
-        			console.log(data);
-        			console.log(request.term);
         			response(
         				$.map(data, function(item){
         					return {
@@ -65,7 +49,7 @@ $(function() {
         	});
         },
         minLength:1,
-        delay:500,
+        delay:100,
         select:function(event,ui){},
         focus:function(event,ui){
         	return false;
@@ -73,8 +57,7 @@ $(function() {
     });
 })
 </script>
-
-	<header class="main_menu home_menu">
+s	<header class="main_menu home_menu">
 		<div class="container">
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-12">
@@ -246,8 +229,7 @@ $(function() {
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex align-items-center">
-							<a id="search_1" href="javascript:void(0)"><i
-								class="ti-search"></i></a> 
+							<a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a> 
 								<c:if test="${sessionScope.id !=null}">
 								<a href="${contextPath}/cartList.car?id=${sessionScope.id}"> <i	class="flaticon-shopping-cart-black-shape">${cartsize}</i></a>
 								</c:if>
@@ -259,8 +241,7 @@ $(function() {
 		<div class="search_input" id="search_input_box">
 			<div class="container ">
 				<form class="d-flex justify-content-between search-inner" action="${contextPath}/productSearch.pro" method="get">
-					<input type="text" class="form-control" id="search_input" name="search_key"
-						placeholder="제품명을 입력해주세요.">
+					<input type="text" class="form-control" id="search_input" name="search_key" placeholder="제품명을 입력해주세요.">
                     <input type="hidden" name="category1" value="total">
                     <input type="hidden" name="category3" value="total"> 
 					<button type="submit" class="btn"></button>

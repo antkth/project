@@ -238,10 +238,8 @@ public class ProductController {
 							HttpServletRequest reqeust,
 							HttpServletResponse response)throws Exception{
 		
-		System.out.println("ÄÄ");
 		response.setContentType("text/html;charset=utf-8");
 		List searchList2 = productService.searchList(key);
-		System.out.println(key);
 		JSONArray jSONArray = new JSONArray();
 		for(int i=0; i<searchList2.size(); i++) {
 			ProductVO productVO = (ProductVO)searchList2.get(i);
@@ -250,7 +248,6 @@ public class ProductController {
 			jSONArray.add(jSONObject);
 		}
 		response.getWriter().print(jSONArray);
-		System.out.println(jSONArray);
 	}
 
 	
