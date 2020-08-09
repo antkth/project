@@ -1,6 +1,8 @@
 package com.main.spring.product;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,16 +10,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -225,4 +232,23 @@ public class ProductController {
 		return mav;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/searchList.pro", method= RequestMethod.POST)
+	public void searchList(@RequestParam String key,
+							HttpServletRequest reqeust,
+							HttpServletResponse response)throws Exception{
+		
+		response.setContentType("text/html;charset=utf-8");
+		List searchList2 = productService.searchList(key);
+		JSONArray jSONArray = new JSONArray();
+		for(int i=0; i<searchList2.size(); i++) {
+			ProductVO productVO = (ProductVO)searchList2.get(i);
+			JSONObject jSONObject = new JSONObject();
+			jSONObject.put("data", productVO.getName());
+			jSONArray.add(jSONObject);
+		}
+		response.getWriter().print(jSONArray);
+	}
+
+	
 }

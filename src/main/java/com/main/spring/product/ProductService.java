@@ -137,4 +137,12 @@ public class ProductService {
 		return productDAO.bestProductList();
 	}
 	
+	public List searchList(String key) {
+		HashMap map = new HashMap();
+		map.put("key",'%'+key+'%'); 
+		return productDAO.searchList(map);
+	} 
+	 
+
+	
 }

@@ -123,7 +123,7 @@
 							<div></div>
 						</div>
 						<div class="switch-wrap d-flex justify-content-between">
-							<p>04. Disabled Checkbox</p>
+							<a href='${contextPath}/admin/getOrderList.pur?sort=1'>주문관리</a>
 							<div></div>
 						</div>
 						<div class="switch-wrap d-flex justify-content-between">

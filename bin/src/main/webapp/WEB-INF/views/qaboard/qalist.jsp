@@ -48,7 +48,16 @@
               	<td>${i.qa_num}</td>
               	<td><a href="${contextPath}/qaboard/qaread.qab?qa_num=${i.qa_num}">${i.title}</a></td>
               	<td><f:formatDate value="${i.qa_date}" pattern="yyyy-MM-dd"/></td>
-              	<td>${i.cur_status}</td>
+              	<td>
+				<c:choose>
+				<c:when test="${i.cur_status == 1}">
+				<font color="red">답변 완료</font>
+				</c:when>
+				<c:otherwise>
+				<font color="blue">답변 대기</font>
+				</c:otherwise>
+				</c:choose>
+              	</td>
               </tr>
               </c:forEach>
  

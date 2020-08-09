@@ -16,7 +16,48 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/nice-select.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/slick.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/style.css">
-	<header class="main_menu home_menu">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+	.ui-autocomplete{
+		overflow-y: scroll; 
+    	overflow-x: hidden;}
+	}
+</style>
+<script type="text/javascript">
+$(function() {
+    $("#search_input").autocomplete({
+        source: function(request, response){
+        	$.ajax({
+        		url : "${contextPath}/searchList.pro",
+        		type: "post",
+        		dataType: "json",
+        		data:{key : request.term},
+        		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        		success:function(data){
+        			response(
+        				$.map(data, function(item){
+        					return {
+        						label : item.data,
+        						value : item.data
+        					}
+        				})
+        			);
+        		}
+        	});
+        },
+        minLength:1,
+        delay:100,
+        select:function(event,ui){},
+        focus:function(event,ui){
+        	return false;
+        }
+    });
+})
+</script>
+s	<header class="main_menu home_menu">
 		<div class="container">
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-12">
