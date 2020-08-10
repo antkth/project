@@ -68,6 +68,13 @@
  		]]>	
  	</update>
  	
+ 	<insert id="addCalendar" parameterType="productVO">
+	   	<![CDATA[
+		   	insert into product (exp_date)
+			values(#{exp_date})
+	   	]]>
+   	</insert>
+ 	
  	
  	
  	

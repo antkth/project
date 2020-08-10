@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.io.filefilter.FalseFileFilter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -78,7 +79,15 @@
 				<input type="hidden" name="total" value="${cart.price * cart.qty}">
 				<input type="hidden" name="cart_num1" value="${cart.cart_num}">
 				<input type="hidden" value="${id}" name="id">     
+				
+				<c:choose>
+				<c:when test="${cart.qty>cart.inventory}">
+				<p><font color="red">수량부족</font></p>
+				</c:when>
+				<c:otherwise>
 				<input class="genric-btn primary-border small" value="payment" type="submit">
+				</c:otherwise>
+				</c:choose>
 				</form>
 				<form action="${contextPath}/deletecart.car" method="post">
 				<input type="hidden" name="id" value="${id}">
@@ -109,14 +118,16 @@
                 <td>
                 <div class="clear"></div>
                   <div class="cupon_text float-right">
-                   <form action="${contextPath}/purchase.pur" method="post">
+                  <c:if test="${check==0}">
+                   <form action="${contextPath}/purchase.pur" method="post" id="totalpayment">
                   <c:forEach items="${cartList}" varStatus="cnt" var="cart">
                 	<input type="hidden" value="${cart.cart_num}" name="cart_num${cnt.count}">
                   </c:forEach>
                   	<input type="hidden" value="${total}" name="total">
 					<input type="hidden" value="${id}" name="id">     
-				<input type="submit" class="genric-btn primary-border circle" value="total payment">
+				<input type="submit" class="genric-btn primary-border circle" value="total payment" onclick="totalpay()">
                   </form> 
+                  </c:if>
                   </div>
                 </td>
               </tr>

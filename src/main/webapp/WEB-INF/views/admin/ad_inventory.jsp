@@ -14,7 +14,15 @@
     <title>재고 관리</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-     	
+     	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+	    $( "#testDatepicker" ).datepicker({
+	    	minDate : 0,
+	    	dateFormat: "yy-mm-dd"
+	    });
+	});
+  </script>
 </head>
 
 <body>
@@ -99,7 +107,12 @@
 				      <td>${i.price}</td>
 				      <td>${i.manufacturer}</td>
 				      <td><f:formatDate value="${i.w_date}" pattern="yyyy-MM-dd"/></td>
-				      <td><f:formatDate value="${i.exp_date}" pattern="yyyy-MM-dd"/></td>
+  			      	  <td>
+  			      	  <input type="text" value="${i.exp_date}" name="exp_date" id="testDatepicker" class="single-input" required="required" pattern="yyyy-MM-dd"/>
+  			      	  </td> 				      
+
+				      
+				      
 				      <td>${i.inventory}&nbsp;&nbsp;<a href="${contextPath}/admin/addInventory.inv?num=${i.num}"><i class="fa fa-plus" style="font-size:20px"></i></a>
 				      					&nbsp;&nbsp;<a href="${contextPath}/admin/subInventory.inv?num=${i.num}"><i class="fa fa-minus" style="font-size:20px"></i></a>
 				      </td>
