@@ -142,7 +142,7 @@ public class ProductService {
 		map.put("key",'%'+key+'%'); 
 		return productDAO.searchList(map);
 	} 
-	 
+
 
 	
 }

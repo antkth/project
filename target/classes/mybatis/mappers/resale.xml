@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="mapper.resale">
+   	<resultMap type="resaleVO" id="proResult">
+   		<result property="re_num" column="re_num" />
+   		<result property="num" column="num" />
+   		<result property="qty" column="qty" />
+   		<result property="id" column="id" />
+   		<result property="period" column="period" />
+  		<result property="re_date" column="re_date" />
+  		<result property="name" column="name"/>
+  		<result property="image" column="image"/>
+  		<result property="price" column="price"/>
+   	</resultMap>
+   	
+   	<insert id="insertResale" parameterType="resaleVO">
+   	<![CDATA[
+	   	insert into resale (num, qty, id, period, re_date)
+		values(#{num}, #{qty}, #{id}, #{period}, #{re_date})
+   	]]>
+   	</insert>
+   	<select id="checkResale" resultMap="proResult">
+   	<![CDATA[
+	   	select r.re_num, r.num, r.qty, r.id, r.period, r.re_date, m.point
+		from resale r join member m
+		on r.id = m.id
+		where re_date = DATE_FORMAT(now(), '%Y-%m-%d 00:00:00')
+   	]]>
+   	</select>
+   	<update id="updateResale" parameterType="java.util.HashMap">
+	<![CDATA[
+	   	update resale
+		set re_date = #{re_date}
+		where re_num = #{re_num}
+	]]>
+   	</update>
+   	<select id="resaleList" resultMap="proResult">
+   	<![CDATA[
+   		select r.re_num, r.num, p.name, r.qty, r.id, r.period, r.re_date
+		from resale r join product p
+		on r.num = p.num
+		order by r.re_date
+   	]]>
+   	</select>
+   	<select id="myResaleList" parameterType="String" resultMap="proResult">
+   	<![CDATA[
+	   	select p.image, p.name, p.price, r.qty, r.id, r.re_date , r.re_num
+		from resale r join product p
+		on r.num = p.num
+		where id = #{id}
+   	]]>
+   	</select>
+   	<delete id="delResale" parameterType="int">
+   	<![CDATA[
+   		delete from resale where re_num = #{re_num}
+   	]]>
+   	</delete>
+   	</mapper>

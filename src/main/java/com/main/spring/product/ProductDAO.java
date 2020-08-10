@@ -61,5 +61,6 @@ public class ProductDAO {
 	public List searchList(HashMap map) {
 		return sqlSession.selectList("mapper.product.searchList",map);
 	}
+
 	
 }

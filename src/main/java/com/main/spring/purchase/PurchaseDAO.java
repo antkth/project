@@ -57,4 +57,7 @@ public class PurchaseDAO {
 	public void ad_orderStatus(int pur_num) {
 		sqlSession.update("mapper.purchase.ad_orderStatus", pur_num);
 	}
+	public void inventoryChange(HashMap map) {
+		sqlSession.update("mapper.product.inventoryChange",map);
+	}
 }

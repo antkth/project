@@ -102,7 +102,7 @@
 								class="single-input-accent">
 						</div>						
 						<div class="input-group-icon mt-10" align="center">
-				<input type="submit" class="genric-btn success circle" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="genric-btn success circle" value="상품등록">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="reset" class="genric-btn success circle" value="다시작성">
 			</div>
 					</form>

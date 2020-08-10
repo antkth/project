@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.inventory">
+   	<resultMap type="inventoryVO" id="invResult">
+   		<result property="num" column="num" />
+   		<result property="category1" column="category1" />
+   		<result property="name" column="name" />
+   		<result property="price" column="price" />
+   		<result property="manufacturer" column="manufacturer" />
+   		<result property="w_date" column="w_date" />
+   		<result property="exp_date" column="exp_date" />
+   		<result property="inventory" column="inventory" />
+   	</resultMap>
+   	
+   	<select id="getAllProducts" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+   		<![CDATA[
+   		select count(num) from product 
+   		]]>
+   		<if test="search != '' and search != null">
+   		where #{searchField} like #{search}
+   		</if>
+   	</select>
+
+	<select id="getNoSearch" resultMap="invResult" parameterType="java.util.HashMap">
+		   	<![CDATA[
+			select p.num, p.category1, p.name, p.price, p.manufacturer, i.w_date, p.exp_date, p.inventory from product p join inventory i on p.num = i.num
+			order by num limit #{pageFirst},#{pageSize}
+			]]>
+	</select>
+
+
+   	<select id="getInvList" resultMap="invResult" parameterType="java.util.HashMap">
+	   	<![CDATA[
+			select p.num, p.category1, p.name, p.price, p.manufacturer, i.w_date, p.exp_date, p.inventory from product p join inventory i on p.num = i.num
+			where ${searchField} like #{search} order by num limit #{pageFirst},#{pageSize}
+		]]>						
+   	</select>	
+   	   	
+   	<update id="getUpdateInv" parameterType="int"> 
+   		<![CDATA[
+   			update product set inventory=inventory+10 where num=#{num}
+   		]]>	
+   	</update>
+   	   	
+   	<update id="getUpdateW_date" parameterType="int"> 
+	 	<![CDATA[
+	 		update inventory set w_date=now() where num=#{num}
+	 	]]>	
+ 	</update>
+ 	
+ 	<update id="getSubInv" parameterType="java.lang.Integer">
+ 		<![CDATA[
+ 			update product set inventory=inventory-10 where num=#{num} 		
+ 		]]>	
+ 	</update>
+ 	
+ 	<select id="getInventory" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+ 		<![CDATA[
+ 			select inventory from product where num=#{num}
+ 		]]>	 	
+ 	</select>
+ 	
+ 	 <update id="setZero" parameterType="java.lang.Integer">
+ 		<![CDATA[
+ 			update product set inventory=0 where num=#{num} 		
+ 		]]>	
+ 	</update>
+ 	
+ 	
+ 	
+ 	
+</mapper>

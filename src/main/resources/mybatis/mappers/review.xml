@@ -11,36 +11,30 @@
    		<result property="score" column="score" />
   		<result property="date" column="date" />
    	</resultMap>
-   	
    	 <select id="numcheck" resultType="java.lang.Integer" >
    	 	<![CDATA[
    	 		SELECT count(num) FROM review WHERE num = #{num}
    	 	]]>
    	 </select>
-   	 
    	 <select id="scoreAVG" resultType="java.lang.Double" parameterType="java.lang.Integer" >
    	 	<![CDATA[
    	 		SELECT AVG(score) as scoreAVG FROM review WHERE num = #{num}
    	 	]]>
    	 </select>
-   	 
    	<insert id="insertReview" parameterType="reviewVO" >
    		<![CDATA[
    			INSERT INTO review(num, id, content, date, score) 
    			VALUES (#{num},#{id},#{content},#{date},#{score})
    		]]>
    	</insert>
-   	
    	<select id="reviewList" parameterType="java.lang.Integer" resultMap="revResult" >
    		<![CDATA[
    			SELECT * FROM review WHERE num = #{num}
    		]]>
    	</select>
-   	
    	<delete id="deleteReview" parameterType="java.lang.Integer" >
    		<![CDATA[
    			DELETE FROM review WHERE r_num = #{r_num}
    		]]>
    	</delete>
-   	
    </mapper>
