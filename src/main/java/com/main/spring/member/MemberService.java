@@ -102,5 +102,4 @@ public class MemberService {
 	public int totalCheck(String id) {
 		return memberDAO.totalCheck(id);
 	}
-	
 }

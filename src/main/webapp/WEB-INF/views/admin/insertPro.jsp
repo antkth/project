@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
-						<h2>Join</h2>
+						<h2>관리자페이지</h2>
 					</div>
 				</div>
 			</div>
@@ -127,7 +127,7 @@
 							<div></div>
 						</div>
 						<div class="switch-wrap d-flex justify-content-between">
-							<p>05. Disabled Checkbox active</p>
+							<a href="${contextPath}/ad_resaleList.res">정기구매관리</a>
 							<div></div>
 						</div>
 					</div>

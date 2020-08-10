@@ -182,7 +182,10 @@
 	            	<input type="hidden" name="manufacturer" value="${productVO.manufacturer}">
 	            	<input type="hidden" name="price" value="${productVO.real_price}">
 	            	<input type="hidden" name="category3" value="${productVO.category3}"> 
+	          	<c:if test="${id!=null}">  
                   <input type="submit" class="btn_3" value="장바구니 추가하기">
+                  <input type="button" class="btn_3" value="정기구독 신청하기" onclick="location.href='${contextPath}/resale.pro?num=${productVO.num}'">
+              	</c:if>
               </div>
             </div>
           </div>

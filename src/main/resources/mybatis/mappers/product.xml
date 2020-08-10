@@ -103,11 +103,14 @@
 		order by avg(r.score) desc limit 0, 10;
 		]]>
 	</select>
-	
 	<select id="searchList" resultMap="proResult" parameterType="java.util.HashMap">
    		<![CDATA[
 		select * from product where name like #{key} limit 0, 5
 		]]>
 	</select>
-	
+	<select id="getPrice" parameterType="int" resultType="int">
+		<![CDATA[
+		select price from product where num = #{num}
+		]]>
+	</select>
    	</mapper>
