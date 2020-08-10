@@ -58,6 +58,7 @@ public class PurchaseService {
 			map.put("id",(String)request.getSession().getAttribute("id"));
 			map.put("cart_num",cart_num.get(i));
 			HashMap mapinfo = purchaseDAO.cartinfo(map);
+			purchaseDAO.inventoryChange(mapinfo);
 			PurchaseVO purchaseVO = new PurchaseVO((Integer)mapinfo.get("num"),
 												   (Integer)mapinfo.get("qty"),
 												   (Integer)mapinfo.get("price"),

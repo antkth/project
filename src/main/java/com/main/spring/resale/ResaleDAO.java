@@ -52,5 +52,11 @@ public class ResaleDAO {
 	public List myResaleList(String id) {
 		return sqlSession.selectList("mapper.resale.myResaleList", id);
 	}
+	public void delResale(int re_num) {
+		sqlSession.delete("mapper.resale.delResale", re_num);
+	}
+	public void inventoryChange(HashMap map) {
+		sqlSession.update("mapper.product.inventoryChange",map);
+	}
 	
 }

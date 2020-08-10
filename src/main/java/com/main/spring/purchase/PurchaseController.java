@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,7 +64,6 @@ public class PurchaseController {
 	}
 	@RequestMapping(value = "/admin/getOrderList.pur", method = RequestMethod.GET)
 	public ModelAndView getOrderList(@RequestParam String sort) {
-		List getOrderList = purchaseService.ad_orderList(sort);
 		mav.addObject("getOrderList", purchaseService.ad_orderList(sort));
 		mav.setViewName("admin/ad_orderList");
 		return mav;
@@ -71,7 +71,7 @@ public class PurchaseController {
 	@RequestMapping(value = "/admin/orderStatus.pur", method = RequestMethod.GET)
 	public ModelAndView orderStatus(@RequestParam int pur_num) {
 		purchaseService.ad_orderStatus(pur_num);
-		mav.setViewName("redirect:/admin/getOrderList.pur?sort=1");
+		mav.setViewName("redirect:/admin/getOrderList.pur");
 		return mav;
 	}
 }

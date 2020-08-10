@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +23,12 @@ public class ResaleController {
 	private ModelAndView mav = new ModelAndView();
 
 	  @RequestMapping(value = "/insertResale.res", method = RequestMethod.POST)
-	  public ModelAndView insertResale(@ModelAttribute ResaleVO resaleVO, @RequestParam Date startDate) {
+	  public ModelAndView insertResale(@ModelAttribute ResaleVO resaleVO, @RequestParam Date startDate,
+			  							HttpServletRequest request) {
 		  resaleVO.setRe_date(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(startDate)));
 		  resaleService.insertResale(resaleVO);
-		  mav.setViewName("resaleList"); 
+		  String id = (String) request.getSession().getAttribute("id");
+		  mav.setViewName("redirect:/resaleList.res?id="+id); 
 	  return mav;
 	  }
 	  
@@ -37,12 +41,19 @@ public class ResaleController {
 		  return mav;
 	  }
 	  @RequestMapping(value = "/resaleList.res", method = RequestMethod.GET)
-	  public ModelAndView resaleList(@ModelAttribute ResaleVO resaleVO, @RequestParam String id) {
+	  public ModelAndView resaleList(@RequestParam String id) {
 		  List list = resaleService.myResaleList(id);
 		  mav.addObject("myResaleList", list);
 		  mav.setViewName("resaleList");
 		  return mav;
 	  }
+	  @RequestMapping(value = "/delResale.res", method = RequestMethod.GET)
+	  public ModelAndView delResale(@RequestParam int re_num,HttpServletRequest request) {
+		  resaleService.delResale(re_num);
+		  String id = (String)request.getSession().getAttribute("id");
+		  mav.setViewName("redirect:/resaleList.res?id="+id);
+		  return mav;
+	  } 
 	 
 
 }

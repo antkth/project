@@ -12,7 +12,6 @@
     <title>pillloMart</title>
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
 </head>
-
 <body>
 <jsp:include page="inc/header.jsp"/>
     <!-- breadcrumb part start-->

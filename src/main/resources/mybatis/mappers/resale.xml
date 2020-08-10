@@ -46,10 +46,15 @@
    	</select>
    	<select id="myResaleList" parameterType="String" resultMap="proResult">
    	<![CDATA[
-	   	select p.image, p.name, p.price, r.qty, r.id, r.re_date  
+	   	select p.image, p.name, p.price, r.qty, r.id, r.re_date , r.re_num
 		from resale r join product p
 		on r.num = p.num
 		where id = #{id}
    	]]>
    	</select>
+   	<delete id="delResale" parameterType="int">
+   	<![CDATA[
+   		delete from resale where re_num = #{re_num}
+   	]]>
+   	</delete>
    	</mapper>

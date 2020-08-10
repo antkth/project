@@ -33,10 +33,16 @@ public class CartController {
 	@RequestMapping(value = "/cartList.car", method=RequestMethod.GET)
 	public ModelAndView cartList(@RequestParam String id){
 		int total =0;
+		int check = 0 ;
 		List cartList = cartService.getCartList(id);
 		if(cartService.totalCheck(id)!=0) total = cartService.getTotalPrice(id);
+		for(int i = 0 ; i < cartList.size();i++) {
+			CartVO cartVO = (CartVO)cartList.get(i);
+			if(cartVO.getQty()>cartVO.getInventory()) check=1;
+		}
 		mav.addObject("cartList", cartList);
 		mav.addObject("total",total);
+		mav.addObject("check",check);
 		mav.setViewName("cartList");
 		return mav;
 	}

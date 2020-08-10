@@ -113,4 +113,9 @@
 		select price from product where num = #{num}
 		]]>
 	</select>
+	<update id="inventoryChange" parameterType="java.util.HashMap">
+		<![CDATA[
+		update product set inventory = inventory-#{qty} where num = #{num}
+		]]>
+	</update>
    	</mapper>

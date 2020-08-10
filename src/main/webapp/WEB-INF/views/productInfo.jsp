@@ -7,6 +7,12 @@
 <html lang="zxx">
 
 <head>
+       <c:if test="${msg != null}">
+               <script type="text/javascript">
+               window.alert('${msg}');
+               </script>
+		<c:remove var="msg"/>
+       </c:if>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>pillloMart</title>
@@ -163,7 +169,9 @@
 	            </table>
 				</div>
             <div class="card_area">
-                <div class="product_count_area">
+            <c:choose>
+            <c:when test="${productVO.inventory!=0}">
+				<div class="product_count_area">
                     <p>수량</p>
                     <div class="product_count d-inline-block">
                         <select id="qty" class="product_count_item input-number" name="qty">
@@ -186,7 +194,17 @@
                   <input type="submit" class="btn_3" value="장바구니 추가하기">
                   <input type="button" class="btn_3" value="정기구독 신청하기" onclick="location.href='${contextPath}/resale.pro?num=${productVO.num}'">
               	</c:if>
-              </div>
+              </div>            
+            </c:when>
+			<c:otherwise>
+				<div class="product_count_area">
+					<p><font color="red" size="15px">품절</font></p>
+				</div>
+					<a href="${contextPath}/insertwearing.wea?num=${productVO.num}">입고시 알람받기</a>
+					
+			</c:otherwise>
+            </c:choose>
+
             </div>
           </div>
         </div>

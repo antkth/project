@@ -49,7 +49,7 @@
                 <th scope="col">수량</th>
                 <th scope="col">결제금액</th>
                 <th scope="col">다음결제일</th>
-                <th scope="col">상태</th>
+                <th scope="col">취소</th>
               </tr>
               <c:forEach items="${myResaleList}" var="VO" varStatus="NO">
               <tr>
@@ -59,7 +59,7 @@
               	<td>${VO.qty}</td>
               	<td>${Math.round(VO.price * VO.qty/100*70/100)*100}</td>
               	<td><f:formatDate value="${VO.re_date}" pattern="yyyy-MM-dd"/></td>
-              	<td><font color="red">결제완료</font></td>
+              	<td><a href="${contextPath}/delResale.res?re_num=${VO.re_num}">취소</a></td>
               </c:forEach>
             </table>
           <div class="checkout_btn_inner float-right">

@@ -10,11 +10,12 @@
    		<result property="qty" column="qty" />
    		<result property="price" column="price" />
    		<result property="order_date" column="order_date" />
+   		<result property="inventory" column="inventory"/>
    	</resultMap>
    	
    	<select id="cartList" resultMap="cartResult" parameterType="String">
    		 <![CDATA[
-   		 	SELECT p.name, c.cart_num, c.id, c.order_date, c.price, p.image, c.qty
+   		 	SELECT p.name, c.cart_num, c.id, c.order_date, c.price, p.image, c.qty , p.inventory
    		 	FROM cart c JOIN product p ON c.num = p.num
    		 	WHERE id = #{id} ORDER BY cart_num DESC
    		 ]]>

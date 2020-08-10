@@ -119,6 +119,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/inventory-context.xml</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
@@ -137,5 +138,18 @@
 	<servlet-mapping>
 		<servlet-name>resaleServlet</servlet-name>
 		<url-pattern>*.res</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>wearingnoticeServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/wearingnotice-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>wearingnoticeServlet</servlet-name>
+		<url-pattern>*.wea</url-pattern>
 	</servlet-mapping>
 </web-app>
