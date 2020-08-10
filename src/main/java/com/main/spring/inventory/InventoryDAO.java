@@ -40,6 +40,4 @@ public class InventoryDAO {
 		sqlSession.update("mapper.inventory.setZero", num);		
 	}
 
-	
-
 }

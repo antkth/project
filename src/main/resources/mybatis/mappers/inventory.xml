@@ -38,13 +38,13 @@
 		]]>						
    	</select>	
    	   	
-   	<update id="getUpdateInv" parameterType="java.lang.Integer"> 
+   	<update id="getUpdateInv" parameterType="int"> 
    		<![CDATA[
    			update product set inventory=inventory+10 where num=#{num}
    		]]>	
    	</update>
    	   	
-   	<update id="getUpdateW_date" parameterType="java.lang.Integer"> 
+   	<update id="getUpdateW_date" parameterType="int"> 
 	 	<![CDATA[
 	 		update inventory set w_date=now() where num=#{num}
 	 	]]>	

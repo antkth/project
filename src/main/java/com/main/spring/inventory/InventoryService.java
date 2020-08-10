@@ -51,8 +51,4 @@ public class InventoryService {
 	public void setZero(int num) {
 		inventoryDAO.setZero(num);		
 	}
-
-
-	
-
 }

@@ -2,7 +2,6 @@ package com.main.spring.inventory;
 
 
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 
 
@@ -42,7 +40,6 @@ public class InventoryController {
 		int blockFirst = (nowPage/blockSize-(nowPage%blockSize==0?1:0))*blockSize + 1;
 		int blockLast = blockFirst + blockSize -1;		
 		if(blockLast>totalPage) blockLast=totalPage;
-		
 		List inventoryList = null;		
 		
 		if(!search.equals("none")) {
@@ -69,12 +66,10 @@ public class InventoryController {
 		return mav;
 	}
 	@RequestMapping(value = "/admin/addInventory.inv", method = RequestMethod.GET)
-	public ModelAndView addInventory (  @RequestParam int num,
-										HttpServletRequest request) {	
-				
+	public ModelAndView addInventory (@RequestParam int num,
+									  HttpServletRequest request) {	
 		inventoryService.getUpdateInv(num);
 		inventoryService.getUpdateW_date(num);
-		
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
 	}
