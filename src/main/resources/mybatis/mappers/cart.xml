@@ -58,4 +58,10 @@
 			select count(num) from cart where id=#{id}
 		]]>
 	</select>
+	<insert id="re_addCart" parameterType="java.util.HashMap">
+   		<![CDATA[
+   			insert into cart(num, id, order_date, qty, price) values
+   			(#{num}, #{id}, now(), #{qty}, #{price})
+   		]]>
+   	</insert>
    </mapper>

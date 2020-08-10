@@ -54,4 +54,10 @@
 		where pur_num = #{pur_num};
 	]]>
 	</update>
+	<insert id="re_intsertPurchase" parameterType="java.util.HashMap">
+  	<![CDATA[
+  		insert into purchaselist (num,pur_num,id,put_date,qty,price,pur_status) 
+  		values (#{num},#{pur_num},#{id},now(),#{qty},#{price},1)
+  	]]>
+	</insert>
 </mapper>

@@ -11,8 +11,6 @@ public class ReviewVO {
 	private Timestamp date;
 	private double socreAVG;
 	
-	public ReviewVO() {}
-	
 	public double getSocreAVG() {
 		return socreAVG;
 	}

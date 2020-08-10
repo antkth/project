@@ -103,4 +103,9 @@
 		order by avg(r.score) desc limit 0, 10;
 		]]>
 	</select>
+	<select id="getPrice" parameterType="int" resultType="int">
+		<![CDATA[
+		select price from product where num = #{num}
+		]]>
+	</select>
    	</mapper>

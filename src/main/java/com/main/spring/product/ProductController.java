@@ -224,5 +224,14 @@ public class ProductController {
 		mav.setViewName("redirect:/wishList.pro?id="+id);
 		return mav;
 	}
+	@RequestMapping(value = "/resale.pro", method = RequestMethod.GET)
+	public ModelAndView resale(@RequestParam int num,
+								   HttpServletRequest request,
+								   HttpServletResponse response) {
+		ProductVO productVO = productService.getProductInfo(num);
+		mav.addObject("proInfo", productVO);
+		mav.setViewName("stOrder");
+		return mav;
+	}
 
 }

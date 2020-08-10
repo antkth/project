@@ -13,14 +13,11 @@ public class MemberDAO {
 	private SqlSession sqlsession;
 	
 	public List idCheck(String id) {
-		
 		return sqlsession.selectList("mapper.member.idcheck",id);
 	}
-
 	public void addMember(MemberVO memberVO) {
 		sqlsession.insert("mapper.member.addMember",memberVO);
 	}
-
 	public MemberVO loginMember(String id) {
 		return sqlsession.selectOne("mapper.member.loginMember",id);
 	}
