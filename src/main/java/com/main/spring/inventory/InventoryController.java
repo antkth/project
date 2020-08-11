@@ -69,6 +69,7 @@ public class InventoryController {
 	public ModelAndView addInventory (@RequestParam int num,
 									  HttpServletRequest request) {	
 		inventoryService.getUpdateInv(num);
+		inventoryService.getWearingList(num);
 		inventoryService.getUpdateW_date(num);
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
@@ -84,8 +85,6 @@ public class InventoryController {
 		}else {
 			inventoryService.setZero(num);		
 		}
-		
-
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
 }
