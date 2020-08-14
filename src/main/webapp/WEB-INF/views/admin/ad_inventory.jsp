@@ -70,16 +70,7 @@
 				<option ${(param.searchField == "manufacturer")?"selected":""} value="manufacturer">제조사명</option>
 	        </select>         
 	        &nbsp;
-        
-			<c:choose>
-			<c:when test="${search} eq none">
-				<input type="text" name="search" value="" style="padding: 7px;">
-			</c:when>
-			<c:otherwise>
-				<input type="text" name="search" value="${param.search}" style="padding: 7px;">
-			</c:otherwise>
-			</c:choose>                    		    	
-
+				<input type="text" name="search"  style="padding: 7px;">
 		        <button class="class__filter__btn" type="submit" style="padding: 6px;"><i class="fa fa-search"></i></button>
 		</form>			
 		<br>	
