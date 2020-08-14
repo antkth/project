@@ -7,6 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.spring.product.ProductVO;
+import com.main.spring.resale.ResaleVO;
+
 @Service
 public class InventoryService {
 	
@@ -50,5 +53,8 @@ public class InventoryService {
 	}
 	public void setZero(int num) {
 		inventoryDAO.setZero(num);		
+	}
+	public void addCalendar(ProductVO productVO) {
+		inventoryDAO.addCalendar(productVO);
 	}
 }

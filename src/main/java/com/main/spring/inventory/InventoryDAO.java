@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.main.spring.product.ProductVO;
+
 @Repository
 public class InventoryDAO {
 	
@@ -38,6 +40,11 @@ public class InventoryDAO {
 	}
 	public void setZero(int num) {
 		sqlSession.update("mapper.inventory.setZero", num);		
+	}
+
+	public void addCalendar(ProductVO productVO) {
+		sqlSession.update("mapper.inventory.addCalendar", productVO);
+		
 	}
 
 }
