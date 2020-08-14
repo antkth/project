@@ -67,15 +67,15 @@
  			update product set inventory=0 where num=#{num} 		
  		]]>	
  	</update>
- 	
  	<insert id="addCalendar" parameterType="productVO">
 	   	<![CDATA[
 		   	insert into product (exp_date)
 			values(#{exp_date})
 	   	]]>
    	</insert>
- 	
- 	
- 	
- 	
+ 	<select id="getWearingList" parameterType="int" resultMap="invResult">
+ 		<![CDATA[
+ 			select num, inventory from product where num=${num}
+ 		]]>
+ 	</select>
 </mapper>
