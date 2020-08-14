@@ -71,7 +71,7 @@ public class PurchaseController {
 	@RequestMapping(value = "/admin/orderStatus.pur", method = RequestMethod.GET)
 	public ModelAndView orderStatus(@RequestParam int pur_num) {
 		purchaseService.ad_orderStatus(pur_num);
-		mav.setViewName("redirect:/admin/getOrderList.pur");
+		mav.setViewName("redirect:/admin/getOrderList.pur?sort=1");
 		return mav;
 	}
 }

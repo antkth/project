@@ -57,7 +57,7 @@ $(function() {
     });
 })
 </script>
-s	<header class="main_menu home_menu">
+	<header class="main_menu home_menu">
 		<div class="container">
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-12">
