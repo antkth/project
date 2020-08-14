@@ -98,7 +98,8 @@
 	</select>
 	<select id="bestProductList" resultMap="proResult">
 		<![CDATA[
-		select p.num, p.name, p.price, p.image, p.exp_date from product p join review r on p.num = r.num 
+		select p.num, p.name, p.price, p.image, p.exp_date 
+		from product p join review r on p.num = r.num 
 		group by p.num, p.name, p.price, p.image
 		order by avg(r.score) desc limit 0, 10;
 		]]>
@@ -118,4 +119,9 @@
 		update product set inventory = inventory-#{qty} where num = #{num}
 		]]>
 	</update>
+	   	<update id="addexp_date" parameterType="java.util.HashMap">
+   		<![CDATA[
+   		update product set exp_date = #{exp_date} where num=#{num} 
+   		]]>
+   	</update>
    	</mapper>

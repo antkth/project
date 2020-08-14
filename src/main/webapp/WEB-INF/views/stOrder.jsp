@@ -38,7 +38,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner">
-						<h2>정기구독 신청</h2>
+						<h2>정기구매 신청</h2>
 					</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 
 	<!-- product list part start-->
 	<section class="about_us padding_top">
-		<h3 class="mb-30" align="center">정기구독 신청</h3>
+		<h3 class="mb-30" align="center">정기구매 신청</h3>
 		<form action="${contextPath}/insertResale.res" style="width: 75%; padding-left: 25%"
 			onsubmit="return checkForm();" method="post">
 			<input type="hidden" name="num" value="${proInfo.num}">

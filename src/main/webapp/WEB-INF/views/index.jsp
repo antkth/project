@@ -101,7 +101,7 @@
                         <div class="single_product_item_thumb">
                             <a href="${contextPath}/productInfo.pro?num=${VO.num}"><img src="${contextPath}/resources/img_catfood/${VO.image}" alt="#" class="img-fluid"></a>
                         </div>
-                        <h3> <a href="single-product.html">${VO.name}</a></h3>
+                        <h3> <a href="${contextPath}/productInfo.pro?num=${VO.num}">${VO.name}</a></h3>
                         <p>${VO.real_price}</p>
                     </div>
                 </div>

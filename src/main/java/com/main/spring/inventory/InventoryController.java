@@ -2,6 +2,9 @@ package com.main.spring.inventory;
 
 
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,10 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.main.spring.product.ProductService;
+import com.main.spring.product.ProductVO;
+import com.main.spring.resale.ResaleVO;
 
 
 
@@ -60,6 +68,7 @@ public class InventoryController {
 		
 		mav.addObject("inventoryList", inventoryList);
 		mav.addObject("searchField", searchField);
+		if(search.equals("none")) search = "";
 		mav.addObject("search", search);
 		mav.addObject("i_map", i_map);
 		mav.setViewName("admin/ad_inventory");
@@ -69,7 +78,9 @@ public class InventoryController {
 	public ModelAndView addInventory (@RequestParam int num,
 									  HttpServletRequest request) {	
 		inventoryService.getUpdateInv(num);
+		inventoryService.getWearingList(num);
 		inventoryService.getUpdateW_date(num);
+		inventoryService.addexp_date(num);
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
 	}
@@ -84,11 +95,20 @@ public class InventoryController {
 		}else {
 			inventoryService.setZero(num);		
 		}
-		
-
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
-}
+	}
+	@RequestMapping(value = "/addCalendar", method = RequestMethod.POST)
+	  public ModelAndView addCalendar(@RequestParam Date exp_date,
+			  							HttpServletRequest request) {
+		  ProductVO productVO = new ProductVO();
+		  ProductService productService = new ProductService();
+		  productVO.setExp_date(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(exp_date)));
+		  inventoryService.addCalendar(productVO);
+		  
+		  mav.setViewName("redirect:/admin/ad_inventory"); 
+	  return mav;
+	  }
 	
 
 }

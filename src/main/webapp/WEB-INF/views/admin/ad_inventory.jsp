@@ -14,11 +14,9 @@
     <title>재고 관리</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
-     	
+     	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
-
 <body>
-
   <jsp:include page="../inc/header.jsp"/>
 
     <!-- breadcrumb part start-->
@@ -43,15 +41,23 @@
 			<div class="single-element-widget mt-30">
 				<h3 class="mb-30">목록</h3>
 				<div class="switch-wrap d-flex justify-content-between">
-					<a href='${contextPath}/admin/insertPro.pro'>상품 등록</a>
+					<a href='${contextPath}/admin/insertPro'>상품등록</a>
 					<div></div>
 				</div>
 				<div class="switch-wrap d-flex justify-content-between">
-					<a href='${contextPath}/admin/ad_qalist.qab'>문의 내역</a>
+					<a href='${contextPath}/admin/ad_qalist.qab'>문의내역</a>
 					<div></div>
 				</div>
 				<div class="switch-wrap d-flex justify-content-between">
 					<a href='${contextPath}/admin/inventorylist.inv'>재고 관리</a>
+					<div></div>
+				</div>
+				<div class="switch-wrap d-flex justify-content-between">
+					<a href='${contextPath}/admin/getOrderList.pur?sort=1'>주문관리</a>
+					<div></div>
+				</div>
+				<div class="switch-wrap d-flex justify-content-between">
+					<a href="${contextPath}/ad_resaleList.res">정기구매관리</a>
 					<div></div>
 				</div>
 			</div>
@@ -99,12 +105,17 @@
 				      <td>${i.price}</td>
 				      <td>${i.manufacturer}</td>
 				      <td><f:formatDate value="${i.w_date}" pattern="yyyy-MM-dd"/></td>
-				      <td><f:formatDate value="${i.exp_date}" pattern="yyyy-MM-dd"/></td>
+  			      	  <td>
+  			      	  <f:formatDate pattern="yyyy-MM-dd" value="${i.exp_date}"/>
+  			      	  </td> 				      
+
+				      
+				      
 				      <td>${i.inventory}&nbsp;&nbsp;<a href="${contextPath}/admin/addInventory.inv?num=${i.num}"><i class="fa fa-plus" style="font-size:20px"></i></a>
 				      					&nbsp;&nbsp;<a href="${contextPath}/admin/subInventory.inv?num=${i.num}"><i class="fa fa-minus" style="font-size:20px"></i></a>
 				      </td>
 				    </tr>	
-				</c:forEach>				 
+				</c:forEach>	
 			</table>
 		<nav class="blog-pagination justify-content-center d-flex">                       		
             <ul class="pagination">                               

@@ -57,6 +57,9 @@
                                 <div class="single_product_item" >
                                     <img src="${contextPath}/resources/img_catfood/${product.image}" class="img-fluid">
                                     <h3><a href="${contextPath}/productInfo.pro?num=${product.num}">${product.name}</a></h3>
+                                  
+                                  <c:choose>
+                                  <c:when test="${product.inventory!=0}">
                                    <c:choose>
                                    <c:when test="${product.price == product.real_price}">
                                    <p>${product.price}</p>
@@ -66,6 +69,12 @@
                                    <p>${product.real_price}</p>
                                    </c:otherwise>
                                    </c:choose>
+                                   </c:when>
+                                   <c:otherwise>
+                                   <p><font color="red">품절</font></p>
+                                   </c:otherwise>
+                                   </c:choose>
+                                   
                                    <c:if test="${id != null}">
                                    		<c:choose>
                                    		<c:when test="${product.wishCheck==1}">

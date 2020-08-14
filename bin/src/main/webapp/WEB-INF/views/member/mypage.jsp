@@ -135,9 +135,9 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <div class="single_feature_part">
+                    <div class="single_feature_part" style="cursor: pointer;" onclick="location.href='${contextPath}/resaleList.res?id=${id}'">
                         <img src="${contextPath}/resources/img/icon/feature_icon_3.svg">
-                        <h4>Free Delivery</h4>
+                        <h4>정기구매</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">

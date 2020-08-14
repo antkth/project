@@ -1,12 +1,37 @@
 package com.main.spring.inventory;
 
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.main.spring.product.ProductVO;
+import com.main.spring.wearingnotice.WearingnoticeVO;
+
+class MyAuthentication extends Authenticator { //아이디 패스워드 인증받기 함수
+	  PasswordAuthentication pa;
+	  public MyAuthentication(){
+	    pa=new PasswordAuthentication("gimt94566@gmail.com","66549tmig!");        
+	  }
+	  @Override
+	  protected PasswordAuthentication getPasswordAuthentication() {
+	    return pa;
+	  }
+	}
 @Service
 public class InventoryService {
 	
@@ -51,4 +76,61 @@ public class InventoryService {
 	public void setZero(int num) {
 		inventoryDAO.setZero(num);		
 	}
+	public void addCalendar(ProductVO productVO) {
+		inventoryDAO.addCalendar(productVO);
+	}
+	public void addexp_date(int num) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss",Locale.KOREA);
+		Calendar time = Calendar.getInstance();
+		time.add(Calendar.MONTH,6);
+		String nowTime = format.format(time.getTime());
+		HashMap map = new HashMap();
+		map.put("exp_date",nowTime);
+		map.put("num",num);
+		inventoryDAO.addexp_date(map);
+	}
+	public void getWearingList(int num) {
+		//1. num값으로 id구해오기
+		List list = inventoryDAO.getId(num);
+		//2. num값으로 name구해오기
+		String name = inventoryDAO.getName(num); 
+		//3. id로 email구해오기
+		for(int i=0; i<list.size(); i++) {
+			WearingnoticeVO wearingnoticeVO = (WearingnoticeVO)list.get(i);
+			String email = inventoryDAO.getEmail(wearingnoticeVO.getId());
+			wearingnoticeVO.setName(name);
+			wearingnoticeVO.setEmail(email);
+			SendEmail(wearingnoticeVO);
+		}
+		inventoryDAO.delWearing(num);
+	}
+	public void SendEmail(WearingnoticeVO vo){
+		try {
+			  Properties props = new Properties();
+			props.put("mail.smtp.user", "gimt94566@gmail.com");
+			props.put("mail.smtp.host", "smtp.googlemail.com");
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.debug", "true");
+			props.put("mail.smtp.socketFactory.port", "465");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.socketFactory.fallback", "false");
+			  Authenticator myauth=new MyAuthentication(); 
+			  Session sess=Session.getInstance(props, myauth);
+			  InternetAddress addr = new InternetAddress();
+			  addr.setPersonal("gimt94566","UTF-8");
+			  addr.setAddress("gimt94566@gmail.com");
+			  Message msg = new MimeMessage(sess);
+			  msg.setFrom(addr);         
+			  msg.setSubject(MimeUtility.encodeText("입고알람메일", "utf-8","B"));
+			  String content = vo.getId() +"님! 요청하신 " + vo.getName() + " 상품이 입고되었습니다.";
+			  msg.setContent(content, "text/html;charset=utf-8");
+			  msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(vo.getEmail()));
+			  Transport.send(msg);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
