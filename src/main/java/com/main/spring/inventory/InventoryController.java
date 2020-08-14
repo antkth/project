@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,19 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.main.spring.product.ProductService;
 import com.main.spring.product.ProductVO;
-import com.main.spring.resale.ResaleVO;
-
-
-
 @Controller
 public class InventoryController {
 	private ModelAndView mav = new ModelAndView();
-	
 	@Autowired
 	InventoryService inventoryService;
-	
-	
-	
 	@RequestMapping(value = "/admin/inventorylist.inv", method = RequestMethod.GET)
 	public ModelAndView inventorylist(	@RequestParam(defaultValue = "none") String searchField,
 										@RequestParam(defaultValue = "none") String search,
@@ -68,7 +59,6 @@ public class InventoryController {
 		
 		mav.addObject("inventoryList", inventoryList);
 		mav.addObject("searchField", searchField);
-		if(search.equals("none")) search = "";
 		mav.addObject("search", search);
 		mav.addObject("i_map", i_map);
 		mav.setViewName("admin/ad_inventory");
