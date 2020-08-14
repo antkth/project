@@ -15,18 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="${contextPath}/resources/js/jquery-1.12.1.min.js"></script>
      	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-  <script>
-  $(function() {
-	    $( "#testDatepicker" ).datepicker({
-	    	minDate : 0,
-	    	dateFormat: "yy-mm-dd"
-	    });
-	});
-  </script>
 </head>
-
 <body>
-
   <jsp:include page="../inc/header.jsp"/>
 
     <!-- breadcrumb part start-->
@@ -116,7 +106,7 @@
 				      <td>${i.manufacturer}</td>
 				      <td><f:formatDate value="${i.w_date}" pattern="yyyy-MM-dd"/></td>
   			      	  <td>
-  			      	  <input type="text" value="${i.exp_date}" name="exp_date" id="testDatepicker" class="single-input" required="required" pattern="yyyy-MM-dd"/>
+  			      	  <f:formatDate pattern="yyyy-MM-dd" value="${i.exp_date}"/>
   			      	  </td> 				      
 
 				      
@@ -125,7 +115,7 @@
 				      					&nbsp;&nbsp;<a href="${contextPath}/admin/subInventory.inv?num=${i.num}"><i class="fa fa-minus" style="font-size:20px"></i></a>
 				      </td>
 				    </tr>	
-				</c:forEach>				 
+				</c:forEach>	
 			</table>
 		<nav class="blog-pagination justify-content-center d-flex">                       		
             <ul class="pagination">                               

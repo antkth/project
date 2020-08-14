@@ -41,10 +41,11 @@ public class InventoryDAO {
 	public void setZero(int num) {
 		sqlSession.update("mapper.inventory.setZero", num);		
 	}
-
 	public void addCalendar(ProductVO productVO) {
 		sqlSession.update("mapper.inventory.addCalendar", productVO);
-		
+	}
+	public void addexp_date(HashMap map) {
+		sqlSession.update("mapper.product.addexp_date",map);
 	}
 
 }

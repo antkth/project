@@ -1,8 +1,12 @@
 package com.main.spring.inventory;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +60,15 @@ public class InventoryService {
 	}
 	public void addCalendar(ProductVO productVO) {
 		inventoryDAO.addCalendar(productVO);
+	}
+	public void addexp_date(int num) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss",Locale.KOREA);
+		Calendar time = Calendar.getInstance();
+		time.add(Calendar.MONTH,6);
+		String nowTime = format.format(time.getTime());
+		HashMap map = new HashMap();
+		map.put("exp_date",nowTime);
+		map.put("num",num);
+		inventoryDAO.addexp_date(map);
 	}
 }

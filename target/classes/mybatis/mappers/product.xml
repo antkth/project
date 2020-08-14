@@ -118,4 +118,9 @@
 		update product set inventory = inventory-#{qty} where num = #{num}
 		]]>
 	</update>
+	   	<update id="addexp_date" parameterType="java.util.HashMap">
+   		<![CDATA[
+   		update product set exp_date = #{exp_date} where num=#{num} 
+   		]]>
+   	</update>
    	</mapper>

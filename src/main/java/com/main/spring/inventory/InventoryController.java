@@ -68,6 +68,7 @@ public class InventoryController {
 		
 		mav.addObject("inventoryList", inventoryList);
 		mav.addObject("searchField", searchField);
+		if(search.equals("none")) search = "";
 		mav.addObject("search", search);
 		mav.addObject("i_map", i_map);
 		mav.setViewName("admin/ad_inventory");
@@ -78,6 +79,7 @@ public class InventoryController {
 									  HttpServletRequest request) {	
 		inventoryService.getUpdateInv(num);
 		inventoryService.getUpdateW_date(num);
+		inventoryService.addexp_date(num);
 		mav.setViewName("redirect:/admin/inventorylist.inv");
 		return mav;
 	}
