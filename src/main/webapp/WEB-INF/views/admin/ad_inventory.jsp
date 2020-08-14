@@ -43,15 +43,23 @@
 			<div class="single-element-widget mt-30">
 				<h3 class="mb-30">목록</h3>
 				<div class="switch-wrap d-flex justify-content-between">
-					<a href='${contextPath}/admin/insertPro.pro'>상품 등록</a>
+					<a href='${contextPath}/admin/insertPro'>상품등록</a>
 					<div></div>
 				</div>
 				<div class="switch-wrap d-flex justify-content-between">
-					<a href='${contextPath}/admin/ad_qalist.qab'>문의 내역</a>
+					<a href='${contextPath}/admin/ad_qalist.qab'>문의내역</a>
 					<div></div>
 				</div>
 				<div class="switch-wrap d-flex justify-content-between">
 					<a href='${contextPath}/admin/inventorylist.inv'>재고 관리</a>
+					<div></div>
+				</div>
+				<div class="switch-wrap d-flex justify-content-between">
+					<a href='${contextPath}/admin/getOrderList.pur?sort=1'>주문관리</a>
+					<div></div>
+				</div>
+				<div class="switch-wrap d-flex justify-content-between">
+					<a href="${contextPath}/ad_resaleList.res">정기구매관리</a>
 					<div></div>
 				</div>
 			</div>
