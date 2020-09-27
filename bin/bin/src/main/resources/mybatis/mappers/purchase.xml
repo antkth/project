@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.purchase">
+	<resultMap type="purchaseVO" id="purResult">
+		<result property="num" column="num" />
+		<result property="pur_num" column="pur_num" />
+		<result property="id" column="id" />
+		<result property="qty" column="qty" />
+		<result property="price" column="price" />
+		<result property="pur_status" column="pur_status" />
+		<result property="put_date" column="put_date" />
+		<result property="image" column="image"/>
+		<result property="name" column="name"/>
+	</resultMap>
+
+	<select id="getpur_num" parameterType="String"
+		resultType="java.lang.Integer">
+  	<![CDATA[
+  		select count(pur_num) from purchaselist where id = #{id};
+  	]]>
+	</select>
+	<insert id="intsertPurchase" parameterType="purchaseVO">
+  	<![CDATA[
+  		insert into purchaselist (num,pur_num,id,put_date,qty,price,pur_status) 
+  		values (#{num},#{pur_num},#{id},#{put_date},#{qty},#{price},#{pur_status})
+  	]]>
+	</insert>
+	<select id="getpur_list" resultMap="purResult" parameterType="String">
+	<![CDATA[
+		select p1.num, p1.pur_num, p2.name, p2.image, p1.qty, p1.price, p1.put_date, p1.pur_status
+		from purchaselist p1 JOIN product p2 ON p1.num = p2.num
+		where p1.id = #{id}
+	]]>
+	</select>
+	<delete id="deleteOrderList" parameterType="int">
+	<![CDATA[
+		delete from purchaselist where pur_num = #{pur_num}
+	]]>
+	</delete>
+	<select id="ad_orderList" parameterType="java.util.HashMap" resultMap="purResult">
+	<![CDATA[
+		select p2.name, p1.pur_num, p1.id, p1.put_date, p1.qty, p1.price, p1.pur_status
+		from purchaselist p1 join product p2
+		on p1.num = p2.num where pur_status ${sort}
+		order by pur_status, put_date 
+	]]>
+	</select>
+	<update id="ad_orderStatus" parameterType="int">
+	<![CDATA[
+		update purchaselist set pur_status = pur_status+1
+		where pur_num = #{pur_num};
+	]]>
+	</update>
+	<insert id="re_intsertPurchase" parameterType="java.util.HashMap">
+  	<![CDATA[
+  		insert into purchaselist (num,pur_num,id,put_date,qty,price,pur_status) 
+  		values (#{num},#{pur_num},#{id},now(),#{qty},#{price},1)
+  	]]>
+	</insert>
+</mapper>
